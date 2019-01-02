@@ -1,0 +1,39 @@
+﻿<Window x:Class="PL_Wpf.RemoveTester"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL_Wpf"
+        mc:Ignorable="d"
+        Title="RemoveTester" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="74*"/>
+            <RowDefinition Height="345*"/>
+        </Grid.RowDefinitions>
+        <Label Name="LogoLabel" Content="DMV - Department Of Motor Vehicles" Grid.ColumnSpan="2" 
+               FontSize="36"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="62" Margin="58,6" Width="676" FontWeight="Bold" />
+        <Grid  Grid.Row="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid  Grid.Row="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Name="IDTBlock" Text="ID:" FontSize="26" Margin="30" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <ComboBox Name="IDCBox" Grid.Column="1" HorizontalAlignment="Left" Margin="30"  VerticalAlignment="Center" Width="130" />
+
+
+            </Grid>
+            <Button Name="RemoveButton" Content="remove"  FontSize="26" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="15" Click="RemoveButton_Click"/>
+        </Grid>
+
+
+
+
+    </Grid>
+</Window>
