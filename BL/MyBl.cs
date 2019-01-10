@@ -31,15 +31,15 @@ namespace BL
             }
 
             //check there is enough days between tests
-            if (helpTest != null && DateTime.Now.Day - helpTest.TestTime.Day < Configuration.daysBetweenTests)
+            if (helpTest != null && (DateTime.Now.Day - helpTest.TestTime.Day < Configuration.daysBetweenTests))
             {
-                throw new Exception("there nust be at least " + Configuration.daysBetweenTests + " days before a trainee can take another test\n");
+                throw new Exception("There must be at least " + Configuration.daysBetweenTests + " days before a trainee can take another test\n");
             }
 
             //check there is enough lessons
             if (helpTrainee.NumOfLessons < Configuration.minLessons)
             {
-                throw new Exception(" a trainee can't take a test if he took less then" + Configuration.minLessons + "\n");
+                throw new Exception("A trainee cannot take a test if he took less than" + Configuration.minLessons + " lessons\n");
             }
             
             //if tester is full
@@ -52,12 +52,13 @@ namespace BL
             var licence = from t in GetTests()
                           where t.TraineeID == test.TraineeID && t.TestResult == true
                           select t;
+            
             //check if trainee already have a licence to this type of car
             foreach (var item in licence)
             {
                 if (item.vehicle == test.vehicle)
                 {
-                    throw new Exception("trainee allready as licence for this type of car");
+                    throw new Exception("Trainee already has licence for this type of car");
                 }
             }
 
@@ -72,16 +73,13 @@ namespace BL
                 throw e;
             }
             return true;
-
-            
-
-        }
+       }
 
         public bool AddTester(Tester tester)
         {
             if (DateTime.Now.Year - tester.DateOfBirth.Year < Configuration.minTesterAge)
             {
-                throw new Exception("a tester can't be under " + Configuration.minTesterAge + " / n");
+                throw new Exception("A tester cannot be under " + Configuration.minTesterAge + " years old /n");
             }
             try
             {
@@ -104,7 +102,7 @@ namespace BL
         {
             if (DateTime.Now.Year - trainee.DateOfBirth.Year < Configuration.minTraineeAge)
             {
-                throw new Exception("a trainee fan't be under " + Configuration.minTraineeAge + " \n");
+                throw new Exception("A trainee cannot be under " + Configuration.minTraineeAge + " years old \n");
             }
             try
             {
@@ -118,7 +116,6 @@ namespace BL
             }
             return true;
         }
-
         #endregion
 
         #region remove
@@ -136,7 +133,6 @@ namespace BL
                 throw e;
             }
             return true;
-            
         }
 
         public bool RemoveTester(string testerID)
@@ -229,10 +225,8 @@ namespace BL
 
         public List<Test> GetTests(Predicate<Test> predicate = null)
         {
-
             IDal _dal = FactorySingletonDal.GetDal();
             return _dal.GetTests(predicate);
-            
         }
 
         public List<Trainee> GetTrainees(Predicate<Trainee> predicate = null)
@@ -242,6 +236,7 @@ namespace BL
         }
         #endregion
 
+        #region search functions
         public Tester FindTesterByID(string id)
         {
             return (from t in GetTesters()
@@ -308,9 +303,7 @@ namespace BL
         /// <returns></returns>
         public bool IsLisence(string traineeID)
         {
-           
-
-            //get all the tests of the trainee. the last test will be first in the list
+          //get all the tests of the trainee. the last test will be first in the list
             var tests = from t in GetTests()
                         where t.TraineeID == traineeID
                         orderby t.SerialNumber
