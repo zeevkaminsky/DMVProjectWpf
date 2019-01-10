@@ -122,9 +122,9 @@ namespace DAL
         #endregion
 
         #region get lists
-        public List<Tester> GetTesters(Predicate<Tester>predicate = null )
+        public List<Tester> GetTesters(Predicate<Tester> predicate = null )
         {
-            if (predicate != null)
+            if (predicate != null) //if meets the condition return list
             {
                 var res = from t in DataSource.Testers
                           where predicate(t)
@@ -136,7 +136,7 @@ namespace DAL
 
         public List<Test> GetTests(Predicate<Test> predicate = null)
         {
-            if (predicate != null)
+            if (predicate != null) //if meets the condition return list
             {
                 var res = from t in DataSource.Test
                           where predicate(t)
@@ -148,7 +148,7 @@ namespace DAL
 
         public List<Trainee> GetTrainees(Predicate<Trainee> predicate = null)
         {
-            if (predicate != null)
+            if (predicate != null) //if meets the condition return list
             {
                 var res = from t in DataSource.trainees
                           where predicate(t)
