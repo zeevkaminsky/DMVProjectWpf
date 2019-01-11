@@ -6,8 +6,12 @@
         xmlns:local="clr-namespace:PL_Wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Label Name="LogoLabel" Content="DMV - Department Of Motor Vehicles" Grid.ColumnSpan="2" 
+    <Window.Resources>
+        <Label x:Key="MyLabel"  Content="DMV - Department Of Motor Vehicles" Grid.ColumnSpan="2" 
+               FontSize="36"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="62" Margin="58,12,58,11" Width="676" FontWeight="Bold" />
+    </Window.Resources>
+    <Grid >
+        <Label Name="LogoLabel"  Content="DMV - Department Of Motor Vehicles" Grid.ColumnSpan="2" 
                FontSize="36"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="62" Margin="58,12,58,11" Width="676" FontWeight="Bold" />
         <Grid Name="InnerGrid" Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -21,10 +25,10 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Button Name="Tester" Content="tester" FontSize="36" Background="LightGray" Margin="15" Click="Tester_Click"/>
-                <Button Name="Trainee" Content="trainee"  Grid.Row="1" FontSize="36" Background="LightGray"  Margin="15" />
+                <Button Name="Tester" Content="Tester" FontSize="36" Background="LightGray" Margin="15" Click="Tester_Click"/>
+                <Button Name="Trainee" Content="Trainee"  Grid.Row="1" FontSize="36" Background="LightGray"  Margin="15" Click="Trainee_Click" />
                 <Button Name="DataBase" Content="Data Base" Grid.Row="2" FontSize="36" Background="LightGray"  Margin="15"/>
-                <Button Name="Test" Content="create test"  Grid.Row="3" FontSize="36" Background="LightGray"  Margin="15"/>
+                <Button Name="Test" Content="Test"  Grid.Row="3" FontSize="36" Background="LightGray"  Margin="15"/>
             </Grid>
             <Image Grid.Column="1" Source="images/car_new.JPG" />
 

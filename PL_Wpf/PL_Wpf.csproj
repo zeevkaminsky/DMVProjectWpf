@@ -37,6 +37,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -58,13 +60,39 @@
     <Compile Include="AddTester.xaml.cs">
       <DependentUpon>AddTester.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddTrainee.xaml.cs">
+      <DependentUpon>AddTrainee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LogoUserControl.xaml.cs">
+      <DependentUpon>LogoUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RemoveTester.xaml.cs">
       <DependentUpon>RemoveTester.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tester.xaml.cs">
-      <DependentUpon>Tester.xaml</DependentUpon>
+    <Compile Include="RemoveTraineeWin.xaml.cs">
+      <DependentUpon>RemoveTraineeWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Test.xaml.cs">
+      <DependentUpon>Test.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TesterWind.xaml.cs">
+      <DependentUpon>TesterWind.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Trainee.xaml.cs">
+      <DependentUpon>Trainee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateTesterWin.xaml.cs">
+      <DependentUpon>UpdateTesterWin.xaml</DependentUpon>
     </Compile>
     <Page Include="AddTester.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddTrainee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LogoUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -84,7 +112,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tester.xaml">
+    <Page Include="RemoveTraineeWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Test.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TesterWind.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Trainee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateTesterWin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -107,6 +151,15 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\BE.Address.datasource" />
+    <None Include="Properties\DataSources\BE.Appeal.datasource" />
+    <None Include="Properties\DataSources\BE.Configuration.datasource" />
+    <None Include="Properties\DataSources\BE.FullName.datasource" />
+    <None Include="Properties\DataSources\BE.Person.datasource" />
+    <None Include="Properties\DataSources\BE.Schedule.datasource" />
+    <None Include="Properties\DataSources\BE.Test.datasource" />
+    <None Include="Properties\DataSources\BE.Tester.datasource" />
+    <None Include="Properties\DataSources\BE.Trainee.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -148,6 +201,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\black_car.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\NoUTurn.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\update.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

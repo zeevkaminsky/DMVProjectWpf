@@ -16,25 +16,13 @@ using System.Windows.Shapes;
 namespace PL_Wpf
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LogoUserControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LogoUserControl : UserControl
     {
-        public MainWindow()
+        public LogoUserControl()
         {
             InitializeComponent();
-        }
-
-        private void Tester_Click(object sender, RoutedEventArgs e)
-        {
-            new TesterWind().ShowDialog();
-           
-          
-        }
-
-        private void Trainee_Click(object sender, RoutedEventArgs e)
-        {
-            new Trainee().ShowDialog();
         }
     }
 }

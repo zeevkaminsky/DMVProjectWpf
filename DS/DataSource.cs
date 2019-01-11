@@ -12,7 +12,7 @@ namespace DS
         public static List<Tester> Testers = new List<Tester>();
         public static List<Trainee> trainees = new List<Trainee>();
         public static List<Test> Test = new List<Test>();
-
+        
 
     }
 }

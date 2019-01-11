@@ -10,31 +10,35 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PL_Wpf
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Tester.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TesterWind : Window
     {
-        public MainWindow()
+        public TesterWind()
         {
             InitializeComponent();
         }
 
-        private void Tester_Click(object sender, RoutedEventArgs e)
+        private void AddTester_Click(object sender, RoutedEventArgs e)
         {
-            new TesterWind().ShowDialog();
+            new AddTester().ShowDialog();
            
-          
         }
 
-        private void Trainee_Click(object sender, RoutedEventArgs e)
+        private void RemoveTester_Click(object sender, RoutedEventArgs e)
         {
-            new Trainee().ShowDialog();
+            new RemoveTester().ShowDialog();
+           
+        }
+
+        private void UpdateTester_Click(object sender, RoutedEventArgs e)
+        {
+            new UpdateTesterWin().ShowDialog();
         }
     }
 }

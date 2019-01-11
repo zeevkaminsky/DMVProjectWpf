@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class Person
+    public abstract class Person
     {
         public string ID { get; set; }
         public FullName Name = new FullName();
@@ -18,8 +18,8 @@ namespace BE
 
         public override string ToString()
         {
-            return string.Format("ID:{0}/n name:{1}\n date of birth:{2}\n gender:{3}\n address:{4} phone number:{5}\n"
-                , ID, Name, DateOfBirth, Gender, Address, Phone);
+            return string.Format(  "ID:{0}\nname:{1}\ndate of birth:{2}\ngender:{3}\naddress:{4}\nphone number:{5}\n"
+                , ID, Name.ToString(), DateOfBirth, Gender, Address.ToString(), Phone);
         }
 
     }

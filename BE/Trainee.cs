@@ -8,10 +8,10 @@ namespace BE
 {
     public class Trainee:Person
     {
-        public Vehicle MyVehicle = new Vehicle();
-        public Gear MyGear = new Gear();
+        public Vehicle MyVehicle { get; set; }
+        public Gear MyGear { get; set; }
         public string School { get; set; }
-        public FullName TeacherName = new FullName();
+        public FullName TeacherName { get; set; }
         public int NumOfLessons { get; set; }
         public int NUmOfTests { get; set; }
 

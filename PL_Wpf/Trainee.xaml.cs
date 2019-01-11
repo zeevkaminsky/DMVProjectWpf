@@ -15,28 +15,25 @@ using System.Windows.Shapes;
 namespace PL_Wpf
 {
     /// <summary>
-    /// Interaction logic for Tester.xaml
+    /// Interaction logic for Trainee.xaml
     /// </summary>
-    public partial class Tester : Window
+    public partial class Trainee : Window
     {
-        public Tester()
+        public Trainee()
         {
             InitializeComponent();
         }
 
-        private void AddTester_Click(object sender, RoutedEventArgs e)
+        
+
+        private void AddTrainee_Click(object sender, RoutedEventArgs e)
         {
-            AddTester addTesterWin = new AddTester();
-           
-            addTesterWin.Show();
-            this.Close();
+            new AddTrainee().ShowDialog();
         }
 
-        private void RemoveTester_Click(object sender, RoutedEventArgs e)
+        private void RemoveTrainee_Click(object sender, RoutedEventArgs e)
         {
-            RemoveTester win = new RemoveTester();
-            this.Close();
-            win.Show();
+            new RemoveTraineeWin().ShowDialog();
         }
     }
 }

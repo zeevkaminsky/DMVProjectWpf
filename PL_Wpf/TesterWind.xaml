@@ -1,11 +1,11 @@
-﻿<Window x:Class="PL_Wpf.Tester"
+﻿<Window x:Class="PL_Wpf.TesterWind"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL_Wpf"
         mc:Ignorable="d"
-        Title="Tester" Height="450" Width="800">
+        Title="TesterWind" Height="450" Width="800">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -26,7 +26,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Button Name="AddTester" Content="add tester" FontSize="30" Background="LightGray" Margin="20" Click="AddTester_Click"/>
-                <Button Name="UpdateTester" Content="update tester" FontSize="30" Grid.Row="1" Background="LightGray" Margin="20"/>
+                <Button Name="UpdateTester" Content="update tester" FontSize="30" Grid.Row="1" Background="LightGray" Margin="20" Click="UpdateTester_Click"/>
                 <Button Name="RemoveTester" Content="remove tester" FontSize="30" Grid.Row="2" Background="LightGray" Margin="20" Click="RemoveTester_Click"/>
             </Grid>
             <Image Grid.Column="1" Source="images/Tester_new.jpg"/>

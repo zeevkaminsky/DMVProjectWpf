@@ -3,12 +3,30 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         xmlns:local="clr-namespace:PL_Wpf"
         mc:Ignorable="d"
-        Title="AddTester" Height="600" Width="800">
-   
+        Title="AddTester" Height="600" Width="1000" FontFamily="Myanmar Text">
+
+    <Window.Resources>
+        <DataTemplate x:Key="DataTemplate_Level2">
+            <CheckBox IsChecked="False"  Height="15" Width="15" Margin="2"/>
+        </DataTemplate>
+        <DataTemplate x:Key="DataTemplate_Level1">
+            <ItemsControl ItemsSource="{Binding arr}" ItemTemplate="{DynamicResource DataTemplate_Level2}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </DataTemplate>
+    </Window.Resources>
+
+
+
     <Grid>
-        
+
         <Label Name="LogoLabel" Content="DMV - Department Of Motor Vehicles" Grid.ColumnSpan="2" 
                FontSize="36"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="62" Margin="58,12,58,11" Width="676" FontWeight="Bold" />
         <Grid Name="InnerGrid" Grid.Row="1" >
@@ -35,13 +53,13 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock  Name="IDTBlock" Text="ID:" FontSize="23" TextAlignment="Right" VerticalAlignment="Center"/>
+                <TextBlock               Name="IDTBlock" Text="ID:" FontSize="23" TextAlignment="Right" VerticalAlignment="Center"/>
                 <TextBlock  Grid.Row="1" Name="FirstNameTBlock" Text="first name:" FontSize="23" TextAlignment="Right" VerticalAlignment="Center"/>
                 <TextBlock  Grid.Row="2" Name="LastNameTBlock" Text="last name:" FontSize="23" TextAlignment="Right" VerticalAlignment="Center"/>
                 <TextBlock  Grid.Row="3" Name="DateOfBirthTBlock" Text="date of birth:" FontSize="23" TextAlignment="Right" VerticalAlignment="Center"/>
                 <TextBlock  Grid.Row="4" Name="GenderTBlock" Text="gender:" FontSize="23" TextAlignment="Right" VerticalAlignment="Center"/>
                 <TextBlock  Grid.Row="5" Name="PhoneTBlock" Text="phone:" FontSize="23" TextAlignment="Right" VerticalAlignment="Center"/>
-                <TextBlock  Grid.Row="6" Name="CityTBlock" Text="city:" FontSize="23" TextAlignment="Right" VerticalAlignment="Center"/>
+                <TextBlock  Grid.Row="6" Name="CityTBlock" Text="city:" FontSize="23" TextAlignment="Right" VerticalAlignment="Center" Margin="0,1,0,5"/>
                 <TextBlock  Grid.Row="7" Name="StreetTBlock" Text="street:" FontSize="23" TextAlignment="Right" VerticalAlignment="Center"/>
                 <TextBlock  Grid.Row="8" Name="NumTBlock" Text="number:" FontSize="23" TextAlignment="Right" VerticalAlignment="Center"/>
                 <TextBlock  Grid.Row="9" Name="SpecialityTBlock" Text="speciality:" FontSize="23" TextAlignment="Right" VerticalAlignment="Center"/>
@@ -61,59 +79,141 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/> 
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <TextBox Name="IDTBox" Margin="5" VerticalAlignment="Center" />
-                <TextBox Grid.Row="1" Name="FirstNameTBox" Margin="5" VerticalAlignment="Center" />
+                <TextBox Grid.Row="0" Name="IDTBox" Margin="5" VerticalAlignment="Center" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                <TextBox Grid.Row="1" Name="FirstNameTBox" Margin="5" VerticalAlignment="Center"/>
                 <TextBox Grid.Row="2" Name="LastNameTBox" Margin="5" VerticalAlignment="Center" />
-                <DatePicker Name="DateOfBirthDatePicker"  Grid.Row="3" VerticalAlignment="Center" Margin="5" DisplayDateStart="01.01.1911" DisplayDateEnd="01.01.2000"/>
-                <ComboBox  Name="GenderCBox"  Grid.Row="4" Margin="5" SelectionChanged="ComboBox_SelectionChanged">
-                    <ComboBoxItem>male</ComboBoxItem>
-                    <ComboBoxItem>female</ComboBoxItem>
-                </ComboBox>
-                <ComboBox Name="SpecialityCBox" Grid.Row="9"  Margin=" 5"/>
-                <ComboBox Name="CityCBox" Grid.Row="6" Margin="5" SelectionChanged="ComboBox_SelectionChanged_1"/>
+                <DatePicker Name="DateOfBirthDatePicker"  Grid.Row="3" VerticalAlignment="Center" Margin="5" DisplayDateStart="01.01.1911" DisplayDateEnd="01.01.2000" />
+                <ComboBox  Name="GenderCBox"  Grid.Row="4" Margin="5"  />
+                <ComboBox  Name="ExpCBox"  Grid.Row="10" Margin="5"  />
+                <ComboBox  Name="MaxTestsCBox"  Grid.Row="11" Margin="5"  />
+                <ComboBox  Name="MaxDistanceCBox"  Grid.Row="12" Margin="5"  />
+
+                <TextBox Grid.Row="5" Name="PhoneTBox" Margin="5" VerticalAlignment="Center" Text="{Binding Phone, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                <ComboBox Name="SpecialityCBox" Grid.Row="9"  Margin=" 5" />
+                <ComboBox Name="CityCBox" Grid.Row="6" Margin="5"  />
                 <TextBox  Grid.Row="7" Name="StreetTBox" Margin="5" VerticalAlignment="Center" />
-                <TextBox Grid.Row="8" Name="NumberTBox" Margin="5" VerticalAlignment="Center" />
-                <TextBox Grid.Row="10" Name="ExperienceTBox" Margin="5" VerticalAlignment="Center" />
+                <TextBox Grid.Row="8" Name="NumberTBox" Margin="5" VerticalAlignment="Center"  />
+                <!--<TextBox Grid.Row="10" Name="ExperienceTBox" Margin="5" VerticalAlignment="Center" />
                 <TextBox Grid.Row="11" Name="MaxTestsTBox" Margin="5" VerticalAlignment="Center" />
-                <TextBox Grid.Row="12" Name="MaxDistanceTBox" Margin="5" VerticalAlignment="Center" />
+                <TextBox Grid.Row="12" Name="MaxDistanceTBox" Margin="5" VerticalAlignment="Center" />-->
 
             </Grid>
-            
-            
+
+
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="MenuButton" Content="back to menu =>" FontSize="26" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="15" Click="MenuButton_Click"/>
+                
                 <Button Grid.Row="2" Name="EnterButton" Content="Enter" Grid.Column="2" HorizontalAlignment="Right" FontSize="30" VerticalAlignment="Bottom" Width="184" Height="47" Click="EnterButton_Click" Margin="30"/>
                 <Grid Name="SchedGrid" Grid.Row="1" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <ListBox Name ="sunLBox" VerticalAlignment="Top" Height="36" />
-                    <ListBox Name ="monLBox" Grid.Column="1" VerticalAlignment="Top" />
-                    <ListBox Name ="tueLBox" Grid.Column="2" VerticalAlignment="Top"/>
-                    <ListBox Name ="wedLBox" Grid.Column="3" VerticalAlignment="Top"/>
-                    <ListBox Name ="thuLBox" Grid.Column="4" VerticalAlignment="Top"/>
+
+                    <CheckBox  Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" />
+                    <CheckBox  Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" />
+                    <CheckBox  Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" />
+                    <CheckBox  Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" />
+                    <CheckBox  Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="5" />
+                    <CheckBox  Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="6" />
+                    <CheckBox  Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" />
+                    <CheckBox  Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" />
+                    <CheckBox  Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" />
+                    <CheckBox  Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" />
+                    <CheckBox  Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="5" />
+                    <CheckBox  Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="6" />
+                    <CheckBox  Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" />
+                    <CheckBox  Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" />
+                    <CheckBox  Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" />
+                    <CheckBox  Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" />
+                    <CheckBox  Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="5" />
+                    <CheckBox  Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="6" />
+                    <CheckBox  Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" />
+                    <CheckBox  Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" />
+                    <CheckBox  Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" />
+                    <CheckBox  Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" />
+                    <CheckBox  Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="5" />
+                    <CheckBox  Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="6" />
+                    <CheckBox  Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" />
+                    <CheckBox  Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" />
+                    <CheckBox  Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" />
+                    <CheckBox  Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" />
+                    <CheckBox  Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="5"/>
+                    <CheckBox  Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="6"/>
+                    <Label Content="Sun" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="25"/>
+                    <Label Content="Mon" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="25"/>
+                    <Label Content="Tue" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="25"/>
+                    <Label Content="Wed" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="25"/>
+                    <Label Content="Thu" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="25"/>
+                    <Label Content="09:00-10:00" HorizontalAlignment="Right"  Grid.Row="1" VerticalAlignment="Center" FontSize="14"/>
+                    <Label Content="10:00-11:00" HorizontalAlignment="Right"  Grid.Row="2"  VerticalAlignment="Center" FontSize="14"/>
+                    <Label Content="11:00-12:00" HorizontalAlignment="Right"  Grid.Row="3"  VerticalAlignment="Center" FontSize="14"/>
+                    <Label Content="12:00-13:00" HorizontalAlignment="Right"  Grid.Row="4"  VerticalAlignment="Center" FontSize="14"/>
+                    <Label Content="13:00-14:00" HorizontalAlignment="Right"  Grid.Row="5"  VerticalAlignment="Center" FontSize="14"/>
+                    <Label Content="14:00-15:00" HorizontalAlignment="Right"  Grid.Row="6"  VerticalAlignment="Center" FontSize="14"/>
+                    <!-- <DataGrid  x:Name="luzDataGrid" AutoGenerateColumns="False" HorizontalAlignment="Center" Width="536" >
+                       
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="ColumnHeader" Header="Day:    "/>
+                            <DataGridCheckBoxColumn Width="*" Header="09:00-10:00"/>
+                            <DataGridCheckBoxColumn Width="*" Header="10:00-11:00"/>
+                            <DataGridCheckBoxColumn Width="*" Header="11:00-12:00"/>
+                            <DataGridCheckBoxColumn Width="*" Header="12:00-13:00"/>
+                            <DataGridCheckBoxColumn Width="*" Header="13:00-14:00"/>
+                            <DataGridCheckBoxColumn Width="*" Header="14:00-15:00" />
+                            <DataGridCheckBoxColumn/>
+                        </DataGrid.Columns>
+                        <StackPanel Margin="0,27,0,89" HorizontalAlignment="Left" Width="44">
+                            <TextBlock TextWrapping="Wrap" Text="Sun" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                            <TextBlock TextWrapping="Wrap" Text="Mon"/>
+                            <TextBlock TextWrapping="Wrap" Text="Tue"/>
+                            <TextBlock TextWrapping="Wrap" Text="Wed"/>
+                            <TextBlock TextWrapping="Wrap" Text="Thu"/>
+
+                        </StackPanel>
+                    </DataGrid>-->
+                    
+
+
+
+
+
+
+
+
+
                 </Grid>
+                <Label Content="Please Enter Your Schedule:" HorizontalAlignment="Center"  VerticalAlignment="Top" FontSize="30" />
             </Grid>
 
 
 
         </Grid>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="334*"/>

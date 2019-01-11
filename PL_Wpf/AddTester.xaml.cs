@@ -2,6 +2,7 @@
 using BL;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,88 +22,175 @@ namespace PL_Wpf
     /// </summary>
     public partial class AddTester : Window
     {
+
+        private BE.Tester tester;
+
         public AddTester()
         {
             InitializeComponent();
+            tester = new BE.Tester { Name = new FullName(), Address = new Address(), WeeklySchedule = new Schedule() };
+            init(tester);//initialize all comboboxes with apropriate values
 
-            var vehicles = Enum.GetValues(typeof(Vehicle));
-            foreach (var v in vehicles)
-            {
-                SpecialityCBox.Items.Add(v);
-            }
+            //dafault combo box values
+            GenderCBox.SelectedIndex = 0;
+            SpecialityCBox.SelectedIndex = 0;
+            CityCBox.SelectedIndex = 0;
+            ExpCBox.SelectedIndex = 0;
+            MaxTestsCBox.SelectedIndex = 0;
+            MaxDistanceCBox.SelectedIndex = 0;
 
-            var cities = Enum.GetValues(typeof(Cities));
-            foreach (var c in cities)
-            {
-                CityCBox.Items.Add(c);
-            }
+            DateOfBirthDatePicker.SelectedDate = DateTime.Now.AddYears(-50);
+        }
+        public AddTester(Tester testerToUp)//update window sending an existing tester
+        {
 
-            foreach (var item in SchedGrid.Children)
-            {
-                if (item is ListBox)
-                {
-                    ListBox LB = item as ListBox;
-                    for (int i = 9; i < 16; ++i)
-                    {
-                        ListBoxItem newItem = new ListBoxItem();
-                        newItem.Content = i + ":00";
-                        LB.Items.Add(newItem);
-                    }
-                }
-            }
+
+            InitializeComponent();
+            tester = testerToUp;
+            this.EnterButton.Content = "update";
+            init(testerToUp);
+            GenderCBox.SelectedItem = testerToUp.Gender;
+            SpecialityCBox.SelectedItem = testerToUp.MyVehicle;
+            CityCBox.SelectedItem = testerToUp.Address.Town;
+            StreetTBox.Text = testerToUp.Address.Street;
+            NumberTBox.Text = testerToUp.Address.Building.ToString();
+            ExpCBox.SelectedItem = testerToUp.Experience;
+            MaxTestsCBox.SelectedItem = testerToUp.MaxTests;
+            MaxDistanceCBox.SelectedItem = testerToUp.MaxDistance;
+            FirstNameTBox.Text = testerToUp.Name.FirstName;
+            LastNameTBox.Text = testerToUp.Name.LastName;
+
+            DateOfBirthDatePicker.SelectedDate = testerToUp.DateOfBirth;
+            DateOfBirthDatePicker.Text = testerToUp.DateOfBirth.ToShortDateString();
+        }
+
+        private void init(BE.Tester tester)
+        {
+
+            //Days[] days = new Days[5];
+            //days[0] = Days.sun;
+            //days[1] = Days.sun;
+            //days[2] = Days.sun;
+            //days[3] = Days.sun;
+            //days[4] = Days.sun;
+            //foreach (var item in days)
+            //{
+            //    this.luzDataGrid.Items.Add(item);
+            //}
             
+          
+
+            this.TextBoxGrid.DataContext = tester;
+
+            GenderCBox.ItemsSource = Enum.GetValues(typeof(Gender));
+
+            SpecialityCBox.ItemsSource = Enum.GetValues(typeof(Vehicle));
+
+            CityCBox.ItemsSource = Enum.GetValues(typeof(Cities));
+
+            for (int i = 0; i < Configuration.MaxTesterAge - Configuration.minTesterAge; i++)
+            {
+                ExpCBox.Items.Add(i);
+            }
+
+            for (int i = 1; i <= 30; i++)
+            {
+                MaxTestsCBox.Items.Add(i);
+            }
+
+            for (double i = 5; i < 150.0; i += 0.5)
+            {
+                MaxDistanceCBox.Items.Add(i);
+            }
 
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
 
-        }
+        #region disableButoon
 
-        private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
 
-        }
+        #endregion
+
+
+
         /// <summary>
         /// convert to enum
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="enumString"></param>
         /// <returns></returns>
-        public static T ToEnum<T>(string enumString)
-        {
-            return (T)Enum.Parse(typeof(T), enumString);
-        }
+
 
         private void EnterButton_Click(object sender, RoutedEventArgs e)
         {
-
-
-            BE.Tester tester = new BE.Tester();
-            tester.ID = IDTBox.Text;
-            tester.Name.FirstName = FirstNameTBox.Text;
-            tester.Name.LastName = LastNameTBox.Text;
-            ComboBoxItem typeItem = new ComboBoxItem();
-            typeItem = (ComboBoxItem)GenderCBox.SelectedItem;
-            tester.Gender = ToEnum<Gender>(typeItem.Content.ToString());
-            //tester.MaxDistance = (double)MaxDistanceTBox.Text;
-
+            Schedule schedule = new Schedule { weeklySchedule = new string[5][] };
+            for (int i = 0; i < 5; i++)
+            {
+                schedule.weeklySchedule[i] = new string[6];
+            }
             try
             {
-                IBl _bl = FactorySingletonBl.GetBl();
-                if(_bl.AddTester(tester))
+                foreach (var item in SchedGrid.Children.OfType<CheckBox>())
                 {
-                    MessageBox.Show(tester.ToString() + "added successfully");
+                    int row = Grid.GetRow(item);
+                    int column = Grid.GetColumn(item);
+                    if (item.IsChecked == true)
+                    {
+                        schedule.weeklySchedule[row - 1][column - 1] = "work";
+                    }
+                    else
+                    {
+                        schedule.weeklySchedule[column - 1][row - 1] = "dosn't work";
+                    }
                 }
+                tester.WeeklySchedule.weeklySchedule = schedule.weeklySchedule;
+
+                tester.Name.FirstName = FirstNameTBox.Text;
+                tester.Name.LastName = LastNameTBox.Text;
+                tester.DateOfBirth = DateOfBirthDatePicker.SelectedDate.Value;
+                Object gen = GenderCBox.SelectedItem;
+                tester.Gender = Configuration.ToEnum<Gender>(gen.ToString());
+                //tester.Phone = PhoneTBox.Text;
+                tester.MaxTests = int.Parse(MaxTestsCBox.SelectedItem.ToString());
+                tester.Experience = int.Parse(ExpCBox.SelectedItem.ToString());
+                tester.MaxDistance = double.Parse(MaxDistanceCBox.SelectedItem.ToString());
+                Object V = SpecialityCBox.SelectedItem;
+                tester.MyVehicle = Configuration.ToEnum<Vehicle>(V.ToString());
+                object city = CityCBox.SelectedItem;
+                tester.Address.Town = (city.ToString());
+                tester.Address.Street = StreetTBox.Text;
+                tester.Address.Building = int.Parse(NumberTBox.Text);
+
+                if (EnterButton.Content.ToString() != "update")
+                {
+                    IBl _bl = FactorySingletonBl.GetBl();
+                    if (_bl.AddTester(tester))
+                    {
+                        MessageBox.Show(tester.ToString() + "added successfully");
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    IBl _bl = FactorySingletonBl.GetBl();
+                    
+                    if (_bl.UpdateTester(tester))
+                    {
+                        MessageBox.Show(tester.ToString() + "updated successfully");
+                        this.Close();
+                    }
+                }
+               
             }
             catch (Exception m)
             {
 
-                throw m;
+                MessageBox.Show(m.Message);
             }
 
-            
-            
+
+
+
 
 
 
@@ -114,6 +202,9 @@ namespace PL_Wpf
             this.Close();
             mainWindow.Show();
         }
+
+        
     }
 }
+
 

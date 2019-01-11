@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace BE
 {
 
-    public enum Gender { male, female }
+    public enum Gender { MALE, FEMALE }
     public enum Days { sun = 1, mon, tues, wednes, thurs }
     public enum Vehicle { car, motorcycle, truck, trailer, tractor }
     public enum Gear { auto, manual }

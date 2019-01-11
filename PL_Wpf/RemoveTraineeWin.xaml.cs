@@ -17,35 +17,32 @@ using System.Windows.Shapes;
 namespace PL_Wpf
 {
     /// <summary>
-    /// Interaction logic for RemoveTester.xaml
+    /// Interaction logic for RemoveTraineeWin.xaml
     /// </summary>
-    public partial class RemoveTester : Window
+    public partial class RemoveTraineeWin : Window
     {
-        private ObservableCollection<string> testers = new ObservableCollection<string>();
-        public RemoveTester()
+        private ObservableCollection<string> trainees = new ObservableCollection<string>();
+        public RemoveTraineeWin()
         {
-            
+
             InitializeComponent();
             try
             {
-                
+
                 IBl _bl = FactorySingletonBl.GetBl();
-                foreach (var item in _bl.GetTesters())
+                foreach (var item in _bl.GetTrainees())
                 {
-                    testers.Add(item.ID);
+                    trainees.Add(item.ID);
                 }
-               
-
-                IDCBox.ItemsSource = testers; 
 
 
+                IDCBox.ItemsSource = trainees;
+                
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }
-           
-
             
         }
 
@@ -60,15 +57,13 @@ namespace PL_Wpf
                     {
                         IBl _bl = FactorySingletonBl.GetBl();
                         string IDToRemove = IDCBox.SelectedItem as string;
-                        if (_bl.RemoveTester(IDToRemove))
+                        if (_bl.RemoveTrainee(IDToRemove))
                         {
-                            testers.Remove(IDToRemove);
+                            trainees.Remove(IDToRemove);
                             MessageBox.Show(IDToRemove + " removed successfully");
-                            this.Close();
                         }
                     }
                 }
-                    
             }
             catch (Exception m)
             {
