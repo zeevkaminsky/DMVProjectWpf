@@ -14,40 +14,39 @@ namespace DAL
         #region add functions
         public bool AddDrivingTest(Test test)
         {
-            Tester tester = GetTesters().FirstOrDefault(t => t.ID == test.TesterID);
-            tester.WeeklySchedule.weeklySchedule[(int)test.TestTime.DayOfWeek][(int)test.TestTime.Hour] = "in test";
-            Trainee trainee = GetTrainees().FirstOrDefault(t => t.ID == test.TraineeID);
-            trainee.NUmOfTests++;
+            
+            Trainee trainee = GetTrainees().FirstOrDefault(t => t.ID == test.TraineeID); // 
+            trainee.NUmOfTests++; 
 
-            test.SerialNumber = Configuration.InitialSerialNumber++;
-            DataSource.Test.Add(test);
+            test.SerialNumber = Configuration.InitialSerialNumber++; //giving a serial number to the test
+            DataSource.Test.Add(test); //add to test list
             return true;
         }
 
         public bool AddTester(Tester tester)
         {
-            foreach (Tester t in GetTesters())
+            foreach (Tester t in GetTesters()) // checking if already exists 
             {
                 if (tester.ID == t.ID)
                 {
-                    throw new Exception("tester with the same id allready exists");
+                    throw new Exception("Tester with the same Id already exists");
                 }
             }
-            tester.NumOfTests++;
-            DataSource.Testers.Add(tester);
+            tester.NumOfTests++; 
+            DataSource.Testers.Add(tester); //add to tester list
             return true;
         }
 
         public bool AddTrainee(Trainee trainee)
         {
-            foreach (Trainee T in GetTrainees())
+            foreach (Trainee T in GetTrainees()) //checking if already exists 
             {
                 if (trainee.ID == T.ID)
                 {
-                    throw new Exception("Trainee with the same id allready exists");
+                    throw new Exception("Trainee with the same Id already exists");
                 }
             }
-            DataSource.trainees.Add(trainee);
+            DataSource.trainees.Add(trainee); // add to trainees list
             return true;
         }
         #endregion
@@ -55,44 +54,42 @@ namespace DAL
         #region remove functions
         public bool RemovedrivingTest(int serialNumber)
         {
-            Test drivTestToDel = GetTests().FirstOrDefault(t => t.SerialNumber == serialNumber);
-            if (drivTestToDel != null)
+            Test drivTestToDel = GetTests().FirstOrDefault(t => t.SerialNumber == serialNumber); // search if exists
+            if (drivTestToDel != null) //if exists, remove it
             {
                 DataSource.Test.Remove(drivTestToDel);
                 return true;
             }
-            throw new Exception("test didn't found. make sure you're writing the serial number correct");
-               
-
+            throw new Exception("Test didn't found. Make sure you're writing the correct serial number");
         }
 
         public bool RemoveTester(string id)
         {
-            Tester testerToDel = DataSource.Testers.FirstOrDefault(t => t.ID == id);
-            if (testerToDel != null)
+            Tester testerToDel = DataSource.Testers.FirstOrDefault(t => t.ID == id); //search if exists
+            if (testerToDel != null) //if exists, remove it
             {
                 DataSource.Testers.Remove(testerToDel);
                 return true;
             }
-            throw new Exception(" tester didn't found. make sure you're writing the id correctly");
+            throw new Exception("Tester didn't found. Make sure you're writing the id correctly");
         }
 
         public bool RemoveTrainee(string id)
         {
-            Trainee traineeToDel = GetTrainees().FirstOrDefault(t => t.ID == id);
-            if (traineeToDel != null)
+            Trainee traineeToDel = GetTrainees().FirstOrDefault(t => t.ID == id); //search if exists
+            if (traineeToDel != null) //if exists, remove it
             {
                 DataSource.trainees.Remove(traineeToDel);
                 return true;
             }
-            throw new Exception(" trainee didn't found. make sure you're writing the id correctly");
+            throw new Exception("Trainee didn't found. Make sure you're writing the id correctly");
         }
         #endregion
 
         #region update functions
         public bool UpdateDrivingTest(Test test)
         {
-            Test testToUp = GetTests().FirstOrDefault(t => t.SerialNumber == test.SerialNumber);
+            Test testToUp = GetTests().FirstOrDefault(t => t.SerialNumber == test.SerialNumber); //search if exists
             if (testToUp == null)
             {
                 throw new Exception("test didn't found. make sure you enter the right serial number.");
@@ -103,8 +100,8 @@ namespace DAL
 
         public bool UpdateTester(Tester tester)
         {
-            Tester testerToUp = GetTesters().FirstOrDefault(t => t.ID == tester.ID);
-            if (testerToUp == null)
+            Tester testerToUp = GetTesters().FirstOrDefault(t => t.ID == tester.ID); //search if exists
+            if (testerToUp == null) 
             {
                 throw new Exception("tester didn't found. make sure you enter the right id.");
             }
@@ -114,10 +111,10 @@ namespace DAL
 
         public bool UpdateTrainee(Trainee trainee)
         {
-            Trainee traineeToUp =GetTrainees().FirstOrDefault(t => t.ID == trainee.ID);
+            Trainee traineeToUp =GetTrainees().FirstOrDefault(t => t.ID == trainee.ID); //search if exists
             if (traineeToUp == null)
             {
-                throw new Exception("traine didn't found. make sure you enter the right id.");
+                throw new Exception("trainee didn't found. make sure you enter the right id.");
             }
             traineeToUp = trainee;
             return true;
@@ -125,9 +122,9 @@ namespace DAL
         #endregion
 
         #region get lists
-        public List<Tester> GetTesters(Predicate<Tester>predicate = null )
+        public List<Tester> GetTesters(Predicate<Tester> predicate = null )
         {
-            if (predicate != null)
+            if (predicate != null) //if meets the condition return list
             {
                 var res = from t in DataSource.Testers
                           where predicate(t)
@@ -139,7 +136,7 @@ namespace DAL
 
         public List<Test> GetTests(Predicate<Test> predicate = null)
         {
-            if (predicate != null)
+            if (predicate != null) //if meets the condition return list
             {
                 var res = from t in DataSource.Test
                           where predicate(t)
@@ -151,7 +148,7 @@ namespace DAL
 
         public List<Trainee> GetTrainees(Predicate<Trainee> predicate = null)
         {
-            if (predicate != null)
+            if (predicate != null) //if meets the condition return list
             {
                 var res = from t in DataSource.trainees
                           where predicate(t)

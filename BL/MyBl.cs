@@ -24,53 +24,41 @@ namespace BL
                 throw new Exception("ERROR: Trainee wasn't found in the system\n");
             }
 
-            ////check tester if exist
-            //if (helpTester == null)
-            //{
-            //    throw new Exception("ERROR: tester wasn't found in the system\n");
-            //}
-
-            //check the test as the same type of vheicle that trainee took lessons of
-            if (test.vehicle != helpTrainee.MyVehicle)
+            //check tester if exist
+            if (helpTester == null)
             {
-                throw new Exception("trainee can't take a test of this type of vehicle");
+                throw new Exception("ERROR: tester wasn't found in the system\n");
             }
 
-           //// check the tester speciality and trainee type of vehicle are the same
-           // if (helpTrainee.MyVehicle != helpTester.MyVehicle)
-           // {
-           //     throw new Exception("this tester can't be added to the test");
-           // }
-
             //check there is enough days between tests
-            TimeSpan ts = DateTime.Now - helpTest.TestTime;
-            if (helpTest != null && ts.Days < Configuration.daysBetweenTests)
+            if (helpTest != null && (DateTime.Now.Day - helpTest.TestTime.Day < Configuration.daysBetweenTests))
             {
-                throw new Exception("there nust be at least " + Configuration.daysBetweenTests + " days before a trainee can take another test\n");
+                throw new Exception("There must be at least " + Configuration.daysBetweenTests + " days before a trainee can take another test\n");
             }
 
             //check there is enough lessons
             if (helpTrainee.NumOfLessons < Configuration.minLessons)
             {
-                throw new Exception(" a trainee can't take a test if he took less then" + Configuration.minLessons + "\n");
+                throw new Exception("A trainee cannot take a test if he took less than" + Configuration.minLessons + " lessons\n");
             }
             
-            ////if tester is full
-            //if (helpTester.NumOfTests >= helpTester.MaxTests)
-            //{
-            //    throw new Exception("tester is full");
-            //}
+            //if tester is full
+            if (helpTester.NumOfTests >= helpTester.MaxTests)
+            {
+                throw new Exception("tester is full");
+            }
 
             //find all tests trainee succedded
-            var lisense = from t in GetTests()
+            var licence = from t in GetTests()
                           where t.TraineeID == test.TraineeID && t.TestResult == true
                           select t;
-            //check if trainee already have a lisense to this type of car
-            foreach (var item in lisense)
+            
+            //check if trainee already have a licence to this type of car
+            foreach (var item in licence)
             {
                 if (item.vehicle == test.vehicle)
                 {
-                    throw new Exception("trainee allready as licence for this type of car");
+                    throw new Exception("Trainee already has licence for this type of car");
                 }
             }
 
@@ -85,26 +73,13 @@ namespace BL
                 throw e;
             }
             return true;
-
-            
-
-        }
-
-
-        public List<Tester> FindTesterToTest(Test test)
-        {
-           var testers = (from t in TestersAvailableByHour(test.TestTime)//find all testers available in the hour of the test
-                                 where t.MyVehicle == FindTraineeByID(test.TraineeID).MyVehicle //get only testers that are match to trainee vehicle
-                                 select t).ToList();
-
-            return testers;
-        }
+       }
 
         public bool AddTester(Tester tester)
         {
             if (DateTime.Now.Year - tester.DateOfBirth.Year < Configuration.minTesterAge)
             {
-                throw new Exception("a tester can't be under " + Configuration.minTesterAge + " / n");
+                throw new Exception("A tester cannot be under " + Configuration.minTesterAge + " years old /n");
             }
             try
             {
@@ -127,7 +102,7 @@ namespace BL
         {
             if (DateTime.Now.Year - trainee.DateOfBirth.Year < Configuration.minTraineeAge)
             {
-                throw new Exception("a trainee fan't be under " + Configuration.minTraineeAge + " \n");
+                throw new Exception("A trainee cannot be under " + Configuration.minTraineeAge + " years old \n");
             }
             try
             {
@@ -141,7 +116,6 @@ namespace BL
             }
             return true;
         }
-
         #endregion
 
         #region remove
@@ -159,7 +133,6 @@ namespace BL
                 throw e;
             }
             return true;
-            
         }
 
         public bool RemoveTester(string testerID)
@@ -252,10 +225,8 @@ namespace BL
 
         public List<Test> GetTests(Predicate<Test> predicate = null)
         {
-
             IDal _dal = FactorySingletonDal.GetDal();
             return _dal.GetTests(predicate);
-            
         }
 
         public List<Trainee> GetTrainees(Predicate<Trainee> predicate = null)
@@ -265,6 +236,7 @@ namespace BL
         }
         #endregion
 
+        #region search functions
         public Tester FindTesterByID(string id)
         {
             return (from t in GetTesters()
@@ -329,11 +301,9 @@ namespace BL
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public bool IsLisense(string traineeID)
+        public bool IsLisence(string traineeID)
         {
-           
-
-            //get all the tests of the trainee. the last test will be first in the list
+          //get all the tests of the trainee. the last test will be first in the list
             var tests = from t in GetTests()
                         where t.TraineeID == traineeID
                         orderby t.SerialNumber
@@ -373,61 +343,44 @@ namespace BL
         }
 
 
-        /// <summary>
-        /// returns all testers avaliable in specific hour
-        /// </summary>
-        /// <param name="testTime"></param>
-        /// <returns></returns>
-        public List<Tester> TestersAvailableByHour(DateTime testTime)
-        {
-            return GetTesters(t => t.WeeklySchedule.weeklySchedule[(int)testTime.DayOfWeek][(int)((testTime.Hour)-9)] == "work");
-        }
-        /// <summary>
-        /// returns all tests in a specific day
-        /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
-        public List<Test> TestsByDay(DateTime date)
-        {
-            return GetTests (t => t.TestTime.Day == date.Day);
-        }
-        /// <summary>
-        /// returns all tests in specific month
-        /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
-        public List<Test> TestsByMonth(DateTime date)
-        {
-            return GetTests(t => t.TestTime.Month == date.Month);
-                   
-        }
 
-        #region grouping
-        public IEnumerable<IGrouping<Vehicle,Tester> >TestersByVehicle()
-        {
-            return (from t in GetTesters()
-                    group t by t.MyVehicle) ;     
-        }
+        //public List<Tester> availableTesters(DateTime dayAndHour)
+        //{
+        //    var availableTesters = from tester in GetTesters()
+        //                           where tester.WeeklySchedule.weeklySchedule[dayAndHour.Day, dayAndHour.Hour]
+        //                           select tester;
 
-        public IEnumerable<IGrouping<string, Trainee>> TrauneesBySchool()
-        {
-            return (from t in GetTrainees()
-                    group t by t.School);
-        }
+        //    var test = from t in GetTests()
+        //                  where t.TestTime == dayAndHour
+        //                  select t;
 
-        public IEnumerable<IGrouping<FullName, Trainee>> TraineeByTeacher()
-        {
-            return (from t in GetTrainees()
-                    group t by t.TeacherName);
-        }
+        //    var notAvailableTesters = from tester in GetTesters()
+        //                  from t in GetTests()
+        //                  where t.TesterID == tester.ID
+        //                  select tester;
 
-        public IEnumerable<IGrouping<int, Trainee>> TraineesByNumOfTests()
-        {
-            return (from t in GetTrainees()
-                    group t by t.NUmOfTests);
-        }
+        //    List<Tester> result = availableTesters.ToList();
 
-        #endregion
+        //    /*foreach (Tester tester in availableTesters)
+        //    {
+        //        foreach (var t  in notAvailableTesters)
+        //        {
+        //            if (tester == t)
+        //            {
+        //                result.Remove(t);
+        //            }
+        //        }
+        //    }*/
 
+        //    return result;
+           
+             
+        //}
+
+
+
+
+
+        
     }
 }
