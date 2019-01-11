@@ -14,9 +14,10 @@ namespace DAL
         #region add functions
         public bool AddDrivingTest(Test test)
         {
-            
-            Trainee trainee = GetTrainees().FirstOrDefault(t => t.ID == test.TraineeID); // 
-            trainee.NUmOfTests++; 
+            Tester tester = GetTesters().FirstOrDefault(t => t.ID == test.TesterID);
+            tester.WeeklySchedule.weeklySchedule[(int)test.TestTime.DayOfWeek][(int)test.TestTime.Hour] = "in test";
+            Trainee trainee = GetTrainees().FirstOrDefault(t => t.ID == test.TraineeID);
+            trainee.NUmOfTests++;
 
             test.SerialNumber = Configuration.InitialSerialNumber++; //giving a serial number to the test
             DataSource.Test.Add(test); //add to test list
