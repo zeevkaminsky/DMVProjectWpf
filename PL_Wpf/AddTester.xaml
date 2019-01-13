@@ -86,19 +86,19 @@
                 </Grid.RowDefinitions>
 
                 <TextBox Grid.Row="0" Name="IDTBox" Margin="5" VerticalAlignment="Center" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                <TextBox Grid.Row="1" Name="FirstNameTBox" Margin="5" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="2" Name="LastNameTBox" Margin="5" VerticalAlignment="Center" />
-                <DatePicker Name="DateOfBirthDatePicker"  Grid.Row="3" VerticalAlignment="Center" Margin="5" DisplayDateStart="01.01.1911" DisplayDateEnd="01.01.2000" />
-                <ComboBox  Name="GenderCBox"  Grid.Row="4" Margin="5"  />
-                <ComboBox  Name="ExpCBox"  Grid.Row="10" Margin="5"  />
-                <ComboBox  Name="MaxTestsCBox"  Grid.Row="11" Margin="5"  />
-                <ComboBox  Name="MaxDistanceCBox"  Grid.Row="12" Margin="5"  />
+                <TextBox Grid.Row="1" Name="FirstNameTBox" Margin="5" VerticalAlignment="Center" Text="{Binding Name.FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                <TextBox Grid.Row="2" Name="LastNameTBox" Margin="5" VerticalAlignment="Center" Text="{Binding Name.LastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                <DatePicker Name="DateOfBirthDatePicker"  Grid.Row="3" VerticalAlignment="Center" Margin="5" DisplayDateStart="01.01.1930" DisplayDateEnd="01.01.2000" SelectedDate="{Binding DateOfBirth, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                <ComboBox  Name="GenderCBox"  Grid.Row="4" Margin="5" SelectedItem="{Binding Gender}" />
+                <ComboBox  Name="ExpCBox"  Grid.Row="10" Margin="5"  SelectedIndex="{Binding Experience}"/>
+                <ComboBox  Name="MaxTestsCBox"  Grid.Row="11" Margin="5" SelectedIndex="{Binding MaxTests}" />
+                <ComboBox  Name="MaxDistanceCBox"  Grid.Row="12" Margin="5" SelectedIndex="{Binding MaxDistance}" />
 
                 <TextBox Grid.Row="5" Name="PhoneTBox" Margin="5" VerticalAlignment="Center" Text="{Binding Phone, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                <ComboBox Name="SpecialityCBox" Grid.Row="9"  Margin=" 5" />
-                <ComboBox Name="CityCBox" Grid.Row="6" Margin="5"  />
-                <TextBox  Grid.Row="7" Name="StreetTBox" Margin="5" VerticalAlignment="Center" />
-                <TextBox Grid.Row="8" Name="NumberTBox" Margin="5" VerticalAlignment="Center"  />
+                <ComboBox Name="SpecialityCBox" Grid.Row="9"  Margin=" 5" SelectedItem="{Binding MyVehicle}"/>
+                <ComboBox Name="CityCBox" Grid.Row="6" Margin="5"  SelectedItem="{Binding Address.Town}"/>
+                <TextBox  Grid.Row="7" Name="StreetTBox" Margin="5" VerticalAlignment="Center" Text="{Binding Address.Street, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                <TextBox Grid.Row="8" Name="NumberTBox" Margin="5" VerticalAlignment="Center"  Text="{Binding Address.Building, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                 <!--<TextBox Grid.Row="10" Name="ExperienceTBox" Margin="5" VerticalAlignment="Center" />
                 <TextBox Grid.Row="11" Name="MaxTestsTBox" Margin="5" VerticalAlignment="Center" />
                 <TextBox Grid.Row="12" Name="MaxDistanceTBox" Margin="5" VerticalAlignment="Center" />-->

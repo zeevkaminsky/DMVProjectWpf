@@ -63,6 +63,9 @@
     <Compile Include="AddTrainee.xaml.cs">
       <DependentUpon>AddTrainee.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CreateTestWin.xaml.cs">
+      <DependentUpon>CreateTestWin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LogoUserControl.xaml.cs">
       <DependentUpon>LogoUserControl.xaml</DependentUpon>
     </Compile>
@@ -84,11 +87,18 @@
     <Compile Include="UpdateTesterWin.xaml.cs">
       <DependentUpon>UpdateTesterWin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdateTraineeWind.xaml.cs">
+      <DependentUpon>UpdateTraineeWind.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddTester.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddTrainee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreateTestWin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -129,6 +139,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UpdateTesterWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateTraineeWind.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

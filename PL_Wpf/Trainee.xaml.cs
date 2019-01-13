@@ -35,5 +35,10 @@ namespace PL_Wpf
         {
             new RemoveTraineeWin().ShowDialog();
         }
+
+        private void UpdateTrainee_Click(object sender, RoutedEventArgs e)
+        {
+            new UpdateTraineeWind().ShowDialog();
+        }
     }
 }

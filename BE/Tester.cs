@@ -11,9 +11,9 @@ namespace BE
         public int Experience { get; set; }
         public int NumOfTests { get; set; }
         public int MaxTests { get; set; }
-        public Vehicle MyVehicle;
-        public Schedule WeeklySchedule;
-        public double MaxDistance { get; set; }
+        public Vehicle MyVehicle { get; set; }
+        public Schedule WeeklySchedule { get; set; }
+        public int MaxDistance { get; set; }
 
         
         public Tester()

@@ -47,26 +47,28 @@
             <TextBlock Name="TeacherFNameTBlock" Grid.Column="2" FontSize="20" HorizontalAlignment="Right"  Grid.Row="4" TextWrapping="Wrap" Text="teacher FName" VerticalAlignment="Center"/>
             <TextBlock Name="TeacherLNameTBlock" Grid.Column="2" FontSize="20" HorizontalAlignment="Right"  Grid.Row="5" TextWrapping="Wrap" Text="teacher LName" VerticalAlignment="Center"/>
             <TextBlock Name="LessonsTBlock" Grid.Column="2" FontSize="20" HorizontalAlignment="Right"  Grid.Row="6" TextWrapping="Wrap" Text="lessons:" VerticalAlignment="Center"/>
-            <TextBlock Name="TestsTBlock" Grid.Column="2" FontSize="20" HorizontalAlignment="Right"  Grid.Row="7" TextWrapping="Wrap" Text="tests:" VerticalAlignment="Center"/>
+            <!--<TextBlock Name="TestsTBlock" Grid.Column="2" FontSize="20" HorizontalAlignment="Right"  Grid.Row="7" TextWrapping="Wrap" Text="tests:" VerticalAlignment="Center"/>-->
 
 
             <TextBox    Name="IDTBox"     Grid.Column="1" HorizontalAlignment="Left"  Margin="10" TextWrapping="Wrap"   VerticalAlignment="Center" Width="120" HorizontalContentAlignment="Stretch" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
             <TextBox    Name="FNameTBox"  Grid.Column="1" HorizontalAlignment="Left"  Margin="10" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Center" Width="120" Text="{Binding Name.FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-            <TextBox    Name="LNameTBox"  Grid.Column="1" HorizontalAlignment="Left"  Margin="10" Grid.Row="2" TextWrapping="Wrap"  VerticalAlignment="Center" Width="120"/>
-            <DatePicker Name="DOBDPicker" Grid.Column="1" HorizontalAlignment="Left"  Margin="10" Grid.Row="3" VerticalAlignment="Center" SelectedDate="{Binding DateOfBirth}" Width="120"/>
-            <ComboBox   Name="GenderCBox" Grid.Column="1" HorizontalAlignment="Left"  Margin="10" Grid.Row="4" VerticalAlignment="Center"  Width="120"/>
-            <TextBox    Name="PhoneTBox"  Grid.Column="1" HorizontalAlignment="Left"  Margin="10" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Center" Width="120"/>
-            <ComboBox   Name="VehicleCBox" Grid.Column="1" Grid.Row="6" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="10"   Width="120"/>
+            <TextBox    Name="LNameTBox"  Grid.Column="1" HorizontalAlignment="Left"  Margin="10" Grid.Row="2" TextWrapping="Wrap"  VerticalAlignment="Center" Width="120" Text="{Binding Name.LastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+            <DatePicker Name="DOBDPicker" Grid.Column="1" HorizontalAlignment="Left"  Margin="10" Grid.Row="3" VerticalAlignment="Center"  Width="120" SelectedDate="{Binding DateOfBirth, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+            <ComboBox   Name="GenderCBox" Grid.Column="1" HorizontalAlignment="Left"  Margin="10" Grid.Row="4" VerticalAlignment="Center"  Width="120" SelectedItem="{Binding Gender}"/>
+            <TextBox    Name="PhoneTBox"  Grid.Column="1" HorizontalAlignment="Left"  Margin="10" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Center" Width="120" Text="{Binding Phone, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+            <ComboBox   Name="VehicleCBox" Grid.Column="1" Grid.Row="6" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="10"   Width="120" SelectedItem="{Binding MyVehicle}"/>
 
-            <ComboBox   Name="CityCBox"     Grid.Column="3" HorizontalAlignment="Left" Margin="10"              VerticalAlignment="Center"     Width="120" />
-            <TextBox   Name="StreetTBox"   Grid.Column="3" HorizontalAlignment="Left" Margin="10" Grid.Row="1" VerticalAlignment="Center"  TextWrapping="Wrap"  Width="120" />
-            <TextBox   Name="NumberTBox"   Grid.Column="3" HorizontalAlignment="Left" Margin="10" Grid.Row="2" VerticalAlignment="Center"  TextWrapping="Wrap"  Width="120" />
-            <TextBox   Name="SchoolTBox"   Grid.Column="3" HorizontalAlignment="Left" Margin="10" Grid.Row="3" VerticalAlignment="Center"  TextWrapping="Wrap" Width="120" />
-            <ComboBox  Name="GearCBox"     Grid.Column="1" HorizontalAlignment="Left" Margin="10" Grid.Row="7" VerticalAlignment="Center"   Text="MyGear" Width="120"/>
-            <TextBox   Name="LessonsTBox"  Grid.Column="3" HorizontalAlignment="Left" Margin="10" Grid.Row="6" VerticalAlignment="Center"   TextWrapping="Wrap"   Width="120" />
-            <TextBox   Name="TestsTBox"    Grid.Column="3" HorizontalAlignment="Left" Margin="10" Grid.Row="7" VerticalAlignment="Center"  TextWrapping="Wrap"  Width="120" />
-            <TextBox  Name="TeacherFNameTBox"  Grid.Column="3" HorizontalAlignment="Left" Margin="10" Grid.Row="4" VerticalAlignment="Center"   Width="120" />
-            <TextBox  Name="TeacherLNameTBox"  Grid.Column="3" HorizontalAlignment="Left" Margin="10" Grid.Row="5" VerticalAlignment="Center"   Width="120" />
+            <ComboBox   Name="CityCBox"     Grid.Column="3" HorizontalAlignment="Left" Margin="10"              VerticalAlignment="Center"     Width="120" SelectedItem="{Binding Address.Town}"/>
+            <TextBox   Name="StreetTBox"   Grid.Column="3" HorizontalAlignment="Left" Margin="10" Grid.Row="1" VerticalAlignment="Center"  TextWrapping="Wrap"  Width="120" Text="{Binding Address.Street, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+            <TextBox   Name="NumberTBox"   Grid.Column="3" HorizontalAlignment="Left" Margin="10" Grid.Row="2" VerticalAlignment="Center"  TextWrapping="Wrap"  Width="120" Text="{Binding Address.Building, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+            <TextBox   Name="SchoolTBox"   Grid.Column="3" HorizontalAlignment="Left" Margin="10" Grid.Row="3" VerticalAlignment="Center"  TextWrapping="Wrap" Width="120" Text="{Binding School, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+            <ComboBox  Name="GearCBox"     Grid.Column="1" HorizontalAlignment="Left" Margin="10" Grid.Row="7" VerticalAlignment="Center"    Width="120"  SelectedItem="{Binding MyGear}"/>
+            <TextBox   Name="LessonsTBox"  Grid.Column="3" HorizontalAlignment="Left" Margin="10" Grid.Row="6" VerticalAlignment="Center"   TextWrapping="Wrap"   Width="120" Text="{Binding NumOfLessons, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <!--<TextBox   Name="TestsTBox"    Grid.Column="3" HorizontalAlignment="Left" Margin="10" Grid.Row="7" VerticalAlignment="Center"  TextWrapping="Wrap"  Width="120" Text="{Binding NumOfTests, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>-->
+            <TextBox  Name="TeacherFNameTBox"  Grid.Column="3" HorizontalAlignment="Left" Margin="10" Grid.Row="4" VerticalAlignment="Center"   Width="120" Text="{Binding TeacherName.FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+            <TextBox  Name="TeacherLNameTBox"  Grid.Column="3" HorizontalAlignment="Left" Margin="10" Grid.Row="5" VerticalAlignment="Center"   Width="120" Text="{Binding TeacherName.LastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+            
+            
             <Button   x:Name="AddTraineeButton"  Content="Add Trainee" FontSize="20" Grid.Column="4"   Grid.Row="6" Grid.RowSpan="2" Margin="15" Click="AddTraineeButton_Click" />
         </Grid>        
 

@@ -9,11 +9,11 @@ namespace BE
     public abstract class Person
     {
         public string ID { get; set; }
-        public FullName Name = new FullName();
-        public DateTime DateOfBirth = new DateTime();
-        public Gender Gender = new Gender();
+        public FullName Name { get; set; } 
+        public DateTime DateOfBirth { get; set; }
+        public Gender Gender { get; set; } 
         public string Phone { get; set; }
-        public Address Address = new Address();
+        public Address Address { get; set; }
 
 
         public override string ToString()

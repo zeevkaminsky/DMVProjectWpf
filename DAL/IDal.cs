@@ -32,5 +32,6 @@ namespace DAL
         List<Trainee> GetTrainees(Predicate<Trainee> predicate = null);
         List<Test> GetTests(Predicate<Test> predicate = null);
         #endregion
+        #endregion
     }
 }

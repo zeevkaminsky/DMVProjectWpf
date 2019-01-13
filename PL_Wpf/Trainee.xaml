@@ -26,7 +26,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Button Name="AddTrainee" Content="add trainee" FontSize="30" Background="LightGray" Margin="20" Click="AddTrainee_Click" />
-                <Button Name="UpdateTrainee" Content="update trainee" FontSize="30" Grid.Row="1" Background="LightGray" Margin="20"/>
+                <Button Name="UpdateTrainee" Content="update trainee" FontSize="30" Grid.Row="1" Background="LightGray" Margin="20" Click="UpdateTrainee_Click"/>
                 <Button Name="RemoveTrainee" Content="remove trainee" FontSize="30" Grid.Row="2" Background="LightGray" Margin="20" Click="RemoveTrainee_Click" />
             </Grid>
             <Image Grid.Column="1" Source="images/Tester_new.jpg"/>

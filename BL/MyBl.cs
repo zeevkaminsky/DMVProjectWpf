@@ -31,7 +31,7 @@ namespace BL
             //}
 
             //check the test as the same type of vheicle that trainee took lessons of
-            if (test.vehicle != helpTrainee.MyVehicle)
+            if (test.Vehicle != helpTrainee.MyVehicle)
             {
                 throw new Exception("trainee can't take a test of this type of vehicle");
             }
@@ -63,7 +63,7 @@ namespace BL
             //check if trainee already have a licence to this type of car
             foreach (var item in licence)
             {
-                if (item.vehicle == test.vehicle)
+                if (item.Vehicle == test.Vehicle)
                 {
                     throw new Exception("Trainee already has licence for this type of car");
                 }
@@ -367,7 +367,7 @@ namespace BL
         /// <returns></returns>
         public List<Tester> TestersAvailableByHour(DateTime testTime)
         {
-            return GetTesters(t => t.WeeklySchedule.weeklySchedule[(int)testTime.DayOfWeek][(int)((testTime.Hour)-9)] == "work");
+            return GetTesters(t => t.WeeklySchedule.weeklySchedule[(int)testTime.DayOfWeek][(int)((testTime.Hour)-9)] == WorkAvailability.work);
         }
         /// <summary>
         /// returns all tests in a specific day
@@ -411,9 +411,10 @@ namespace BL
         public IEnumerable<IGrouping<int, Trainee>> TraineesByNumOfTests()
         {
             return (from t in GetTrainees()
-                    group t by t.NUmOfTests);
+                    group t by t.NumOfTests);
         }
 
+        #endregion
         #endregion
 
     }

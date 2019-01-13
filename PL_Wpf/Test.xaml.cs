@@ -23,5 +23,20 @@ namespace PL_Wpf
         {
             InitializeComponent();
         }
+
+        private void CreateTest_Click(object sender, RoutedEventArgs e)
+        {
+            new CreateTestWin().ShowDialog();
+        }
+
+        private void UpdateTest_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RemoveTest_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

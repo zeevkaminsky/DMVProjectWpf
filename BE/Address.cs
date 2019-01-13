@@ -11,7 +11,7 @@ namespace BE
         
         public string Street { get; set; }
         public int Building { get; set; }
-        public string Town { get; set; }
+        public Cities Town { get; set; }
 
         public override string ToString()
         {

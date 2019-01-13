@@ -8,16 +8,16 @@ namespace BE
 {
     public class Test
     {
-        public Vehicle vehicle = new Vehicle();
-        public Gear gear = new Gear();
+        public Vehicle Vehicle { get; set; } 
+        public Gear Gear { get; set; }
 
         public int SerialNumber { get; set; }
         public string TesterID { get; set; }
         public string TraineeID { get; set; }
         public DateTime TestTime { get; set; }
-        public string ExitPoint { get; set; }
-        public bool TestResult  { get; set; }
-        public Dictionary<string, bool> Criteria = new Dictionary<string, bool>();
+        public Address ExitPoint { get; set; }
+        public bool? TestResult  { get; set; }
+        public Dictionary<string, bool?> Criteria { get; set; } 
            
 
 

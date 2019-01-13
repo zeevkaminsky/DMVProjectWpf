@@ -13,7 +13,7 @@ namespace BE
         public string School { get; set; }
         public FullName TeacherName { get; set; }
         public int NumOfLessons { get; set; }
-        public int NUmOfTests { get; set; }
+        public int NumOfTests { get; set; }
 
         public override string ToString()
         {

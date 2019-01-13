@@ -31,9 +31,10 @@ namespace BL
         List<Tester> GetTesters(Predicate<Tester> predicate = null);
         List<Trainee> GetTrainees(Predicate<Trainee> predicate =null);
         List<Test> GetTests(Predicate<Test> predicate = null);
+        #endregion
 
         List<Tester> FindTesterToTest(Test test);
+        Trainee FindTraineeByID(string id);
         Tester FindTesterByID(string id);
-        #endregion
     }
 }

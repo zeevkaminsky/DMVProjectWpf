@@ -31,15 +31,15 @@ namespace PL_Wpf
             tester = new BE.Tester { Name = new FullName(), Address = new Address(), WeeklySchedule = new Schedule() };
             init(tester);//initialize all comboboxes with apropriate values
 
-            //dafault combo box values
-            GenderCBox.SelectedIndex = 0;
-            SpecialityCBox.SelectedIndex = 0;
-            CityCBox.SelectedIndex = 0;
-            ExpCBox.SelectedIndex = 0;
-            MaxTestsCBox.SelectedIndex = 0;
-            MaxDistanceCBox.SelectedIndex = 0;
+            ////dafault combo box values
+            //GenderCBox.SelectedIndex = 0;
+            //SpecialityCBox.SelectedIndex = 0;
+            //CityCBox.SelectedIndex = 0;
+            //ExpCBox.SelectedIndex = 0;
+            //MaxTestsCBox.SelectedIndex = 0;
+            //MaxDistanceCBox.SelectedIndex = 0;
 
-            DateOfBirthDatePicker.SelectedDate = DateTime.Now.AddYears(-50);
+           // DateOfBirthDatePicker.SelectedDate = DateTime.Now.AddYears(-50);
         }
         public AddTester(Tester testerToUp)//update window sending an existing tester
         {
@@ -49,43 +49,29 @@ namespace PL_Wpf
             tester = testerToUp;
             this.EnterButton.Content = "update";
             init(testerToUp);
-            GenderCBox.SelectedItem = testerToUp.Gender;
-            SpecialityCBox.SelectedItem = testerToUp.MyVehicle;
-            CityCBox.SelectedItem = testerToUp.Address.Town;
-            StreetTBox.Text = testerToUp.Address.Street;
-            NumberTBox.Text = testerToUp.Address.Building.ToString();
-            ExpCBox.SelectedItem = testerToUp.Experience;
-            MaxTestsCBox.SelectedItem = testerToUp.MaxTests;
-            MaxDistanceCBox.SelectedItem = testerToUp.MaxDistance;
-            FirstNameTBox.Text = testerToUp.Name.FirstName;
-            LastNameTBox.Text = testerToUp.Name.LastName;
+            //GenderCBox.SelectedItem = testerToUp.Gender;
+            //SpecialityCBox.SelectedItem = testerToUp.MyVehicle;
+            //CityCBox.SelectedItem = testerToUp.Address.Town;
+            //StreetTBox.Text = testerToUp.Address.Street;
+            //NumberTBox.Text = testerToUp.Address.Building.ToString();
+            //ExpCBox.SelectedItem = testerToUp.Experience;
+            //MaxTestsCBox.SelectedItem = testerToUp.MaxTests;
+            //MaxDistanceCBox.SelectedItem = testerToUp.MaxDistance;
+            //FirstNameTBox.Text = testerToUp.Name.FirstName;
+            //LastNameTBox.Text = testerToUp.Name.LastName;
 
-            DateOfBirthDatePicker.SelectedDate = testerToUp.DateOfBirth;
-            DateOfBirthDatePicker.Text = testerToUp.DateOfBirth.ToShortDateString();
+            //DateOfBirthDatePicker.SelectedDate = testerToUp.DateOfBirth;
+            //DateOfBirthDatePicker.Text = testerToUp.DateOfBirth.ToShortDateString();
         }
 
         private void init(BE.Tester tester)
         {
 
-            //Days[] days = new Days[5];
-            //days[0] = Days.sun;
-            //days[1] = Days.sun;
-            //days[2] = Days.sun;
-            //days[3] = Days.sun;
-            //days[4] = Days.sun;
-            //foreach (var item in days)
-            //{
-            //    this.luzDataGrid.Items.Add(item);
-            //}
             
-          
-
             this.TextBoxGrid.DataContext = tester;
 
             GenderCBox.ItemsSource = Enum.GetValues(typeof(Gender));
-
             SpecialityCBox.ItemsSource = Enum.GetValues(typeof(Vehicle));
-
             CityCBox.ItemsSource = Enum.GetValues(typeof(Cities));
 
             for (int i = 0; i < Configuration.MaxTesterAge - Configuration.minTesterAge; i++)
@@ -93,12 +79,12 @@ namespace PL_Wpf
                 ExpCBox.Items.Add(i);
             }
 
-            for (int i = 1; i <= 30; i++)
+            for (int i = 0; i <= 30; i++)
             {
                 MaxTestsCBox.Items.Add(i);
             }
 
-            for (double i = 5; i < 150.0; i += 0.5)
+            for (int i = 0; i < 150; i++)
             {
                 MaxDistanceCBox.Items.Add(i);
             }
@@ -113,20 +99,15 @@ namespace PL_Wpf
 
 
 
-        /// <summary>
-        /// convert to enum
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="enumString"></param>
-        /// <returns></returns>
+       
 
 
         private void EnterButton_Click(object sender, RoutedEventArgs e)
         {
-            Schedule schedule = new Schedule { weeklySchedule = new string[5][] };
+            Schedule schedule = new Schedule { weeklySchedule = new WorkAvailability[5][] };
             for (int i = 0; i < 5; i++)
             {
-                schedule.weeklySchedule[i] = new string[6];
+                schedule.weeklySchedule[i] = new WorkAvailability[6];
             }
             try
             {
@@ -136,30 +117,30 @@ namespace PL_Wpf
                     int column = Grid.GetColumn(item);
                     if (item.IsChecked == true)
                     {
-                        schedule.weeklySchedule[row - 1][column - 1] = "work";
+                        schedule.weeklySchedule[column - 1][row - 1] = WorkAvailability.work;
                     }
                     else
                     {
-                        schedule.weeklySchedule[column - 1][row - 1] = "dosn't work";
+                        schedule.weeklySchedule[column - 1][row - 1] = WorkAvailability.not_work;
                     }
                 }
                 tester.WeeklySchedule.weeklySchedule = schedule.weeklySchedule;
 
-                tester.Name.FirstName = FirstNameTBox.Text;
-                tester.Name.LastName = LastNameTBox.Text;
-                tester.DateOfBirth = DateOfBirthDatePicker.SelectedDate.Value;
-                Object gen = GenderCBox.SelectedItem;
-                tester.Gender = Configuration.ToEnum<Gender>(gen.ToString());
+                //tester.Name.FirstName = FirstNameTBox.Text;
+                //tester.Name.LastName = LastNameTBox.Text;
+                //tester.DateOfBirth = DateOfBirthDatePicker.SelectedDate.Value;
+                //Object gen = GenderCBox.SelectedItem;
+                //tester.Gender = Configuration.ToEnum<Gender>(gen.ToString());
                 //tester.Phone = PhoneTBox.Text;
-                tester.MaxTests = int.Parse(MaxTestsCBox.SelectedItem.ToString());
-                tester.Experience = int.Parse(ExpCBox.SelectedItem.ToString());
-                tester.MaxDistance = double.Parse(MaxDistanceCBox.SelectedItem.ToString());
-                Object V = SpecialityCBox.SelectedItem;
-                tester.MyVehicle = Configuration.ToEnum<Vehicle>(V.ToString());
-                object city = CityCBox.SelectedItem;
-                tester.Address.Town = (city.ToString());
-                tester.Address.Street = StreetTBox.Text;
-                tester.Address.Building = int.Parse(NumberTBox.Text);
+                //tester.MaxTests = int.Parse(MaxTestsCBox.SelectedItem.ToString());
+                //tester.Experience = int.Parse(ExpCBox.SelectedItem.ToString());
+                //tester.MaxDistance = int.Parse(MaxDistanceCBox.SelectedItem.ToString());
+                //Object V = SpecialityCBox.SelectedItem;
+                //tester.MyVehicle = Configuration.ToEnum<Vehicle>(V.ToString());
+                //object city = CityCBox.SelectedItem;
+                //tester.Address.Town = (city.ToString());
+                //tester.Address.Street = StreetTBox.Text;
+                //tester.Address.Building = int.Parse(NumberTBox.Text);
 
                 if (EnterButton.Content.ToString() != "update")
                 {

@@ -79,4 +79,5 @@ namespace BE
         Yehud,
         Yokneam
     };
+    public enum WorkAvailability { work, not_work, in_test}
 }

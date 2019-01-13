@@ -15,9 +15,9 @@ namespace DAL
         public bool AddDrivingTest(Test test)
         {
             Tester tester = GetTesters().FirstOrDefault(t => t.ID == test.TesterID);
-            tester.WeeklySchedule.weeklySchedule[(int)test.TestTime.DayOfWeek][(int)test.TestTime.Hour] = "in test";
+            tester.WeeklySchedule.weeklySchedule[(int)test.TestTime.DayOfWeek][(int)test.TestTime.Hour] = WorkAvailability.in_test;
             Trainee trainee = GetTrainees().FirstOrDefault(t => t.ID == test.TraineeID);
-            trainee.NUmOfTests++;
+            trainee.NumOfTests++;
 
             test.SerialNumber = Configuration.InitialSerialNumber++; //giving a serial number to the test
             DataSource.Test.Add(test); //add to test list
@@ -33,7 +33,7 @@ namespace DAL
                     throw new Exception("Tester with the same Id already exists");
                 }
             }
-            tester.NumOfTests++; 
+            tester.NumOfTests++;
             DataSource.Testers.Add(tester); //add to tester list
             return true;
         }
@@ -102,7 +102,7 @@ namespace DAL
         public bool UpdateTester(Tester tester)
         {
             Tester testerToUp = GetTesters().FirstOrDefault(t => t.ID == tester.ID); //search if exists
-            if (testerToUp == null) 
+            if (testerToUp == null)
             {
                 throw new Exception("tester didn't found. make sure you enter the right id.");
             }
@@ -112,7 +112,7 @@ namespace DAL
 
         public bool UpdateTrainee(Trainee trainee)
         {
-            Trainee traineeToUp =GetTrainees().FirstOrDefault(t => t.ID == trainee.ID); //search if exists
+            Trainee traineeToUp = GetTrainees().FirstOrDefault(t => t.ID == trainee.ID); //search if exists
             if (traineeToUp == null)
             {
                 throw new Exception("trainee didn't found. make sure you enter the right id.");
@@ -123,7 +123,7 @@ namespace DAL
         #endregion
 
         #region get lists
-        public List<Tester> GetTesters(Predicate<Tester> predicate = null )
+        public List<Tester> GetTesters(Predicate<Tester> predicate = null)
         {
             if (predicate != null) //if meets the condition return list
             {

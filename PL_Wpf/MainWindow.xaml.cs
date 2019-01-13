@@ -36,5 +36,10 @@ namespace PL_Wpf
         {
             new Trainee().ShowDialog();
         }
+
+        private void Test_Click(object sender, RoutedEventArgs e)
+        {
+            new Test().ShowDialog();
+        }
     }
 }
