@@ -31,10 +31,10 @@ namespace BL
             //}
 
             //check the test as the same type of vheicle that trainee took lessons of
-            if (test.Vehicle != helpTrainee.MyVehicle)
-            {
-                throw new Exception("trainee can't take a test of this type of vehicle");
-            }
+            //if (test.Vehicle != helpTrainee.MyVehicle)
+            //{
+            //    throw new Exception("trainee can't take a test of this type of vehicle");
+            //}
 
             //check there is enough days between tests
             TimeSpan ts = DateTime.Now - helpTest.TestDay;
@@ -48,12 +48,12 @@ namespace BL
             {
                 throw new Exception("A trainee cannot take a test if he took less than" + Configuration.minLessons + " lessons\n");
             }
-            
-            ////if tester is full
-            //if (helpTester.NumOfTests >= helpTester.MaxTests)
-            //{
-            //    throw new Exception("tester is full");
-            //}
+
+            //if tester is full
+            if (helpTester.NumOfTests >= helpTester.MaxTests)
+            {
+                throw new Exception("tester is full");
+            }
 
             //find all tests trainee succedded
             var licence = from t in GetTests()
@@ -85,7 +85,7 @@ namespace BL
 
         public List<Tester> FindTesterToTest(Test test)
         {
-           var testers = (from t in TestersAvailableByHour(test.TestDay)//find all testers available in the hour of the test
+           var testers = (from t in TestersAvailableByHour(test.TestDay, test.testHour)//find all testers available in the hour of the test
                                  where t.MyVehicle == FindTraineeByID(test.TraineeID).MyVehicle //get only testers that are match to trainee vehicle
                                  select t).ToList();
 
@@ -274,7 +274,7 @@ namespace BL
                     where t.SerialNumber == num
                     select t).FirstOrDefault();
         }
-
+        #endregion
         /// <summary>
         /// return the number of tests trainee did
         /// </summary>
@@ -365,9 +365,9 @@ namespace BL
         /// </summary>
         /// <param name="testTime"></param>
         /// <returns></returns>
-        public List<Tester> TestersAvailableByHour(DateTime testTime)
+        public List<Tester> TestersAvailableByHour(DateTime testTime, TimeSpan timeSpan)
         {
-            return GetTesters(t => t.WeeklySchedule.weeklySchedule[(int)testTime.DayOfWeek][(int)((testTime.Hour)-9)] == WorkAvailability.work);
+            return GetTesters(t => t.WeeklySchedule.weeklySchedule[(int)testTime.DayOfWeek][(int)(timeSpan.Hours-9)] == WorkAvailability.work);
         }
         /// <summary>
         /// returns all tests in a specific day
@@ -414,7 +414,7 @@ namespace BL
                     group t by t.NumOfTests);
         }
 
-        #endregion
+        
         #endregion
 
     }

@@ -23,8 +23,8 @@ namespace BE
         }
         public override string ToString()
         {
-            return base.ToString() + string.Format("years of experience:{0}\n maximum tests for a week:{1}\n type of vehicle:{2}\n",
-               Experience, MaxTests, MyVehicle);
+            return base.ToString() + string.Format("years of experience:{0}\n maximum tests for a week:{1}\n type of vehicle:{2}\nmax distance: {3}\n number of tests {4}\n ",
+               Experience, MaxTests, MyVehicle, MaxDistance, NumOfTests);
         }
 
         

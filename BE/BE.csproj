@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
-    <Compile Include="Appeal.cs" />
     <Compile Include="Schedule.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Enums.cs" />

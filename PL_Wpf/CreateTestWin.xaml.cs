@@ -2,6 +2,7 @@
 using BL;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,11 +35,23 @@ namespace PL_Wpf
             this.exitPointCityComboBox.ItemsSource = Enum.GetValues(typeof(Cities));
             this.testerIDComboBox.ItemsSource = _bl.GetTesters();
             this.traineeIDComboBox.ItemsSource = _bl.GetTrainees();
+
+            findTesterButton.Visibility = Visibility.Visible;
+            availabilityDataGrid.Visibility = Visibility.Hidden;
         }
 
         private void FindTesterButton_Click(object sender, RoutedEventArgs e)
         {
-            List<BE.Tester> matchingTesters =  _bl.FindTesterToTest(test);
+            this.availabilityDataGrid.ItemsSource = new ObservableCollection<Person>(_bl.FindTesterToTest(test));
+            findTesterButton.Visibility = Visibility.Hidden;
+            availabilityDataGrid.Visibility = Visibility.Visible;
+        }
+
+        private void TestHourTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+            findTesterButton.Visibility = Visibility.Visible;
+            availabilityDataGrid.Visibility = Visibility.Hidden;
         }
     }
 }

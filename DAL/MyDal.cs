@@ -15,9 +15,10 @@ namespace DAL
         public bool AddDrivingTest(Test test)
         {
             Tester tester = GetTesters().FirstOrDefault(t => t.ID == test.TesterID);
-            tester.WeeklySchedule.weeklySchedule[(int)test.TestDay.DayOfWeek][(int)test.TestDay.Hour] = WorkAvailability.in_test;
+            tester.WeeklySchedule.weeklySchedule[(int)test.TestDay.DayOfWeek][(int)(test.TestDay.Hour - 9)] = WorkAvailability.in_test;
             Trainee trainee = GetTrainees().FirstOrDefault(t => t.ID == test.TraineeID);
             trainee.NumOfTests++;
+            tester.NumOfTests++;
 
             test.SerialNumber = Configuration.InitialSerialNumber++; //giving a serial number to the test
             DataSource.Test.Add(test); //add to test list
@@ -33,7 +34,7 @@ namespace DAL
                     throw new Exception("Tester with the same Id already exists");
                 }
             }
-            tester.NumOfTests++;
+            
             DataSource.Testers.Add(tester); //add to tester list
             return true;
         }
