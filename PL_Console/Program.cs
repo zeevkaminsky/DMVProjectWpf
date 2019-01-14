@@ -23,7 +23,7 @@ namespace PL_Console
             Console.WriteLine("trainee id");
             test.TraineeID = Console.ReadLine();
             DateTime datetime = new DateTime(2020, 5, 5, 10, 0, 0);
-            test.TestTime = datetime;
+            test.TestDay = datetime;
             Console.WriteLine("exit point");
 
             BL.IBl mofa = FactorySingletonBl.GetBl();

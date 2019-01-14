@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL_Wpf"
         xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PL_Wpf.CreateTestWin"
         mc:Ignorable="d"
-        Title="CreateTestWin" Height="450" Width="800" >
+        Title="CreateTestWin" Height="500" Width="800" >
 
 
     <Grid>
@@ -31,6 +31,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Label Content="Exit Point City:" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Grid.Row="4" VerticalAlignment="Center" FontSize="20"/>
             <ComboBox x:Name="exitPointCityComboBox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" SelectedItem="{Binding ExitPoint.Town}"/>
@@ -43,12 +44,13 @@
 
             <Label Content="Tester ID:" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Grid.Row="1" VerticalAlignment="Center" FontSize="20"/>
             <ComboBox x:Name="testerIDComboBox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" SelectedItem="{Binding TesterID}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Test Time:" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Grid.Row="7" VerticalAlignment="Center" FontSize="20"/>
-            <DatePicker x:Name="testTimeDatePicker" Grid.Column="2" HorizontalAlignment="Left" Margin="3" Grid.Row="7" SelectedDate="{Binding TestTime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+            <Label Content="Test Day:" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Grid.Row="7" VerticalAlignment="Center" FontSize="20"/>
+            <DatePicker x:Name="testDayDatePicker" Grid.Column="2" HorizontalAlignment="Left" Margin="3" Grid.Row="7" SelectedDate="{Binding TestTime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
             <Label Content="Trainee ID:" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Grid.Row="0" VerticalAlignment="Center" FontSize="20"/>
             <ComboBox x:Name="traineeIDComboBox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding TraineeID}" VerticalAlignment="Center" Width="120"/>
             <Label Content="Vehicle:" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Grid.Row="2" VerticalAlignment="Center" FontSize="20"/>
             <ComboBox x:Name="vehicleComboBox" Grid.Column="2"  HorizontalAlignment="Left"   Margin="3,10,0,11" Grid.Row="2" VerticalAlignment="Center" SelectedItem="{Binding Vehicle}" Width="102"/>
+            <Button Name="findTesterButton" Content="Find A Tester" Grid.Column="3" HorizontalAlignment="Center"  Grid.Row="0"  Grid.RowSpan="2" FontSize="50" Click="FindTesterButton_Click"/>
 
 
         </Grid>

@@ -37,7 +37,7 @@ namespace BL
             }
 
             //check there is enough days between tests
-            TimeSpan ts = DateTime.Now - helpTest.TestTime;
+            TimeSpan ts = DateTime.Now - helpTest.TestDay;
             if (helpTest != null && ts.Days < Configuration.daysBetweenTests)
             {
                 throw new Exception("There must be at least " + Configuration.daysBetweenTests + " days before a trainee can take another test\n");
@@ -85,7 +85,7 @@ namespace BL
 
         public List<Tester> FindTesterToTest(Test test)
         {
-           var testers = (from t in TestersAvailableByHour(test.TestTime)//find all testers available in the hour of the test
+           var testers = (from t in TestersAvailableByHour(test.TestDay)//find all testers available in the hour of the test
                                  where t.MyVehicle == FindTraineeByID(test.TraineeID).MyVehicle //get only testers that are match to trainee vehicle
                                  select t).ToList();
 
@@ -376,7 +376,7 @@ namespace BL
         /// <returns></returns>
         public List<Test> TestsByDay(DateTime date)
         {
-            return GetTests (t => t.TestTime.Day == date.Day);
+            return GetTests (t => t.TestDay.Day == date.Day);
         }
         /// <summary>
         /// returns all tests in specific month
@@ -385,7 +385,7 @@ namespace BL
         /// <returns></returns>
         public List<Test> TestsByMonth(DateTime date)
         {
-            return GetTests(t => t.TestTime.Month == date.Month);
+            return GetTests(t => t.TestDay.Month == date.Month);
                    
         }
 
