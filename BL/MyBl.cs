@@ -17,7 +17,7 @@ namespace BL
         {
             Trainee helpTrainee = GetTrainees().FirstOrDefault(t => t.ID == test.TraineeID);
             Tester helpTester = GetTesters().FirstOrDefault(t => t.ID == test.TesterID);
-            Test helpTest = GetTests().FirstOrDefault(t => t == test);
+            
             //check trainee if exist
             if (helpTrainee == null)
             {
@@ -37,8 +37,8 @@ namespace BL
             //}
 
             //check there is enough days between tests
-            TimeSpan ts = DateTime.Now - helpTest.TestDay;
-            if (helpTest != null && ts.Days < Configuration.daysBetweenTests)
+            TimeSpan ts = DateTime.Now -test.TestDay;
+            if ( ts.Days < Configuration.daysBetweenTests)
             {
                 throw new Exception("There must be at least " + Configuration.daysBetweenTests + " days before a trainee can take another test\n");
             }
@@ -85,6 +85,7 @@ namespace BL
 
         public List<Tester> FindTesterToTest(Test test)
         {
+            
            var testers = (from t in TestersAvailableByHour(test.TestDay, test.testHour)//find all testers available in the hour of the test
                                  where t.MyVehicle == FindTraineeByID(test.TraineeID).MyVehicle //get only testers that are match to trainee vehicle
                                  select t).ToList();

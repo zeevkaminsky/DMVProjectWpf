@@ -33,18 +33,42 @@ namespace PL_Wpf
             this.gearComboBox.ItemsSource = Enum.GetValues(typeof(Gear));
             this.vehicleComboBox.ItemsSource = Enum.GetValues(typeof(Vehicle));
             this.exitPointCityComboBox.ItemsSource = Enum.GetValues(typeof(Cities));
-            this.testerIDComboBox.ItemsSource = _bl.GetTesters();
+           
             this.traineeIDComboBox.ItemsSource = _bl.GetTrainees();
+            this.traineeIDComboBox.DisplayMemberPath = "ID";
 
             findTesterButton.Visibility = Visibility.Visible;
             availabilityDataGrid.Visibility = Visibility.Hidden;
+            testerDetailsLabel.Visibility = Visibility.Hidden;
         }
 
         private void FindTesterButton_Click(object sender, RoutedEventArgs e)
         {
-            this.availabilityDataGrid.ItemsSource = new ObservableCollection<Person>(_bl.FindTesterToTest(test));
+            try
+            {
+                test.testHour = TimeSpan.Parse(testHourTextBox.Text);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+            var testers = _bl.FindTesterToTest(test);
+            if (testers != null)
+            {
+                BE.Tester tester = testers.First();
+                this.availabilityDataGrid.ItemsSource = new ObservableCollection<Person>(testers);
+                test.TesterID = tester.ID;
+            }
+            else
+            {
+
+            }
+            
             findTesterButton.Visibility = Visibility.Hidden;
             availabilityDataGrid.Visibility = Visibility.Visible;
+            testerDetailsLabel.Visibility = Visibility.Visible;
+
         }
 
         private void TestHourTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -52,6 +76,26 @@ namespace PL_Wpf
             
             findTesterButton.Visibility = Visibility.Visible;
             availabilityDataGrid.Visibility = Visibility.Hidden;
+            testerDetailsLabel.Visibility = Visibility.Hidden;
+        }
+
+        private void AddTestButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+
+            try
+            {
+                if (_bl.AddDrivingTest(test))
+                {
+                    MessageBox.Show(test + "added successfully");
+                }
+            }
+            catch (Exception m)
+            {
+
+                MessageBox.Show(m.Message);
+            }
+            
         }
     }
 }
