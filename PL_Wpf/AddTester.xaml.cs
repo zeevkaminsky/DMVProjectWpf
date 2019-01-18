@@ -28,7 +28,8 @@ namespace PL_Wpf
         public AddTester()
         {
             InitializeComponent();
-            tester = new BE.Tester { Name = new FullName(), Address = new Address(), WeeklySchedule = new Schedule() };
+            tester = new BE.Tester { DateOfBirth = new DateTime(2000,1,1), Name = new FullName(), Address = new Address(), WeeklySchedule = new Schedule() };
+            
             init(tester);//initialize all comboboxes with apropriate values
 
             
@@ -40,6 +41,7 @@ namespace PL_Wpf
             InitializeComponent();
             tester = testerToUp;
             this.EnterButton.Content = "update";
+            this.IDTBox.IsReadOnly = true;
             init(testerToUp);
             
         }

@@ -8,13 +8,22 @@ namespace BE
 {
     public class Test
     {
+        public Test()
+        {
+            Criteria = new Dictionary<string, bool?>();
+           
+            foreach (var item in BE.Configuration.requirments)
+            {
+                Criteria.Add(item, null);
+            }
+        }
         public Vehicle Vehicle { get; set; } 
         public Gear Gear { get; set; }
         public int SerialNumber { get; set; }
         public string TesterID { get; set; }
         public string TraineeID { get; set; }
         public DateTime TestDay { get; set; }
-        public TimeSpan testHour { get; set; }
+        public TimeSpan TestHour { get; set; }
         public Address ExitPoint { get; set; }
         public bool? TestResult  { get; set; }
         public Dictionary<string, bool?> Criteria { get; set; } 

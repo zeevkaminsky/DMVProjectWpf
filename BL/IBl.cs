@@ -36,5 +36,7 @@ namespace BL
         List<Tester> FindTesterToTest(Test test);
         Trainee FindTraineeByID(string id);
         Tester FindTesterByID(string id);
+        Test FindTestBySerialNumber(int serial_number);
+        bool IsLisense(string traineeID);
     }
 }

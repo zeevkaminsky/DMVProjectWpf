@@ -86,7 +86,7 @@ namespace BL
         public List<Tester> FindTesterToTest(Test test)
         {
             
-           var testers = (from t in TestersAvailableByHour(test.TestDay, test.testHour)//find all testers available in the hour of the test
+           var testers = (from t in TestersAvailableByHour(test.TestDay, test.TestHour)//find all testers available in the hour of the test
                                  where t.MyVehicle == FindTraineeByID(test.TraineeID).MyVehicle //get only testers that are match to trainee vehicle
                                  select t).ToList();
 
@@ -390,6 +390,11 @@ namespace BL
                    
         }
 
+        public Test FindTestBySerialNumber(int serial_number)
+        {
+            return GetTests(t => t.SerialNumber == serial_number).FirstOrDefault();
+        }
+
         #region grouping
         public IEnumerable<IGrouping<Vehicle,Tester> >TestersByVehicle()
         {
@@ -416,6 +421,8 @@ namespace BL
         }
 
         
+
+
         #endregion
 
     }

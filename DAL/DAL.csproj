@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BE_Extentins.cs" />
+    <Compile Include="DalXML.cs" />
     <Compile Include="FactorySingletonDal.cs" />
     <Compile Include="IDal.cs" />
     <Compile Include="MyDal.cs" />

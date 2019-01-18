@@ -10,6 +10,5 @@ namespace BE
     {
         public WorkAvailability[][] weeklySchedule { get; set; }
         
-        
     }
 }

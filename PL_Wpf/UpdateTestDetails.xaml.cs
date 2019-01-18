@@ -15,27 +15,13 @@ using System.Windows.Shapes;
 namespace PL_Wpf
 {
     /// <summary>
-    /// Interaction logic for Test.xaml
+    /// Interaction logic for UpdateTestDetails.xaml
     /// </summary>
-    public partial class Test : Window
+    public partial class UpdateTestDetails : Window
     {
-        public Test()
+        public UpdateTestDetails(Test test)
         {
             InitializeComponent();
-        }
-
-        private void CreateTest_Click(object sender, RoutedEventArgs e)
-        {
-            new CreateTestWin().ShowDialog();
-        }
-
-        private void UpdateTest_Click(object sender, RoutedEventArgs e)
-        {
-            new UpdateTestWin().ShowDialog();
-        }
-
-        private void RemoveTest_Click(object sender, RoutedEventArgs e)
-        {
 
         }
     }

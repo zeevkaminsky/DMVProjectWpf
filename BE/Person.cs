@@ -8,7 +8,7 @@ namespace BE
 {
     public abstract class Person
     {
-        public string ID { get; set; }
+        public string  ID { get; set; }
         public FullName Name { get; set; } 
         public DateTime DateOfBirth { get; set; }
         public Gender Gender { get; set; } 

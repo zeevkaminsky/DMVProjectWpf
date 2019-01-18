@@ -28,7 +28,7 @@ namespace PL_Wpf
         {
             InitializeComponent();
             _bl = FactorySingletonBl.GetBl();
-            test = new BE.Test { Gear = new Gear() , Vehicle = new Vehicle(), TestDay = new DateTime(), Criteria = new Dictionary<string, bool?>() , ExitPoint = new Address()};
+            test = new BE.Test { Gear = new Gear() , Vehicle = new Vehicle(), TestDay = new DateTime() , ExitPoint = new Address()};
             this.DataContext = test;
             this.gearComboBox.ItemsSource = Enum.GetValues(typeof(Gear));
             this.vehicleComboBox.ItemsSource = Enum.GetValues(typeof(Vehicle));
@@ -46,7 +46,7 @@ namespace PL_Wpf
         {
             try
             {
-                test.testHour = TimeSpan.Parse(testHourTextBox.Text);
+                test.TestHour = TimeSpan.Parse(testHourTextBox.Text);
             }
             catch (Exception ex)
             {

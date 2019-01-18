@@ -15,7 +15,7 @@ namespace DAL
         public bool AddDrivingTest(Test test)
         {
             Tester tester = GetTesters().FirstOrDefault(t => t.ID == test.TesterID);
-            tester.WeeklySchedule.weeklySchedule[(int)test.TestDay.DayOfWeek][(int)(test.testHour.Hours - 9)] = WorkAvailability.in_test;
+            tester.WeeklySchedule.weeklySchedule[(int)test.TestDay.DayOfWeek][(int)(test.TestHour.Hours - 9)] = WorkAvailability.in_test;
             Trainee trainee = GetTrainees().FirstOrDefault(t => t.ID == test.TraineeID);
             trainee.NumOfTests++;
             tester.NumOfTests++;

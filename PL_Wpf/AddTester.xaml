@@ -85,7 +85,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <TextBox Grid.Row="0" Name="IDTBox" Margin="5" VerticalAlignment="Center" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                <TextBox Grid.Row="0" Name="IDTBox" Margin="5" VerticalAlignment="Center" MaxLength="9"  Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                 <TextBox Grid.Row="1" Name="FirstNameTBox" Margin="5" VerticalAlignment="Center" Text="{Binding Name.FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                 <TextBox Grid.Row="2" Name="LastNameTBox" Margin="5" VerticalAlignment="Center" Text="{Binding Name.LastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                 <DatePicker Name="DateOfBirthDatePicker"  Grid.Row="3" VerticalAlignment="Center" Margin="5" DisplayDateStart="01.01.1930" DisplayDateEnd="01.01.2000" SelectedDate="{Binding DateOfBirth, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>

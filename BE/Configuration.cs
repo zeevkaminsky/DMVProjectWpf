@@ -20,6 +20,12 @@ namespace BE
         {
             return (T)Enum.Parse(typeof(T), enumString);
         }
+        public static List<string> requirments = new List<string>(new string[] { "isSignaling", "TwoHandsOnWheel", "Mirors" });
+
+
+
+
 
     }
+    
 }

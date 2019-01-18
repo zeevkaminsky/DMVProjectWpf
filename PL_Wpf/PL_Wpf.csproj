@@ -90,8 +90,14 @@
     <Compile Include="Trainee.xaml.cs">
       <DependentUpon>Trainee.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdateTestDetails.xaml.cs">
+      <DependentUpon>UpdateTestDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UpdateTesterWin.xaml.cs">
       <DependentUpon>UpdateTesterWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateTestWin.xaml.cs">
+      <DependentUpon>UpdateTestWin.xaml</DependentUpon>
     </Compile>
     <Compile Include="UpdateTraineeWind.xaml.cs">
       <DependentUpon>UpdateTraineeWind.xaml</DependentUpon>
@@ -152,7 +158,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UpdateTestDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UpdateTesterWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateTestWin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
