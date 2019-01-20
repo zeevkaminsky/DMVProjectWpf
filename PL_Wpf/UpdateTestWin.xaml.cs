@@ -26,7 +26,7 @@ namespace PL_Wpf
         private ObservableCollection<int> tests = new ObservableCollection<int>();
         public UpdateTestWin()
         {
-
+            //this.DataContext = test.Criteria;
             InitializeComponent();
             this.ResultGrid.Visibility = Visibility.Hidden;
             _bl = FactorySingletonBl.GetBl();
@@ -48,6 +48,10 @@ namespace PL_Wpf
 
         private void PastTestButton_Click(object sender, RoutedEventArgs e)
         {
+            
+            test.Criteria["isSignaling"] = this.SignalCheckBox.IsChecked;
+            test.Criteria["TwoHandsOnWheel"] = this.WheelCheckBox.IsChecked;
+            test.Criteria["Mirors"] = this.MirorsCheckBox.IsChecked;
             if (_bl.IsLisense(test.TraineeID))
             {
                 this.resultTextBlock.Text = "trainee past the test";

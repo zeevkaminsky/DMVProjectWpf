@@ -1,2 +1,75 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Trainees />
+<Trainees>
+  <Trainee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <ID>8974651</ID>
+    <Name />
+    <DateOfBirth>0001-01-01T00:00:00</DateOfBirth>
+    <Gender>MALE</Gender>
+    <Address>
+      <Building>0</Building>
+      <Town>Afula</Town>
+    </Address>
+    <MyVehicle>car</MyVehicle>
+    <MyGear>auto</MyGear>
+    <TeacherName />
+    <NumOfLessons>40</NumOfLessons>
+    <NumOfTests>0</NumOfTests>
+  </Trainee>
+  <Trainee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <ID>123456789</ID>
+    <Name />
+    <DateOfBirth>0001-01-01T00:00:00</DateOfBirth>
+    <Gender>MALE</Gender>
+    <Address>
+      <Building>0</Building>
+      <Town>Afula</Town>
+    </Address>
+    <MyVehicle>car</MyVehicle>
+    <MyGear>auto</MyGear>
+    <TeacherName />
+    <NumOfLessons>40</NumOfLessons>
+    <NumOfTests>0</NumOfTests>
+  </Trainee>
+  <Trainee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <ID>123456789</ID>
+    <Name>
+      <FirstName>efsrdtgfafesr</FirstName>
+      <LastName>afesrd</LastName>
+    </Name>
+    <DateOfBirth>0001-01-01T00:00:00</DateOfBirth>
+    <Gender>MALE</Gender>
+    <Address>
+      <Building>0</Building>
+      <Town>Afula</Town>
+    </Address>
+    <MyVehicle>car</MyVehicle>
+    <MyGear>auto</MyGear>
+    <TeacherName />
+    <NumOfLessons>40</NumOfLessons>
+    <NumOfTests>0</NumOfTests>
+  </Trainee>
+  <Trainee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <ID>123456789</ID>
+    <Name>
+      <FirstName>ha;rhji</FirstName>
+      <LastName>ua;jgp</LastName>
+    </Name>
+    <DateOfBirth>0001-01-01T00:00:00</DateOfBirth>
+    <Gender>MALE</Gender>
+    <Phone>uha;thhj</Phone>
+    <Address>
+      <Street>ij</Street>
+      <Building>10</Building>
+      <Town>Afula</Town>
+    </Address>
+    <MyVehicle>car</MyVehicle>
+    <MyGear>auto</MyGear>
+    <School>ijo</School>
+    <TeacherName>
+      <FirstName>jh</FirstName>
+      <LastName>jk</LastName>
+    </TeacherName>
+    <NumOfLessons>40</NumOfLessons>
+    <NumOfTests>0</NumOfTests>
+  </Trainee>
+</Trainees>

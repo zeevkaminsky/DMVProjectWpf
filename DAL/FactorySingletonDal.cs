@@ -16,7 +16,7 @@ namespace DAL
         {
             if (instance == null)
             {
-                instance = new MyDal();
+                instance = new DalXML();
             }
             return instance;
         }

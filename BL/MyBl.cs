@@ -50,10 +50,10 @@ namespace BL
             }
 
             //if tester is full
-            if (helpTester.NumOfTests >= helpTester.MaxTests)
-            {
-                throw new Exception("tester is full");
-            }
+            //if (helpTester.NumOfTests >= helpTester.MaxTests)
+            //{
+            //    throw new Exception("tester is full");
+            //}
 
             //find all tests trainee succedded
             var licence = from t in GetTests()
@@ -87,7 +87,7 @@ namespace BL
         {
             
            var testers = (from t in TestersAvailableByHour(test.TestDay, test.TestHour)//find all testers available in the hour of the test
-                                 where t.MyVehicle == FindTraineeByID(test.TraineeID).MyVehicle //get only testers that are match to trainee vehicle
+                                 where t.MyVehicle == FindTraineeByID(test.TraineeID).MyVehicle && t.MaxTests > t.NumOfTests//get only testers that are match to trainee vehicle andcan take another test this week
                                  select t).ToList();
 
             return testers;

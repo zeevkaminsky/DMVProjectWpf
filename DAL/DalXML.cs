@@ -54,57 +54,109 @@ namespace DAL
 
         public List<Trainee> GetTrainees(Predicate<Trainee> predicate = null)
         {
-           
-                var result = from t in DS.DataSourceXML.Trainees.Elements()
-                             select new Trainee
-                             {
-                                 ID = t.Element("ID").Value,
-                                 Name = new FullName
-                                 {
-                                     FirstName = t.Element("FullName").Element("FirstName").Value,
-                                     LastName = t.Element("FullName").Element("LastName").Value
-                                 },
-                                 Address = new Address
-                                 {
-                                     Town = BE.Configuration.ToEnum<Cities>(t.Element("Address").Element("Town").Value),
-                                     Building = Int32.Parse(t.Element("Address").Element("Building").Value),
-                                     Street = t.Element("Address").Element("Street").Value
-                                 },
-                                 TeacherName = new FullName
-                                 {
-                                     FirstName = t.Element("TeacherName").Element("FirstName").Value,
-                                     LastName = t.Element("TeacherName").Element("LastName").Value
-                                 },
-                                 MyVehicle = BE.Configuration.ToEnum<Vehicle> (t.Element("MyVehicle").Value),
-                                 DateOfBirth = BE.Configuration.ToEnum<DateTime>(t.Element("DateOfBirth").Value),
-                                 School = t.Element("School").Value,
-                                 NumOfLessons = Int32.Parse(t.Element("NumOfLessons").Value),
-                                 MyGear = BE.Configuration.ToEnum < Gear > (t.Element("GearType").Value),
-                                 Gender = BE.Configuration.ToEnum < Gender >( t.Element("Gender").Value)
-                             };
-                if (predicate != null)
-                {
-                    return (from tr in result
-                            where predicate(tr)
-                            select tr).ToList();
-                }
-                return result.ToList();
-            
+            var serializer = new XmlSerializer(typeof(Trainee));
+
+            var elements = DS.DataSourceXML.Trainees.Elements("Trainee");
+            return elements.Select(element => (Trainee)serializer.Deserialize(element.CreateReader())).ToList();
+
+            //var result = from t in DS.DataSourceXML.Trainees.Elements()
+            //             select new Trainee
+            //             {
+            //                 ID = t.Element("ID").Value,
+            //                 Name = new FullName
+            //                 {
+            //                     FirstName = t.Element("FullName").Element("FirstName").Value,
+            //                     LastName = t.Element("FullName").Element("LastName").Value
+            //                 },
+            //                 Address = new Address
+            //                 {
+            //                     Town = BE.Configuration.ToEnum<Cities>(t.Element("Address").Element("Town").Value),
+            //                     Building = Int32.Parse(t.Element("Address").Element("Building").Value),
+            //                     Street = t.Element("Address").Element("Street").Value
+            //                 },
+            //                 TeacherName = new FullName
+            //                 {
+            //                     FirstName = t.Element("TeacherName").Element("FirstName").Value,
+            //                     LastName = t.Element("TeacherName").Element("LastName").Value
+            //                 },
+            //                 MyVehicle = BE.Configuration.ToEnum<Vehicle> (t.Element("MyVehicle").Value),
+            //                 DateOfBirth = BE.Configuration.ToEnum<DateTime>(t.Element("DateOfBirth").Value),
+            //                 School = t.Element("School").Value,
+            //                 NumOfLessons = Int32.Parse(t.Element("NumOfLessons").Value),
+            //                 MyGear = BE.Configuration.ToEnum < Gear > (t.Element("GearType").Value),
+            //                 Gender = BE.Configuration.ToEnum < Gender >( t.Element("Gender").Value)
+            //             };
+            //if (predicate != null)
+            //{
+            //    return (from tr in result
+            //            where predicate(tr)
+            //            select tr).ToList();
+            //}
+            //return result.ToList();
+
         }
 
         public bool RemovedrivingTest(int serialNumber)
         {
-            throw new NotImplementedException();
+            {
+                XElement testElement;
+                try
+                {
+                    testElement = (from tes in DS.DataSourceXML.DrivingTests.Elements()
+                                      where int.Parse( (tes.Element("SerialNumber").Value)) == serialNumber
+                                      select tes).FirstOrDefault();
+                    testElement.Remove();
+                    DS.DataSourceXML.SaveDrivingtests();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
         }
 
         public bool RemoveTester(string testerID)
         {
-            throw new NotImplementedException();
+            {
+                XElement studentElement;
+                try
+                {
+                    studentElement = (from tes in DS.DataSourceXML.Testers.Elements()
+                                      where (tes.Element("ID").Value) == testerID
+                                      select tes).FirstOrDefault();
+                    studentElement.Remove();
+                    DS.DataSourceXML.SaveTesters();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+
+
+
         }
 
         public bool RemoveTrainee(string traineeID)
         {
-            throw new NotImplementedException();
+            {
+                XElement traineeElement;
+                try
+                {
+                    traineeElement = (from tra in DS.DataSourceXML.Trainees.Elements()
+                                      where (tra.Element("ID").Value) == traineeID
+                                      select tra).FirstOrDefault();
+                    traineeElement.Remove();
+                    DS.DataSourceXML.SaveTrainees();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
         }
 
         public bool UpdateDrivingTest(Test test)

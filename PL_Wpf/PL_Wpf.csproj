@@ -78,6 +78,9 @@
     <Compile Include="RemoveTester.xaml.cs">
       <DependentUpon>RemoveTester.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RemoveTestWin.xaml.cs">
+      <DependentUpon>RemoveTestWin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RemoveTraineeWin.xaml.cs">
       <DependentUpon>RemoveTraineeWin.xaml</DependentUpon>
     </Compile>
@@ -139,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RemoveTester.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RemoveTestWin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

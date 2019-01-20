@@ -110,9 +110,9 @@ namespace DAL
                                  new XElement("TesterID", d.TesterID.ToString()),
                                  new XElement("TraineeID", d.TraineeID.ToString()),
                                  new XElement("TestDay", d.TestDay.ToString()),
-                                 new XElement("Criteria",
-                                                    (from r in d.Criteria
-                                                     select new XElement("Criterion", r)).ToList()),
+                                 //new XElement("Criteria",
+                                                    //(from r in d.Criteria
+                                                     //select new XElement("Criterion", r)).ToList()),//need to fix
                                  new XElement(d.ExitPoint.ToXML()),
                                  new XElement("TestResult", d.TestResult.ToString()),
                                  new XElement("TestHour", d.TestHour.ToString())
@@ -134,24 +134,7 @@ namespace DAL
             };
         }
 
-        //public static Person Clone(this Person p)  //deep clone 
-        //{
-        //    return new Person
-        //    {
-        //        ID = p.ID,
-        //        Address = new Address
-        //        {
-        //            City = p.Address.City,
-        //            Number = p.Address.Number,
-        //            StreetName = p.Address.StreetName//,
-        //            //ZipCode = p.Address.ZipCode
-        //        },
-        //        DayOfBirth = p.DayOfBirth,
-        //        Gender = p.Gender,
-        //        Name = p.Name
-        //    };
-        //}
-
+        
         public static Schedule Clone(this Schedule s)
         {
             Schedule result = new Schedule();
@@ -165,13 +148,10 @@ namespace DAL
             return result;
         }
 
-        //public static XElement ToXML(this Schedule s)
-        //{
-        //    return new XElement("Schedule",
-        //        new XElement("Sunday", 
+               
 
 
-        //}
+       
 
         public static Tester Clone(this Tester t)
         {
