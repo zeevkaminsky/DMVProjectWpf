@@ -50,10 +50,11 @@
             <!--<TextBlock Name="TestsTBlock" Grid.Column="2" FontSize="20" HorizontalAlignment="Right"  Grid.Row="7" TextWrapping="Wrap" Text="tests:" VerticalAlignment="Center"/>-->
 
 
-            <TextBox    Name="IDTBox"     Grid.Column="1" HorizontalAlignment="Left"  Margin="10" TextWrapping="Wrap"   VerticalAlignment="Center" Width="120" HorizontalContentAlignment="Stretch" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+            <TextBox    Name="IDTBox"     Grid.Column="1" HorizontalAlignment="Left"  Margin="10" TextWrapping="Wrap"   VerticalAlignment="Center" Width="120" HorizontalContentAlignment="Stretch" MaxLength="9" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
             <TextBox    Name="FNameTBox"  Grid.Column="1" HorizontalAlignment="Left"  Margin="10" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Center" Width="120" Text="{Binding Name.FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
             <TextBox    Name="LNameTBox"  Grid.Column="1" HorizontalAlignment="Left"  Margin="10" Grid.Row="2" TextWrapping="Wrap"  VerticalAlignment="Center" Width="120" Text="{Binding Name.LastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-            <DatePicker Name="DOBDPicker" Grid.Column="1" HorizontalAlignment="Left"  Margin="10" Grid.Row="3" VerticalAlignment="Center"  Width="120" SelectedDate="{Binding DateOfBirth, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+            <DatePicker Name="DOBDPicker" Grid.Column="1" HorizontalAlignment="Left"  Margin="10" Grid.Row="3" VerticalAlignment="Center"  Width="120" SelectedDate="{Binding DateOfBirth, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" DisplayDateStart="01.01.1930" 
+                            DisplayDateEnd="01.01.2010" DisplayDate="01.01.1980"/>
             <ComboBox   Name="GenderCBox" Grid.Column="1" HorizontalAlignment="Left"  Margin="10" Grid.Row="4" VerticalAlignment="Center"  Width="120" SelectedItem="{Binding Gender}"/>
             <TextBox    Name="PhoneTBox"  Grid.Column="1" HorizontalAlignment="Left"  Margin="10" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Center" Width="120" Text="{Binding Phone, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
             <ComboBox   Name="VehicleCBox" Grid.Column="1" Grid.Row="6" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="10"   Width="120" SelectedItem="{Binding MyVehicle}"/>
@@ -67,9 +68,25 @@
             <!--<TextBox   Name="TestsTBox"    Grid.Column="3" HorizontalAlignment="Left" Margin="10" Grid.Row="7" VerticalAlignment="Center"  TextWrapping="Wrap"  Width="120" Text="{Binding NumOfTests, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>-->
             <TextBox  Name="TeacherFNameTBox"  Grid.Column="3" HorizontalAlignment="Left" Margin="10" Grid.Row="4" VerticalAlignment="Center"   Width="120" Text="{Binding TeacherName.FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
             <TextBox  Name="TeacherLNameTBox"  Grid.Column="3" HorizontalAlignment="Left" Margin="10" Grid.Row="5" VerticalAlignment="Center"   Width="120" Text="{Binding TeacherName.LastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-            
-            
-            <Button   x:Name="AddTraineeButton"  Content="Add Trainee" FontSize="20" Grid.Column="4"   Grid.Row="6" Grid.RowSpan="2" Margin="15" Click="AddTraineeButton_Click" />
+
+
+            <Button   x:Name="AddTraineeButton"  Content="Add Trainee" FontSize="20" Grid.Column="4"   Grid.Row="6" Grid.RowSpan="2" Margin="15" Click="AddTraineeButton_Click" >
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text.Length, ElementName=IDTBox, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Text.Length, ElementName=FNameTBox, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Text.Length, ElementName=LNameTBox, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </Grid>        
 
 

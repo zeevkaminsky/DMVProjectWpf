@@ -28,7 +28,7 @@ namespace PL_Wpf
         public AddTester()
         {
             InitializeComponent();
-            tester = new BE.Tester { DateOfBirth = new DateTime(1990,1,1), Name = new FullName(), Address = new Address(), WeeklySchedule = new Schedule() };
+            tester = new BE.Tester();
             
             init(tester);//initialize all comboboxes with apropriate values
 
@@ -43,7 +43,15 @@ namespace PL_Wpf
             this.EnterButton.Content = "update";
             this.IDTBox.IsReadOnly = true;
             init(testerToUp);
-            
+
+            foreach (var item in SchedGrid.Children.OfType<CheckBox>())
+            {
+                int row = Grid.GetRow(item);
+                int column = Grid.GetColumn(item);
+                item.IsChecked = tester.WeeklySchedule.weeklySchedule[column - 1][row - 1];
+
+            }
+
         }
 
         private void init(BE.Tester tester)
@@ -70,26 +78,23 @@ namespace PL_Wpf
             {
                 MaxDistanceCBox.Items.Add(i);
             }
+            
 
         }
         
         private void EnterButton_Click(object sender, RoutedEventArgs e)
         {
-            Schedule schedule = new Schedule { weeklySchedule = new bool[5][] };
-            for (int i = 0; i < 5; i++)
-            {
-                schedule.weeklySchedule[i] = new bool[6];
-            }
+            
             try
             {
                 foreach (var item in SchedGrid.Children.OfType<CheckBox>())
                 {
                     int row = Grid.GetRow(item);
                     int column = Grid.GetColumn(item);
-                    schedule.weeklySchedule[column - 1][row - 1] = item.IsChecked == true;
+                    tester.WeeklySchedule.weeklySchedule[column - 1][row - 1] = item.IsChecked == true?true:false;
                     
                 }
-                tester.WeeklySchedule.weeklySchedule = schedule.weeklySchedule;
+                
 
                 
 

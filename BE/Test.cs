@@ -11,7 +11,7 @@ namespace BE
     {
         public Test()
         {
-            TestDay = new DateTime();
+            TestDay = DateTime.Now;
             TestHour = new TimeSpan();
             ExitPoint = new Address();
             Criteria = new Dictionary<string, bool>();
@@ -74,8 +74,8 @@ namespace BE
 
         public override string ToString()
         {
-            return string.Format("serial number:{0}\n tester's ID:{1}\n trainee's ID:{2}\n test time:{3}\n exit point:{4}\n test result:{5}",
-          SerialNumber, TesterID, TraineeID, TestDay, ExitPoint, TestResult);
+            return string.Format("serial number:{0}\n tester's ID:{1}\n trainee's ID:{2}\n test time:{3}\n test hour\n{4}exit point:{5}\n test result:{6}",
+          SerialNumber, TesterID, TraineeID, TestDay.ToString("dd'/'MM'/'yyyy"), TestHour, ExitPoint, TestResult);
         } 
 
         

@@ -28,7 +28,7 @@ namespace PL_Wpf
         {
             InitializeComponent();
             _bl = FactorySingletonBl.GetBl();
-            test = new BE.Test { Gear = new Gear() , Vehicle = new Vehicle(), TestDay = new DateTime() , ExitPoint = new Address()};
+            test = new BE.Test();
             this.DataContext = test;
             this.gearComboBox.ItemsSource = Enum.GetValues(typeof(Gear));
             this.vehicleComboBox.ItemsSource = Enum.GetValues(typeof(Vehicle));

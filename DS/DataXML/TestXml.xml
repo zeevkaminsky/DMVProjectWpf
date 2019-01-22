@@ -1,2 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Tests />
+<Tests>
+  <Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Vehicle>car</Vehicle>
+    <Gear>auto</Gear>
+    <SerialNumber>0</SerialNumber>
+    <TesterID>312</TesterID>
+    <TraineeID>258258258</TraineeID>
+    <TestDay>0001-01-01T00:00:00</TestDay>
+    <TestHour />
+    <ExitPoint>
+      <Building>0</Building>
+      <Town>Afula</Town>
+    </ExitPoint>
+    <TestResult>false</TestResult>
+    <tempDict>isSignaling,false,TwoHandsOnWheel,false,Mirors,false</tempDict>
+  </Test>
+  <Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Vehicle>car</Vehicle>
+    <Gear>auto</Gear>
+    <SerialNumber>0</SerialNumber>
+    <TesterID>312</TesterID>
+    <TraineeID>258258258</TraineeID>
+    <TestDay>0001-01-01T00:00:00</TestDay>
+    <TestHour />
+    <ExitPoint>
+      <Building>0</Building>
+      <Town>Afula</Town>
+    </ExitPoint>
+    <TestResult>false</TestResult>
+    <tempDict>isSignaling,false,TwoHandsOnWheel,false,Mirors,false</tempDict>
+  </Test>
+  <Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Vehicle>car</Vehicle>
+    <Gear>auto</Gear>
+    <SerialNumber>0</SerialNumber>
+    <TesterID>312</TesterID>
+    <TraineeID>258258258</TraineeID>
+    <TestDay>0001-01-01T00:00:00</TestDay>
+    <TestHour />
+    <ExitPoint>
+      <Building>0</Building>
+      <Town>Afula</Town>
+    </ExitPoint>
+    <TestResult>false</TestResult>
+    <tempDict>isSignaling,false,TwoHandsOnWheel,false,Mirors,false</tempDict>
+  </Test>
+</Tests>

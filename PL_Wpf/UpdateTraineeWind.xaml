@@ -33,7 +33,17 @@
 
 
             </Grid>
-            <Button Name="UpdateButton" Content="update"  FontSize="26" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Width="224" Click="UpdateButton_Click" />
+            <Button Name="UpdateButton" Content="update"  FontSize="26" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Width="224" Click="UpdateButton_Click" >
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=IDCBox, Path=SelectedItem}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
 
         </Grid>
 

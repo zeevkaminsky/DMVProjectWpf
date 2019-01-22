@@ -29,7 +29,7 @@ namespace PL_Wpf
         {
 
             InitializeComponent();
-            trainee = new BE.Trainee { Name = new FullName(), Address = new Address(), TeacherName = new FullName() };
+            trainee = new BE.Trainee();
             _bl = FactorySingletonBl.GetBl();
             init();
 
@@ -41,6 +41,7 @@ namespace PL_Wpf
         {
             InitializeComponent();
             trainee = traineeToUp;
+            this.IDTBox.IsReadOnly = true;
             _bl = FactorySingletonBl.GetBl();
             init();
             this.AddTraineeButton.Content = "Update";

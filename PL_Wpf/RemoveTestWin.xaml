@@ -33,7 +33,17 @@
 
 
             </Grid>
-            <Button Name="RemoveButton" Content="remove"  FontSize="26" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Click="RemoveButton_Click" Width="162"/>
+            <Button Name="RemoveButton" Content="remove"  FontSize="26" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Click="RemoveButton_Click" Width="162">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=IDCBox, Path=SelectedItem}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
 
         </Grid>
 

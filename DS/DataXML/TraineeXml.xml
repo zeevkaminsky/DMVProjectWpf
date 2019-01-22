@@ -1,2 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Trainees />
+<Trainees>
+  <Trainee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <ID>258258258</ID>
+    <Name>
+      <FirstName>reuven</FirstName>
+      <LastName>dtfyguhij</LastName>
+    </Name>
+    <DateOfBirth>1980-01-01T00:00:00</DateOfBirth>
+    <Gender>MALE</Gender>
+    <Phone>0539525576</Phone>
+    <Address>
+      <Street>hutehp</Street>
+      <Building>10</Building>
+      <Town>Afula</Town>
+    </Address>
+    <MyVehicle>car</MyVehicle>
+    <MyGear>auto</MyGear>
+    <School>huhri</School>
+    <TeacherName>
+      <FirstName>hgfd</FirstName>
+      <LastName>bgvfdc</LastName>
+    </TeacherName>
+    <NumOfLessons>40</NumOfLessons>
+    <NumOfTests>0</NumOfTests>
+  </Trainee>
+</Trainees>

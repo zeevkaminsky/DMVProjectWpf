@@ -88,7 +88,8 @@
                 <TextBox Grid.Row="0" Name="IDTBox" Margin="5" VerticalAlignment="Center" MaxLength="9"  Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                 <TextBox Grid.Row="1" Name="FirstNameTBox" Margin="5" VerticalAlignment="Center" Text="{Binding Name.FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                 <TextBox Grid.Row="2" Name="LastNameTBox" Margin="5" VerticalAlignment="Center" Text="{Binding Name.LastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                <DatePicker Name="DateOfBirthDatePicker"  Grid.Row="3" VerticalAlignment="Center" Margin="5" DisplayDateStart="01.01.1930" DisplayDateEnd="01.01.2010" SelectedDate="{Binding DateOfBirth, StringFormat='dd/MM/yyyy', Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" >
+                <DatePicker Name="DateOfBirthDatePicker"  Grid.Row="3" VerticalAlignment="Center" Margin="5" DisplayDateStart="01.01.1930" 
+                            DisplayDateEnd="01.01.2010" DisplayDate="01.01.1980"  SelectedDate="{Binding DateOfBirth, StringFormat='dd/MM/yyyy', Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" >
                     
                 </DatePicker>
                 <ComboBox  Name="GenderCBox"  Grid.Row="4" Margin="5" SelectedItem="{Binding Gender}" />
@@ -101,9 +102,7 @@
                 <ComboBox Name="CityCBox" Grid.Row="6" Margin="5"  SelectedItem="{Binding Address.Town}"/>
                 <TextBox  Grid.Row="7" Name="StreetTBox" Margin="5" VerticalAlignment="Center" Text="{Binding Address.Street, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                 <TextBox Grid.Row="8" Name="NumberTBox" Margin="5" VerticalAlignment="Center"  Text="{Binding Address.Building, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                <!--<TextBox Grid.Row="10" Name="ExperienceTBox" Margin="5" VerticalAlignment="Center" />
-                <TextBox Grid.Row="11" Name="MaxTestsTBox" Margin="5" VerticalAlignment="Center" />
-                <TextBox Grid.Row="12" Name="MaxDistanceTBox" Margin="5" VerticalAlignment="Center" />-->
+             
 
             </Grid>
 
@@ -193,32 +192,7 @@
                     <Label Content="12:00-13:00" HorizontalAlignment="Right"  Grid.Row="4"  VerticalAlignment="Center" FontSize="14"/>
                     <Label Content="13:00-14:00" HorizontalAlignment="Right"  Grid.Row="5"  VerticalAlignment="Center" FontSize="14"/>
                     <Label Content="14:00-15:00" HorizontalAlignment="Right"  Grid.Row="6"  VerticalAlignment="Center" FontSize="14"/>
-                    <!-- <DataGrid  x:Name="luzDataGrid" AutoGenerateColumns="False" HorizontalAlignment="Center" Width="536" >
-                       
-
-                        <DataGrid.Columns>
-                            <DataGridTextColumn x:Name="ColumnHeader" Header="Day:    "/>
-                            <DataGridCheckBoxColumn Width="*" Header="09:00-10:00"/>
-                            <DataGridCheckBoxColumn Width="*" Header="10:00-11:00"/>
-                            <DataGridCheckBoxColumn Width="*" Header="11:00-12:00"/>
-                            <DataGridCheckBoxColumn Width="*" Header="12:00-13:00"/>
-                            <DataGridCheckBoxColumn Width="*" Header="13:00-14:00"/>
-                            <DataGridCheckBoxColumn Width="*" Header="14:00-15:00" />
-                            <DataGridCheckBoxColumn/>
-                        </DataGrid.Columns>
-                        <StackPanel Margin="0,27,0,89" HorizontalAlignment="Left" Width="44">
-                            <TextBlock TextWrapping="Wrap" Text="Sun" HorizontalAlignment="Center" VerticalAlignment="Center"  />
-                            <TextBlock TextWrapping="Wrap" Text="Mon"/>
-                            <TextBlock TextWrapping="Wrap" Text="Tue"/>
-                            <TextBlock TextWrapping="Wrap" Text="Wed"/>
-                            <TextBlock TextWrapping="Wrap" Text="Thu"/>
-
-                        </StackPanel>
-                    </DataGrid>-->
-                    
-
-
-
+                   
 
 
 

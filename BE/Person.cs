@@ -11,7 +11,7 @@ namespace BE
         public Person()
         {
             Name = new FullName();
-            DateOfBirth = new DateTime();
+            DateOfBirth = new DateTime(1980,1,1);
             Gender = new Gender();
             Address = new Address();
             
