@@ -106,15 +106,23 @@ namespace DAL
 
         public static XElement ToXML(this Test d)
         {
-            return new XElement("test",
+            Dictionary<string, string> help = new Dictionary<string, string>();
+            foreach (var item in d.Criteria)
+            {
+                help.Add(item.Key, item.Value.ToString().ToLower());
+            }
+            return new XElement("Test",
                                  new XElement("TesterID", d.TesterID.ToString()),
                                  new XElement("TraineeID", d.TraineeID.ToString()),
                                  new XElement("TestDay", d.TestDay.ToString()),
-                                 //new XElement("Criteria",
-                                                    //(from r in d.Criteria
-                                                     //select new XElement("Criterion", r)).ToList()),//need to fix
+                                 new XElement("Gear", d.Gear.ToString()),
+                                 new XElement("Vehicle", d.Vehicle.ToString()),
+                                 new XElement("SerialNumber", d.SerialNumber.ToString()),
+                                 new XElement("Criteria",
+                                 (from r in help
+                                 select new XElement("Criterion", r))),
                                  new XElement(d.ExitPoint.ToXML()),
-                                 new XElement("TestResult", d.TestResult.ToString()),
+                                 new XElement("TestResult", d.TestResult.ToString().ToLower()),
                                  new XElement("TestHour", d.TestHour.ToString())
                                 );
         }
@@ -135,6 +143,7 @@ namespace DAL
         }
 
         
+
         public static Schedule Clone(this Schedule s)
         {
             Schedule result = new Schedule();
@@ -148,10 +157,28 @@ namespace DAL
             return result;
         }
 
-               
-
-
-       
+        public static XElement testerToXml(Tester tester)
+        {
+            return (new XElement("Tester",
+                                  new XElement("Id", tester.ID),
+                                   new XElement("FirstName", tester.Name.FirstName),
+                                   new XElement("LastName", tester.Name.LastName),
+                                   new XElement("DateOfBirth", tester.DateOfBirth),
+                                   new XElement("Phone", tester.Phone),
+                                   new XElement("City", tester.Address.Town),
+                                   new XElement("Gender", tester.Gender),
+                                   new XElement("NumOfTests", tester.NumOfTests),
+                                   new XElement("Experience", tester.Experience),
+                                   new XElement("MaxTests", tester.MaxTests),
+                                   new XElement("MVehicle", tester.MyVehicle),
+                                   new XElement("MaxDistance", tester.MaxDistance),
+                                   
+                                   new XElement("WeeklySchedule", from x in tester.WeeklySchedule.weeklySchedule
+                                                                select new XElement("IsAvailable", x))
+                                                                
+                                   
+                ));
+        }
 
         public static Tester Clone(this Tester t)
         {

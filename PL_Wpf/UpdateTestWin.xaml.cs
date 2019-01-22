@@ -49,9 +49,9 @@ namespace PL_Wpf
         private void PastTestButton_Click(object sender, RoutedEventArgs e)
         {
             
-            test.Criteria["isSignaling"] = this.SignalCheckBox.IsChecked;
-            test.Criteria["TwoHandsOnWheel"] = this.WheelCheckBox.IsChecked;
-            test.Criteria["Mirors"] = this.MirorsCheckBox.IsChecked;
+            test.Criteria["isSignaling"] = this.SignalCheckBox.IsChecked == true;
+            test.Criteria["TwoHandsOnWheel"] = this.WheelCheckBox.IsChecked == true;
+            test.Criteria["Mirors"] = this.MirorsCheckBox.IsChecked == true;
             if (_bl.IsLisense(test.TraineeID))
             {
                 this.resultTextBlock.Text = "trainee past the test";

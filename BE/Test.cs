@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace BE
 {
@@ -10,11 +11,16 @@ namespace BE
     {
         public Test()
         {
-            Criteria = new Dictionary<string, bool?>();
+            TestDay = new DateTime();
+            TestHour = new TimeSpan();
+            ExitPoint = new Address();
+            Criteria = new Dictionary<string, bool>();
+            Vehicle = new Vehicle();
+            Gear = new Gear();
            
             foreach (var item in BE.Configuration.requirments)
             {
-                Criteria.Add(item, null);
+                Criteria.Add(item, false);
             }
         }
         public Vehicle Vehicle { get; set; } 
@@ -22,11 +28,46 @@ namespace BE
         public int SerialNumber { get; set; }
         public string TesterID { get; set; }
         public string TraineeID { get; set; }
+        
         public DateTime TestDay { get; set; }
+        
         public TimeSpan TestHour { get; set; }
         public Address ExitPoint { get; set; }
-        public bool? TestResult  { get; set; }
-        public Dictionary<string, bool?> Criteria { get; set; } 
+        public bool TestResult  { get; set; }
+        [XmlIgnore]
+        public Dictionary<string, bool> Criteria { get; set; } 
+        public string tempDict
+        {
+            get
+            {
+                if (Criteria == null)
+                    return null;
+                string result = "";
+                if (Criteria != null)
+                {
+
+                    foreach (var item in Criteria)
+                    {
+                        result += item.Key + "," + item.Value.ToString().ToLower() + ",";
+                    }
+                }
+                result = result.Substring(0, result.Length - 1);
+                return result;
+            }
+            set
+            {
+                if (value != null && value.Count() > 0)
+                {
+                    string[] values = value.Split(',');
+                    Criteria = new Dictionary<string, bool>();
+                    for (int i = 0; i < values.Length - 1; i+=2)
+                    {
+                        Criteria.Add(values[i], bool.Parse(values[i + 1]));
+                    }
+                    
+                }
+            }
+        }
            
 
 

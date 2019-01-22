@@ -6,17 +6,27 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using BE;
+using DS;
 
 namespace DAL
 {
     internal class DalXML : IDal
     {
+
+        #region add
         public bool AddDrivingTest(Test test)
         {
-            DS.DataSourceXML.DrivingTests.Add(test.ToXML());
-            DS.DataSourceXML.SaveDrivingtests();
+            //test.SerialNumber = Configuration.InitialSerialNumber++;
+            //DS.DataSourceXML.Tests.Add(test.ToXML());
+            //DS.DataSourceXML.SaveTests();
+            //return true;
+            string str = test.ToXMLstring();
+            XElement xml = XElement.Parse(str);
+            DS.DataSourceXML.Tests.Add(xml);
+            DS.DataSourceXML.SaveTests();
             return true;
         }
+
 
         public bool AddTester(Tester tester)
         {
@@ -27,29 +37,79 @@ namespace DAL
             return true;
         }
 
+
         public bool AddTrainee(Trainee trainee)
         {
+            //var trainees = (from t in DataSourceXML.Trainees.Elements()
+            //               where t.Element("ID").Value == trainee.ID
+            //               select t).FirstOrDefault();
+            //if (trainees != null)
+            //{
+            //    throw new Exception("Trainee with the same ID already exist");
+            //}
             string str = trainee.ToXMLstring();
             XElement xml = XElement.Parse(str);
             DS.DataSourceXML.Trainees.Add(xml);
             DS.DataSourceXML.SaveTrainees();
             return true;
         }
+        #endregion
 
+        #region get
         public List<Tester> GetTesters(Predicate<Tester> predicate = null)
         {
-             
-        
+
+
             var serializer = new XmlSerializer(typeof(Tester));
 
             var elements = DS.DataSourceXML.Testers.Elements("Tester");
             return elements.Select(element => (Tester)serializer.Deserialize(element.CreateReader())).ToList();
-        
+
         }
 
         public List<Test> GetTests(Predicate<Test> predicate = null)
         {
-            throw new NotImplementedException();
+            var serializer = new XmlSerializer(typeof(Test));
+
+            var elements = DS.DataSourceXML.Tests.Elements("Test");
+            return elements.Select(element => (Test)serializer.Deserialize(element.CreateReader())).ToList();
+
+            // try
+            // {
+
+
+            //    var tests = from test in DataSourceXML.Tests.Elements()
+            //                select new Test()
+            //                {
+            //                    SerialNumber = int.Parse(test.Element("SerialNumber").Value),
+            //                    TesterID = test.Element("TesterID").Value,
+            //                    TraineeID = test.Element("TraineeID").Value,
+            //                    Vehicle = BE.Configuration.ToEnum<Vehicle>(test.Element("Vehicle").Value),
+
+            //                    TestDay = DateTime.Parse(test.Element("TestDay").Value),
+            //                    TestHour = TimeSpan.Parse(test.Element("TestHour").Value),
+            //                    // ExitPoint = BE_Extentions.ToAddress(test.Element("ExitPoint")),
+            //                    TestResult = bool.Parse(test.Element("TestResult").Value),
+            //                    Gear = BE.Configuration.ToEnum<Gear>(test.Element("Gear").Value),
+            //                    Criteria = test.Element("Criteria").Elements().Select(t => new { key = t.Name.LocalName, val = bool.Parse(t.Value) })
+            //                    .ToDictionary(t => t.key, t => t.val)
+            //                };
+
+            //    return (from t in tests
+            //            where predicate(t)
+            //            select t).ToList();
+            //}
+            //catch (Exception ex)
+            //{
+
+            //    throw ex;
+
+
+            //}
+
+
+
+
         }
 
         public List<Trainee> GetTrainees(Predicate<Trainee> predicate = null)
@@ -95,23 +155,26 @@ namespace DAL
             //return result.ToList();
 
         }
+        #endregion
 
+
+        #region remove
         public bool RemovedrivingTest(int serialNumber)
         {
             {
                 XElement testElement;
                 try
                 {
-                    testElement = (from tes in DS.DataSourceXML.DrivingTests.Elements()
+                    testElement = (from tes in DS.DataSourceXML.Tests.Elements()
                                       where int.Parse( (tes.Element("SerialNumber").Value)) == serialNumber
                                       select tes).FirstOrDefault();
                     testElement.Remove();
-                    DS.DataSourceXML.SaveDrivingtests();
+                    DS.DataSourceXML.SaveTests();
                     return true;
                 }
-                catch
+                catch (Exception p)
                 {
-                    return false;
+                    throw p;
                 }
             }
         }
@@ -129,9 +192,9 @@ namespace DAL
                     DS.DataSourceXML.SaveTesters();
                     return true;
                 }
-                catch
+                catch (Exception m)
                 {
-                    return false;
+                    throw m;
                 }
             }
 
@@ -152,26 +215,86 @@ namespace DAL
                     DS.DataSourceXML.SaveTrainees();
                     return true;
                 }
-                catch
+                catch (Exception me)
                 {
-                    return false;
+                    throw me;
                 }
             }
         }
+        #endregion
 
+
+        #region update
         public bool UpdateDrivingTest(Test test)
         {
-            throw new NotImplementedException();
+            XElement oldtestElement = (from tes in DataSourceXML.Tests.Elements()
+                                         where int.Parse(tes.Element("SerialNumber").Value) == test.SerialNumber
+                                         select tes).FirstOrDefault();
+            if (oldtestElement == null)
+                throw new Exception("test didnt found");
+
+            //easy way to update, without to update every filed
+            oldtestElement.Remove();
+            DataSourceXML.SaveTests();
+            AddDrivingTest(test);
+            DataSourceXML.SaveTests();
+            return true;
         }
 
         public bool UpdateTester(Tester tester)
         {
-            throw new NotImplementedException();
+            try
+            {
+                
+                XElement oldtesterElement = (from tes in DataSourceXML.Testers.Elements()
+                                             where (tes.Element("ID").Value) == tester.ID
+                                             select tes).FirstOrDefault();
+                if (oldtesterElement == null)
+                    throw new Exception("tester didnt found");
+
+                //easy way to update, without to update every filed
+                oldtesterElement.Remove();
+                DataSourceXML.SaveTesters();
+                AddTester(tester);
+                DataSourceXML.SaveTesters();
+                return true;
+            }
+
+            catch (Exception e)
+            {
+
+                throw e;
+            }
         }
 
+           
+       
         public bool UpdateTrainee(Trainee trainee)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                XElement oldTraineeElement = (from t in DataSourceXML.Trainees.Elements()
+                                             where t.Element("ID").Value == trainee.ID
+                                             select t).FirstOrDefault();
+
+                if (oldTraineeElement == null)
+                    throw new Exception("tester didnt found");
+
+                //easy way to update, without to update every filed
+                oldTraineeElement.Remove();
+                DataSourceXML.SaveTrainees();
+                AddTrainee(trainee);
+                DataSourceXML.SaveTrainees();
+                return true;
+            }
+
+            catch (Exception e)
+            {
+
+                throw e;
+            }
         }
+        #endregion
     }
 }

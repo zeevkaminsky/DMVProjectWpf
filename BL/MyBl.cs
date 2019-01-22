@@ -368,7 +368,7 @@ namespace BL
         /// <returns></returns>
         public List<Tester> TestersAvailableByHour(DateTime testTime, TimeSpan timeSpan)
         {
-            return GetTesters(t => t.WeeklySchedule.weeklySchedule[(int)testTime.DayOfWeek][(int)(timeSpan.Hours-9)] == WorkAvailability.work);
+            return GetTesters(t => t.WeeklySchedule.weeklySchedule[(int)testTime.DayOfWeek][(int)(timeSpan.Hours-9)] == true);
         }
         /// <summary>
         /// returns all tests in a specific day

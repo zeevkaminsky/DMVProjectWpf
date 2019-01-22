@@ -28,7 +28,7 @@ namespace PL_Wpf
         public AddTester()
         {
             InitializeComponent();
-            tester = new BE.Tester { DateOfBirth = new DateTime(2000,1,1), Name = new FullName(), Address = new Address(), WeeklySchedule = new Schedule() };
+            tester = new BE.Tester { DateOfBirth = new DateTime(1990,1,1), Name = new FullName(), Address = new Address(), WeeklySchedule = new Schedule() };
             
             init(tester);//initialize all comboboxes with apropriate values
 
@@ -72,24 +72,13 @@ namespace PL_Wpf
             }
 
         }
-
-
-        #region disableButoon
-
-
-        #endregion
-
-
-
-       
-
-
+        
         private void EnterButton_Click(object sender, RoutedEventArgs e)
         {
-            Schedule schedule = new Schedule { weeklySchedule = new WorkAvailability[5][] };
+            Schedule schedule = new Schedule { weeklySchedule = new bool[5][] };
             for (int i = 0; i < 5; i++)
             {
-                schedule.weeklySchedule[i] = new WorkAvailability[6];
+                schedule.weeklySchedule[i] = new bool[6];
             }
             try
             {
@@ -97,14 +86,8 @@ namespace PL_Wpf
                 {
                     int row = Grid.GetRow(item);
                     int column = Grid.GetColumn(item);
-                    if (item.IsChecked == true)
-                    {
-                        schedule.weeklySchedule[column - 1][row - 1] = WorkAvailability.work;
-                    }
-                    else
-                    {
-                        schedule.weeklySchedule[column - 1][row - 1] = WorkAvailability.not_work;
-                    }
+                    schedule.weeklySchedule[column - 1][row - 1] = item.IsChecked == true;
+                    
                 }
                 tester.WeeklySchedule.weeklySchedule = schedule.weeklySchedule;
 
@@ -145,12 +128,12 @@ namespace PL_Wpf
 
         }
 
-        private void MenuButton_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindow = new MainWindow();
-            this.Close();
-            mainWindow.Show();
-        }
+        //private void MenuButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    MainWindow mainWindow = new MainWindow();
+        //    this.Close();
+        //    mainWindow.Show();
+        //}
 
         
     }

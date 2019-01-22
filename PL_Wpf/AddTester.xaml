@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="AddTester" Height="600" Width="1000" FontFamily="Myanmar Text">
 
-    <Window.Resources>
+    <!--<Window.Resources>
         <DataTemplate x:Key="DataTemplate_Level2">
             <CheckBox IsChecked="False"  Height="15" Width="15" Margin="2"/>
         </DataTemplate>
@@ -21,9 +21,9 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </DataTemplate>
-    </Window.Resources>
+    </Window.Resources>-->
 
-
+    
 
     <Grid>
 
@@ -88,7 +88,9 @@
                 <TextBox Grid.Row="0" Name="IDTBox" Margin="5" VerticalAlignment="Center" MaxLength="9"  Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                 <TextBox Grid.Row="1" Name="FirstNameTBox" Margin="5" VerticalAlignment="Center" Text="{Binding Name.FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                 <TextBox Grid.Row="2" Name="LastNameTBox" Margin="5" VerticalAlignment="Center" Text="{Binding Name.LastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                <DatePicker Name="DateOfBirthDatePicker"  Grid.Row="3" VerticalAlignment="Center" Margin="5" DisplayDateStart="01.01.1930" DisplayDateEnd="01.01.2000" SelectedDate="{Binding DateOfBirth, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                <DatePicker Name="DateOfBirthDatePicker"  Grid.Row="3" VerticalAlignment="Center" Margin="5" DisplayDateStart="01.01.1930" DisplayDateEnd="01.01.2010" SelectedDate="{Binding DateOfBirth, StringFormat='dd/MM/yyyy', Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" >
+                    
+                </DatePicker>
                 <ComboBox  Name="GenderCBox"  Grid.Row="4" Margin="5" SelectedItem="{Binding Gender}" />
                 <ComboBox  Name="ExpCBox"  Grid.Row="10" Margin="5"  SelectedIndex="{Binding Experience}"/>
                 <ComboBox  Name="MaxTestsCBox"  Grid.Row="11" Margin="5" SelectedIndex="{Binding MaxTests}" />
@@ -112,8 +114,25 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                
-                <Button Grid.Row="2" Name="EnterButton" Content="Enter" Grid.Column="2" HorizontalAlignment="Right" FontSize="30" VerticalAlignment="Bottom" Width="184" Height="47" Click="EnterButton_Click" Margin="30"/>
+
+                <Button Grid.Row="2" Name="EnterButton" Content="Enter" Grid.Column="2" HorizontalAlignment="Right" FontSize="30" VerticalAlignment="Bottom" Width="184" Height="47" Click="EnterButton_Click" Margin="30">
+
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text.Length, ElementName=IDTBox, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Text.Length, ElementName=FirstNameTBox, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Text.Length, ElementName=LastNameTBox, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
                 <Grid Name="SchedGrid" Grid.Row="1" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>

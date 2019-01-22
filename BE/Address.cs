@@ -8,7 +8,10 @@ namespace BE
 {
     public class Address
     {
-        
+        public Address()
+        {
+            Town = new Cities();
+        }
         public string Street { get; set; }
         public int Building { get; set; }
         public Cities Town { get; set; }

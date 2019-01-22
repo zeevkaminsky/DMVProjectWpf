@@ -8,7 +8,7 @@ namespace BE
 {
     public class Schedule
     {
-        public WorkAvailability[][] weeklySchedule { get; set; }
+        public bool[][] weeklySchedule { get; set; }
         
     }
 }
