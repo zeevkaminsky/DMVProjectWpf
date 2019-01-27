@@ -1,2 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Config />
+<Config>
+  <MIN_LESSONS>
+    <value>28</value>
+  </MIN_LESSONS>
+  <MAX_AGE_OF_TESTER>
+    <value>85</value>
+  </MAX_AGE_OF_TESTER>
+  <MIN_AGE_OF_TESTER>
+    <value>30</value>
+  </MIN_AGE_OF_TESTER>
+  <Test_Serial_Number>
+    <value>12345686</value>
+  </Test_Serial_Number>
+</Config>

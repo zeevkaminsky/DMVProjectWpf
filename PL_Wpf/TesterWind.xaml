@@ -24,10 +24,12 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Button Name="AddTester" Content="Add tester" FontSize="30" Background="LightGray" Margin="20" Click="AddTester_Click"/>
-                <Button Name="UpdateTester" Content="Update tester" FontSize="30" Grid.Row="1" Background="LightGray" Margin="20" Click="UpdateTester_Click"/>
-                <Button Name="RemoveTester" Content="Remove tester" FontSize="30" Grid.Row="2" Background="LightGray" Margin="20" Click="RemoveTester_Click"/>
+                <Button Name="AddTester" Content="Add tester" FontSize="30" Background="LightGray" Margin="3,10" Click="AddTester_Click"/>
+                <Button Name="UpdateTester" Content="Update tester" FontSize="30" Grid.Row="1" Background="LightGray" Margin="3,10" Click="UpdateTester_Click"/>
+                <Button Name="RemoveTester" Content="Remove tester" FontSize="30" Grid.Row="2" Background="LightGray" Margin="3,10" Click="RemoveTester_Click"/>
+                <Button Name="DataBaseTester" Content="Information" FontSize="30" Grid.Row="3" Background="LightGray" Margin="3,10" Click="DataBaseTester_Click" />
             </Grid>
             <Image Grid.Column="1" Source="images/Tester_new.jpg"/>
         </Grid>

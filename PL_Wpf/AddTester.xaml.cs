@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -133,6 +134,22 @@ namespace PL_Wpf
 
         }
 
+        
+        private void IDTBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Extra.NumbersValidate(sender,e);
+        }
+
+        private void PhoneTBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Extra.NumbersValidate(sender, e);
+        }
+
+        private void NumberTBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Extra.NumbersValidate(sender, e);
+        }
+
         //private void MenuButton_Click(object sender, RoutedEventArgs e)
         //{
         //    MainWindow mainWindow = new MainWindow();
@@ -140,7 +157,7 @@ namespace PL_Wpf
         //    mainWindow.Show();
         //}
 
-        
+
     }
 }
 

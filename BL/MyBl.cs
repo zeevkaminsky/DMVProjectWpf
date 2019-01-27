@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using BE;
 using DAL;
 
@@ -11,37 +15,96 @@ namespace BL
 {
     public class MyBl : IBl
     {
-
+        String API_KEY = @"W1ahdi7Gr0ex7rRwwKtx2inAadymOCKD";
+        
+        public List<Tester> rangeOfTesters(Address address)
+        {
+            IDal _dal = FactorySingletonDal.GetDal();
+            
+            List<Tester> testersByRange = new List<Tester>();
+            var rangGroup = from tester in _dal.GetTesters()
+                            group tester by tester.MaxDistance > getRange(tester.Address.ToString(), address.ToString())into g
+                            select new { key = g.Key, testers = g };
+            foreach (var item in rangGroup)
+            {
+                if (item.key)
+                {
+                    foreach (var tester in item.testers)
+                        testersByRange.Add(tester);
+                }
+            }
+            return testersByRange;
+        }
+        public int getRange(string origin, string destination)
+        {
+            Random X = new Random();//for error occurreds
+            string KEY = API_KEY;
+            string url = @"https://www.mapquestapi.com/directions/v2/route" +
+             @"?key=" + KEY +
+             @"&from=" + origin +
+             @"&to=" + destination +
+             @"&outFormat=xml" +
+             @"&ambiguities=ignore&routeType=fastest&doReverseGeocode=false" +
+             @"&enhancedNarrative=false&avoidTimedConditions=false";
+            //request from MapQuest service the distance between the 2 addresses
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            WebResponse response = request.GetResponse();
+            Stream dataStream = response.GetResponseStream();
+            StreamReader sreader = new StreamReader(dataStream);
+            string responsereader = sreader.ReadToEnd();
+            response.Close();
+            //the response is given in an XML format
+            XmlDocument xmldoc = new XmlDocument();
+            xmldoc.LoadXml(responsereader);
+            if (xmldoc.GetElementsByTagName("statusCode")[0].ChildNodes[0].InnerText == "0")
+            //we have the expected answer
+            {
+                //display the returned distance
+                XmlNodeList distance = xmldoc.GetElementsByTagName("distance");
+                double distInMiles = Convert.ToDouble(distance[0].ChildNodes[0].InnerText);
+                //Console.WriteLine("Distance In KM: " + distInMiles * 1.609344);
+                return (int)(distInMiles * 1.609344);
+                //display the returned driving time
+                //XmlNodeList formattedTime = xmldoc.GetElementsByTagName("formattedTime");
+                //string fTime = formattedTime[0].ChildNodes[0].InnerText;
+                //Console.WriteLine("Driving Time: " + fTime);
+            }
+            else if (xmldoc.GetElementsByTagName("statusCode")[0].ChildNodes[0].InnerText == "402")
+            //we have an answer that an error occurred, one of the addresses is not found
+            {
+                return X.Next(0, 150);
+                //Console.WriteLine("an error occurred, one of the addresses is not found. try again.");
+            }
+            else //busy network or other error...
+            {
+                return X.Next(0, 150);
+                //Console.WriteLine("We have'nt got an answer, maybe the net is busy...");
+            }
+        }
         #region add
         public bool AddDrivingTest(Test test)
         {
             Trainee helpTrainee = GetTrainees().FirstOrDefault(t => t.ID == test.TraineeID);
             Tester helpTester = GetTesters().FirstOrDefault(t => t.ID == test.TesterID);
             
-            //check trainee if exist
-            if (helpTrainee == null)
-            {
-                throw new Exception("ERROR: Trainee wasn't found in the system\n");
-            }
+            
 
-            ////check tester if exist
-            //if (helpTester == null)
-            //{
-            //    throw new Exception("ERROR: tester wasn't found in the system\n");
-            //}
-
-            //check the test as the same type of vheicle that trainee took lessons of
-            //if (test.Vehicle != helpTrainee.MyVehicle)
-            //{
-            //    throw new Exception("trainee can't take a test of this type of vehicle");
-            //}
+            var TraineeTests = ((from t in GetTests()
+                                 where t.TraineeID == test.TraineeID
+                                 select t).OrderByDescending(t => test.TestDay.Year)
+                          .ThenByDescending(t => test.TestDay.Month)
+                          .ThenByDescending(t => test.TestDay.Day).ToList());
 
             //check there is enough days between tests
-            TimeSpan ts = DateTime.Now -test.TestDay;
-            if ( ts.Days < Configuration.daysBetweenTests)
+            if (TraineeTests.Count > 0)
             {
-                throw new Exception("There must be at least " + Configuration.daysBetweenTests + " days before a trainee can take another test\n");
+                TimeSpan ts = test.TestDay - TraineeTests.First().TestDay;
+                if (ts.Days < Configuration.daysBetweenTests)
+                {
+                    throw new Exception("There must be at least " + Configuration.daysBetweenTests + " days before a trainee can take another test\n");
+                }
             }
+            
 
             //check there is enough lessons
             if (helpTrainee.NumOfLessons < Configuration.minLessons)
@@ -49,11 +112,7 @@ namespace BL
                 throw new Exception("A trainee cannot take a test if he took less than" + Configuration.minLessons + " lessons\n");
             }
 
-            //if tester is full
-            //if (helpTester.NumOfTests >= helpTester.MaxTests)
-            //{
-            //    throw new Exception("tester is full");
-            //}
+            
 
             //find all tests trainee succedded
             var licence = from t in GetTests()
@@ -85,12 +144,31 @@ namespace BL
 
         public List<Tester> FindTesterToTest(Test test)
         {
-            
-           var testers = (from t in TestersAvailableByHour(test.TestDay, test.TestHour)//find all testers available in the hour of the test
-                                 where t.MyVehicle == FindTraineeByID(test.TraineeID).MyVehicle && t.MaxTests > t.NumOfTests//get only testers that are match to trainee vehicle andcan take another test this week
-                                 select t).ToList();
+            TimeSpan toAdd = new TimeSpan(1, 0, 0);
+            TimeSpan tempTS = new TimeSpan(14, 0, 0);
 
-            return testers;
+
+
+            var testersavailability = TestersAvailableByHour(test.TestDay, test.TestHour);
+           
+            while (!testersavailability.Any() && test.TestHour < tempTS)
+            {
+                testersavailability = TestersAvailableByHour(test.TestDay, test.TestHour.Add(toAdd));
+                test.TestHour = test.TestHour.Add(toAdd);
+
+
+            }
+            Trainee trainee = FindTraineeByID(test.TraineeID);
+
+            //List<Tester> closedTesters = rangeOfTesters(test.ExitPoint);
+            //get only testers that are match to trainee vehicle and can take another test this week
+            var testers = (from t in testersavailability//find all testers available in the hour of the test
+                           where t.MyVehicle == trainee.MyVehicle && t.MaxTests > t.NumOfTests
+                           select t).ToList();
+            var result = (from t in testers
+                      where getRange(t.Address.ToString(), test.ExitPoint.ToString()) < t.MaxDistance
+                      select t).ToList();
+            return result;
         }
 
         public bool AddTester(Tester tester)
@@ -319,24 +397,24 @@ namespace BL
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public bool IsLisense(string traineeID)
+        public bool IsLisense(Test test)
         {
-          //get all the tests of the trainee. the last test will be first in the list
-            var tests = from t in GetTests()
-                        where t.TraineeID == traineeID
-                        orderby t.SerialNumber
-                        select t;
+          ////get all the tests of the trainee. the last test will be first in the list
+          //  var tests = from t in GetTests()
+          //              where t.TraineeID == traineeID
+          //              orderby t.SerialNumber
+          //              select t;
 
-            //if trainee didn't found
-            if (!tests.Any() )
-            {
-                throw new Exception("this trainee didn't took a test yet.\n");
-            }
+            ////if trainee didn't found
+            //if (!tests.Any() )
+            //{
+            //    throw new Exception("this trainee didn't took a test yet.\n");
+            //}
             
 
             //check how many criterions trainee succeed
             int count = 0;
-            foreach (var c in tests.First().Criteria)
+            foreach (var c in test.Criteria)
             {
                 if (c.Value == true)
                 {
@@ -345,7 +423,7 @@ namespace BL
             }
 
             //check if above 80%
-            if (count > tests.First().Criteria.Count * 0.8)
+            if (count > test.Criteria.Count * 0.8)
             {
                 return true;
             }
@@ -402,7 +480,13 @@ namespace BL
                     group t by t.MyVehicle) ;     
         }
 
-        public IEnumerable<IGrouping<string, Trainee>> TrauneesBySchool()
+        public IEnumerable<IGrouping<Cities, Tester>> TestersByCity()
+        {
+            return (from t in GetTesters()
+                    group t by t.Address.Town);
+        }
+
+        public IEnumerable<IGrouping<string, Trainee>> TraineesBySchool()
         {
             return (from t in GetTrainees()
                     group t by t.School);
@@ -412,6 +496,12 @@ namespace BL
         {
             return (from t in GetTrainees()
                     group t by t.TeacherName);
+        }
+
+        public IEnumerable<IGrouping<Cities, Trainee>> TraineeByCity()
+        {
+            return (from t in GetTrainees()
+                    group t by t.Address.Town);
         }
 
         public IEnumerable<IGrouping<int, Trainee>> TraineesByNumOfTests()

@@ -62,7 +62,15 @@ namespace BE
                     Criteria = new Dictionary<string, bool>();
                     for (int i = 0; i < values.Length - 1; i+=2)
                     {
-                        Criteria.Add(values[i], bool.Parse(values[i + 1]));
+                        if (values[i + 1] == "")
+                        {
+                            Criteria.Add(values[i], false);
+                        }
+                        else
+                        {
+                            Criteria.Add(values[i], bool.Parse(values[i + 1]));
+                        }
+                        
                     }
                     
                 }
@@ -74,8 +82,8 @@ namespace BE
 
         public override string ToString()
         {
-            return string.Format("serial number:{0}\n tester's ID:{1}\n trainee's ID:{2}\n test time:{3}\n test hour\n{4}exit point:{5}\n test result:{6}",
-          SerialNumber, TesterID, TraineeID, TestDay.ToString("dd'/'MM'/'yyyy"), TestHour, ExitPoint, TestResult);
+            return string.Format("serial number:{0}\n tester's ID:{1}\ntrainee's ID:{2}\ntest time:{3}\ntest hour{4}\nexit point:{5}\n",
+          SerialNumber, TesterID, TraineeID, TestDay.ToString("dd'/'MM'/'yyyy"), TestHour, ExitPoint);
         } 
 
         

@@ -41,5 +41,12 @@ namespace PL_Wpf
         {
             new Test().ShowDialog();
         }
+
+        
+
+        private void Dictance_Click(object sender, RoutedEventArgs e)
+        {
+            new Distance().ShowDialog();
+        }
     }
 }

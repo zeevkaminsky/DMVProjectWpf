@@ -83,7 +83,7 @@ namespace DAL
         {
             return new Address
             {
-                Town = BE.Configuration.ToEnum<Cities>(a.Element("Town").Value),
+                Town = BE.Converters.ToEnum<Cities>(a.Element("Town").Value),
                 Building = Int32.Parse(a.Element("Building").Value),
                 Street = a.Element("Street").Value
             };

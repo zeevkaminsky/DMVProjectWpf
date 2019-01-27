@@ -1,25 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Trainees>
   <Trainee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <ID>258258258</ID>
+    <ID>508072876</ID>
     <Name>
-      <FirstName>reuven</FirstName>
-      <LastName>dtfyguhij</LastName>
+      <FirstName>nataly</FirstName>
+      <LastName>mina</LastName>
     </Name>
     <DateOfBirth>1980-01-01T00:00:00</DateOfBirth>
-    <Gender>MALE</Gender>
-    <Phone>0539525576</Phone>
+    <Gender>FEMALE</Gender>
+    <Phone>789465132</Phone>
     <Address>
-      <Street>hutehp</Street>
-      <Building>10</Building>
-      <Town>Afula</Town>
+      <Street>rambam</Street>
+      <Building>2</Building>
+      <Town>Hadera</Town>
     </Address>
     <MyVehicle>car</MyVehicle>
     <MyGear>auto</MyGear>
-    <School>huhri</School>
+    <School>a</School>
     <TeacherName>
-      <FirstName>hgfd</FirstName>
-      <LastName>bgvfdc</LastName>
+      <FirstName>s</FirstName>
+      <LastName>c</LastName>
+    </TeacherName>
+    <NumOfLessons>40</NumOfLessons>
+    <NumOfTests>0</NumOfTests>
+  </Trainee>
+  <Trainee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <ID>123985467</ID>
+    <Name>
+      <FirstName>nachman</FirstName>
+      <LastName>cohen</LastName>
+    </Name>
+    <DateOfBirth>1980-01-01T00:00:00</DateOfBirth>
+    <Gender>MALE</Gender>
+    <Phone>8529637410</Phone>
+    <Address>
+      <Street>rambam</Street>
+      <Building>10</Building>
+      <Town>Haifa</Town>
+    </Address>
+    <MyVehicle>car</MyVehicle>
+    <MyGear>auto</MyGear>
+    <School>f</School>
+    <TeacherName>
+      <FirstName>f</FirstName>
+      <LastName>g</LastName>
     </TeacherName>
     <NumOfLessons>40</NumOfLessons>
     <NumOfTests>0</NumOfTests>

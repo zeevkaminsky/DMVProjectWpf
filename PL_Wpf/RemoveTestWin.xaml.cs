@@ -59,7 +59,7 @@ namespace PL_Wpf
                     if (messageBoxResult == MessageBoxResult.Yes)
                     {
                         IBl _bl = FactorySingletonBl.GetBl();
-                        int TestToRemove =int.Parse( IDCBox.SelectedItem as string);
+                        int TestToRemove =int.Parse( IDCBox.SelectedItem.ToString());
                         if (_bl.RemovedrivingTest(TestToRemove))
                         {
                             tests.Remove(TestToRemove);

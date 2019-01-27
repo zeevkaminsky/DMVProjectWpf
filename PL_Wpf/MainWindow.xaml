@@ -27,7 +27,7 @@
                 </Grid.RowDefinitions>
                 <Button Name="Tester" Content="Tester" FontSize="36" Background="LightGray" Margin="15" Click="Tester_Click"/>
                 <Button Name="Trainee" Content="Trainee"  Grid.Row="1" FontSize="36" Background="LightGray"  Margin="15" Click="Trainee_Click" />
-                <Button Name="DataBase" Content="Data Base" Grid.Row="2" FontSize="36" Background="LightGray"  Margin="15"/>
+                <Button Name="Distance" Content="Dictance" Grid.Row="2" FontSize="36" Background="LightGray"  Margin="15" Click="Dictance_Click"/>
                 <Button Name="Test" Content="Test"  Grid.Row="3" FontSize="36" Background="LightGray"  Margin="15" Click="Test_Click"/>
             </Grid>
             <Image Grid.Column="1" Source="images/car_new.JPG" />

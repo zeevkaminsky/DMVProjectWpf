@@ -12,21 +12,34 @@ namespace DAL
 {
     internal class DalXML : IDal
     {
-
+        //only for the first time
+        
         #region add
         public bool AddDrivingTest(Test test)
         {
-            //test.SerialNumber = Configuration.InitialSerialNumber++;
+
             //DS.DataSourceXML.Tests.Add(test.ToXML());
             //DS.DataSourceXML.SaveTests();
             //return true;
+            test.SerialNumber = getSerialNum();
+            raiseSerialNumber();
             string str = test.ToXMLstring();
             XElement xml = XElement.Parse(str);
             DS.DataSourceXML.Tests.Add(xml);
             DS.DataSourceXML.SaveTests();
             return true;
         }
+        private int getSerialNum()
+        {
+            return int.Parse(DataSourceXML.Config.Element("Test_Serial_Number").Element("value").Value);
+        }
 
+        private void raiseSerialNumber()
+        {
+            int x = getSerialNum() + 1;
+            DataSourceXML.Config.Element("Test_Serial_Number").Element("value").Value = x.ToString();
+            DataSourceXML.SaveConfig();
+        }
 
         public bool AddTester(Tester tester)
         {
@@ -63,7 +76,14 @@ namespace DAL
             var serializer = new XmlSerializer(typeof(Tester));
 
             var elements = DS.DataSourceXML.Testers.Elements("Tester");
-            return elements.Select(element => (Tester)serializer.Deserialize(element.CreateReader())).ToList();
+            var result = elements.Select(element => (Tester)serializer.Deserialize(element.CreateReader()));
+            if (predicate != null)
+            {
+                result = from t in result
+                         where predicate(t)
+                         select t;
+            }
+            return result.ToList();
 
         }
 
@@ -72,7 +92,14 @@ namespace DAL
             var serializer = new XmlSerializer(typeof(Test));
 
             var elements = DS.DataSourceXML.Tests.Elements("Test");
-            return elements.Select(element => (Test)serializer.Deserialize(element.CreateReader())).ToList();
+            var result = elements.Select(element => (Test)serializer.Deserialize(element.CreateReader()));
+            if (predicate != null)
+            {
+                result = from t in result
+                         where predicate(t)
+                         select t;
+            }
+            return result.ToList();
 
             // try
             // {
@@ -117,8 +144,15 @@ namespace DAL
             var serializer = new XmlSerializer(typeof(Trainee));
 
             var elements = DS.DataSourceXML.Trainees.Elements("Trainee");
-            return elements.Select(element => (Trainee)serializer.Deserialize(element.CreateReader())).ToList();
+            var res = elements.Select(element => (Trainee)serializer.Deserialize(element.CreateReader()));
 
+            if (predicate != null)
+            {
+                res = from t in res
+                      where predicate(t)
+                      select t;
+            }
+            return res.ToList();
             //var result = from t in DS.DataSourceXML.Trainees.Elements()
             //             select new Trainee
             //             {

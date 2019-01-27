@@ -79,5 +79,10 @@ namespace BE
         Yehud,
         Yokneam
     };
-    public enum WorkAvailability { work, not_work, in_test}
+
+    //public enum WorkAvailability { work, not_work, in_test}
+    public enum Types { tester, trainee, test}
+
+   
+
 }

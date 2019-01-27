@@ -37,6 +37,12 @@ namespace BL
         Trainee FindTraineeByID(string id);
         Tester FindTesterByID(string id);
         Test FindTestBySerialNumber(int serial_number);
-        bool IsLisense(string traineeID);
+        bool IsLisense(Test test);
+        IEnumerable<IGrouping<Vehicle, Tester>> TestersByVehicle();
+        IEnumerable<IGrouping<string, Trainee>> TraineesBySchool();
+        IEnumerable<IGrouping<FullName, Trainee>> TraineeByTeacher();
+        IEnumerable<IGrouping<int, Trainee>> TraineesByNumOfTests();
+        IEnumerable<IGrouping<Cities, Tester>> TestersByCity();
+        IEnumerable<IGrouping<Cities, Trainee>> TraineeByCity();
     }
 }

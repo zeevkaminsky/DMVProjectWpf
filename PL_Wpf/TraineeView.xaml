@@ -1,0 +1,72 @@
+﻿<Window x:Class="PL_Wpf.TraineeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL_Wpf"
+        mc:Ignorable="d"
+        Title="TraineeView" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="75*"/>
+        </Grid.RowDefinitions>
+        <ListView Margin="10" Name="LVUsers" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" Width="120" DisplayMemberBinding="{Binding ID}" />
+                    <GridViewColumn Header="Last Name" Width="120" DisplayMemberBinding="{Binding Name.LastName}" />
+                    <GridViewColumn Header="First Name" Width="120" DisplayMemberBinding="{Binding Name.FirstName}" />
+
+                    <GridViewColumn Header="Date Of Birth" Width="150" DisplayMemberBinding="{Binding DateOfBirth}" />
+                    <GridViewColumn x:Name ="Gender" Header="Gender" Width="100" DisplayMemberBinding="{Binding Gender}" />
+                    <GridViewColumn Header="Phone" Width="120" DisplayMemberBinding="{Binding Phone}" />
+                    <GridViewColumn x:Name ="Vheicle" Header="CarType" Width="120" DisplayMemberBinding="{Binding MyVehicle}" />
+                    <GridViewColumn x:Name="City"  Header="City" Width="100" DisplayMemberBinding="{Binding Address.Town}" />
+                    <GridViewColumn Header="StreetName" Width="100" DisplayMemberBinding="{Binding Address.Street}" />
+                    <GridViewColumn Header="BuildingNumber" Width="100" DisplayMemberBinding="{Binding Address.Building}" />
+                    <GridViewColumn Header="Teacher first name" Width="100" DisplayMemberBinding="{Binding TeacherName.FirstName}" />
+                    <GridViewColumn Header="Num Of Lessons" Width="100" DisplayMemberBinding="{Binding NumOfLessons}" />
+                    <GridViewColumn Header="Num Of Tests" Width="100" DisplayMemberBinding="{Binding NumOfTests}" />
+                    <GridViewColumn Header="Teacher last name" Width="100" DisplayMemberBinding="{Binding TeacherName.LastName}" />
+                    <GridViewColumn Header="Gear" Width="100" DisplayMemberBinding="{Binding MyGear}" />
+                    <GridViewColumn Header="School" Width="100" DisplayMemberBinding="{Binding School}" />
+                </GridView>
+            </ListView.View>
+
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding  Name}"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
+        </ListView>
+        <Grid Name="CBGrid" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="19*"/>
+                <ColumnDefinition Width="19*"/>
+                <ColumnDefinition Width="22*"/>
+                <ColumnDefinition Width="22*"/>
+                <ColumnDefinition Width="12*"/>
+
+            </Grid.ColumnDefinitions>
+            <ComboBox Name="TestsCB"  Grid.Column="0" HorizontalAlignment="Center" Width="117" FontSize="20" SelectionChanged="TestsCB_SelectionChanged" Margin="10,0,33,0"  VerticalAlignment="Bottom"/>
+            <ComboBox Name="cityCB"  Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Height="33" Width="117" FontSize="20" SelectionChanged="CityCB_SelectionChanged" Margin="10,0,34,0"  />
+            <Button Name="SchoolBtn"  Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Height="42" Width="162" FontSize="18" Content="Order by School" Click="SchoolBtn_Click"  />
+            <Button Name="TeacherBtn"  Grid.Column="3" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Height="42" Width="162" FontSize="18"  Content="Order by Teacher" Click="TeacherBtn_Click"/>
+            <Label Content="order by city" Grid.Column="1" HorizontalAlignment="Center" FontSize="23" Margin="10,0,0,47" Width="151" />
+            <Label Content="order by tests" Grid.Column="0" HorizontalAlignment="Center" FontSize="23" Margin="0,0,10,47" Width="150" />
+            <TextBox  Name="SchoolTB" Grid.Column="2" HorizontalAlignment="Center" Height="23"  TextWrapping="Wrap" VerticalAlignment="Center" Width="104" Margin="39,35,42,47" Background="LightBlue"/>
+            <TextBox Name="TeacherTB" Grid.Column="3"  Height="23" Text="Fname LName"  TextWrapping="Wrap"  VerticalAlignment="Center" Width="120" Margin="28,35,50,47" Background="LightBlue"/>
+            <Label Content="School Name" Grid.Column="2" HorizontalAlignment="Center" FontSize="15" Margin="10,0,12,75" Width="163" />
+            <Label Content="Teacher Name" Grid.Column="3" HorizontalAlignment="Center" FontSize="15" Margin="10,0,0,69" Width="175" />
+
+            <Button Name="ShowAll" Content="All" Grid.Column="4" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Height="42" Margin="10,0" Width="81" FontSize="23" Click="ShowAll_Click"/>
+
+        </Grid>
+
+    </Grid>
+</Window>

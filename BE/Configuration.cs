@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class Configuration
+    public static class Configuration
     {
         public static double minTraineeAge = 17.0;
         public static double minTesterAge = 25.0;
@@ -16,13 +16,10 @@ namespace BE
         public static int InitialSerialNumber = 12345678;
         public static double MaxTesterAge = 85.0;
 
-        public static T ToEnum<T>(string enumString)
-        {
-            return (T)Enum.Parse(typeof(T), enumString);
-        }
+        
         public static List<string> requirments = new List<string>(new string[] { "isSignaling", "TwoHandsOnWheel", "Mirors" });
 
-
+        
 
 
 

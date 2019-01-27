@@ -36,7 +36,7 @@ namespace PL_Wpf
 
         private void RemoveTest_Click(object sender, RoutedEventArgs e)
         {
-
+            new RemoveTestWin().ShowDialog();
         }
     }
 }

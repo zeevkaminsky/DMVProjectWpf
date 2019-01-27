@@ -1,20 +1,83 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Testers>
   <Tester xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <ID>312</ID>
+    <ID>132456789</ID>
     <Name>
-      <FirstName>z</FirstName>
-      <LastName>k</LastName>
+      <FirstName>shmuel</FirstName>
+      <LastName>kaminsky</LastName>
     </Name>
-    <DateOfBirth>1990-01-01T00:00:00</DateOfBirth>
+    <DateOfBirth>1980-01-01T00:00:00</DateOfBirth>
     <Gender>MALE</Gender>
-    <Phone>0</Phone>
     <Address>
-      <Street>hgf</Street>
-      <Building>12</Building>
-      <Town>Afula</Town>
+      <Street>pisga</Street>
+      <Building>78</Building>
+      <Town>Jerusalem</Town>
     </Address>
-    <Experience>0</Experience>
+    <Experience>9</Experience>
+    <NumOfTests>0</NumOfTests>
+    <MaxTests>23</MaxTests>
+    <MyVehicle>car</MyVehicle>
+    <WeeklySchedule>
+      <weeklySchedule>
+        <ArrayOfBoolean>
+          <boolean>false</boolean>
+          <boolean>true</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+        </ArrayOfBoolean>
+        <ArrayOfBoolean>
+          <boolean>false</boolean>
+          <boolean>true</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+        </ArrayOfBoolean>
+        <ArrayOfBoolean>
+          <boolean>false</boolean>
+          <boolean>true</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+        </ArrayOfBoolean>
+        <ArrayOfBoolean>
+          <boolean>false</boolean>
+          <boolean>true</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+        </ArrayOfBoolean>
+        <ArrayOfBoolean>
+          <boolean>false</boolean>
+          <boolean>true</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+        </ArrayOfBoolean>
+      </weeklySchedule>
+    </WeeklySchedule>
+    <MaxDistance>141</MaxDistance>
+  </Tester>
+  <Tester xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <ID>123456789</ID>
+    <Name>
+      <FirstName>shira</FirstName>
+      <LastName>haberman</LastName>
+    </Name>
+    <DateOfBirth>1980-01-01T00:00:00</DateOfBirth>
+    <Gender>FEMALE</Gender>
+    <Phone>0505566226</Phone>
+    <Address>
+      <Street>rambam</Street>
+      <Building>10</Building>
+      <Town>Hadera</Town>
+    </Address>
+    <Experience>9</Experience>
     <NumOfTests>0</NumOfTests>
     <MaxTests>9</MaxTests>
     <MyVehicle>car</MyVehicle>
@@ -22,8 +85,32 @@
       <weeklySchedule>
         <ArrayOfBoolean>
           <boolean>false</boolean>
+          <boolean>true</boolean>
           <boolean>false</boolean>
           <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+        </ArrayOfBoolean>
+        <ArrayOfBoolean>
+          <boolean>false</boolean>
+          <boolean>true</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>true</boolean>
+        </ArrayOfBoolean>
+        <ArrayOfBoolean>
+          <boolean>false</boolean>
+          <boolean>true</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>true</boolean>
+        </ArrayOfBoolean>
+        <ArrayOfBoolean>
+          <boolean>false</boolean>
+          <boolean>false</boolean>
+          <boolean>true</boolean>
           <boolean>false</boolean>
           <boolean>false</boolean>
           <boolean>true</boolean>
@@ -33,99 +120,11 @@
           <boolean>false</boolean>
           <boolean>false</boolean>
           <boolean>false</boolean>
-          <boolean>false</boolean>
           <boolean>true</boolean>
-        </ArrayOfBoolean>
-        <ArrayOfBoolean>
           <boolean>false</boolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-          <boolean>true</boolean>
-        </ArrayOfBoolean>
-        <ArrayOfBoolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-          <boolean>true</boolean>
-        </ArrayOfBoolean>
-        <ArrayOfBoolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-          <boolean>true</boolean>
         </ArrayOfBoolean>
       </weeklySchedule>
     </WeeklySchedule>
-    <MaxDistance>0</MaxDistance>
-  </Tester>
-  <Tester xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <ID>205678543</ID>
-    <Name>
-      <FirstName>shira</FirstName>
-      <LastName>haberman</LastName>
-    </Name>
-    <DateOfBirth>1993-01-01T00:00:00</DateOfBirth>
-    <Gender>FEMALE</Gender>
-    <Phone>0505566226</Phone>
-    <Address>
-      <Street>fdghg</Street>
-      <Building>9</Building>
-      <Town>Hadera</Town>
-    </Address>
-    <Experience>46</Experience>
-    <NumOfTests>0</NumOfTests>
-    <MaxTests>11</MaxTests>
-    <MyVehicle>car</MyVehicle>
-    <WeeklySchedule>
-      <weeklySchedule>
-        <ArrayOfBoolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-          <boolean>true</boolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-        </ArrayOfBoolean>
-        <ArrayOfBoolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-          <boolean>true</boolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-        </ArrayOfBoolean>
-        <ArrayOfBoolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-          <boolean>true</boolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-        </ArrayOfBoolean>
-        <ArrayOfBoolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-          <boolean>true</boolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-          <boolean>false</boolean>
-        </ArrayOfBoolean>
-        <ArrayOfBoolean>
-          <boolean>false</boolean>
-          <boolean>true</boolean>
-          <boolean>true</boolean>
-          <boolean>true</boolean>
-          <boolean>false</boolean>
-          <boolean>true</boolean>
-        </ArrayOfBoolean>
-      </weeklySchedule>
-    </WeeklySchedule>
-    <MaxDistance>8</MaxDistance>
+    <MaxDistance>149</MaxDistance>
   </Tester>
 </Testers>

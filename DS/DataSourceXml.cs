@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BE;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -58,6 +59,18 @@ namespace DS
             if (!File.Exists(configPath))
             {
                 CreateFile("Config", configPath);
+                configRoot = LoadData(configPath);
+                XElement minLessons = new XElement("MIN_LESSONS",  new XElement("value", 28));
+                XElement maxTesterAge = new XElement("MAX_AGE_OF_TESTER", new XElement("value", 85));
+                XElement minTraineeAge = new XElement("MIN_AGE_OF_TRAINEE",  new XElement("value", 17));
+               
+                XElement minDaysBetweenTests = new XElement("MIN_DAYS_BETWEEN_TESTS", new XElement("value", 7));
+                XElement minTesterAge = new XElement("MIN_AGE_OF_TESTER",  new XElement("value", 30));
+                XElement SerialNumber = new XElement("Test_Serial_Number",  new XElement("value", 12345678));
+                configRoot.Add(minLessons, maxTesterAge,  minTesterAge, SerialNumber);
+                configRoot.Save(configPath);
+
+
 
             }
             configRoot = LoadData(configPath);
@@ -138,6 +151,9 @@ namespace DS
             }
             return root;
         }
-
+        private static void setConfig()
+        {
+            
+        }
     }
 }

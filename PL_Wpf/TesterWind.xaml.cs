@@ -40,5 +40,10 @@ namespace PL_Wpf
         {
             new UpdateTesterWin().ShowDialog();
         }
+
+        private void DataBaseTester_Click(object sender, RoutedEventArgs e)
+        {
+            new TesterView().ShowDialog();
+        }
     }
 }

@@ -64,6 +64,7 @@ namespace PL_Wpf
                         }
                     }
                 }
+                this.Close();
             }
             catch (Exception m)
             {

@@ -46,22 +46,25 @@ namespace PL_Wpf
             this.ResultGrid.Visibility = Visibility.Visible;
         }
 
-        private void PastTestButton_Click(object sender, RoutedEventArgs e)
+        private void EnterButton_Click(object sender, RoutedEventArgs e)
         {
             
-            test.Criteria["isSignaling"] = this.SignalCheckBox.IsChecked == true;
-            test.Criteria["TwoHandsOnWheel"] = this.WheelCheckBox.IsChecked == true;
-            test.Criteria["Mirors"] = this.MirorsCheckBox.IsChecked == true;
-            if (_bl.IsLisense(test.TraineeID))
+            test.Criteria["isSignaling"] = this.signalingCheckBox.IsChecked == true;
+            test.Criteria["TwoHandsOnWheel"] = this.wheelCheckBox.IsChecked == true;
+            test.Criteria["Mirors"] = this.mirorsCheckBox.IsChecked == true;
+            if (_bl.IsLisense(test))
             {
-                this.resultTextBlock.Text = "trainee past the test";
+                MessageBox.Show("trainee past the test");
                 test.TestResult = true;
+                
             }
             else
             {
-                this.resultTextBlock.Text = "trainee did not past the test";
+                MessageBox.Show("trainee  failed the test"); 
                 test.TestResult = false;
             }
+            _bl.UpdateDrivingTest(test);
+            Close();
         }
     }
 }

@@ -14,7 +14,7 @@
             <RowDefinition Height="345*"/>
         </Grid.RowDefinitions>
         <local:LogoUserControl/>
-        <Grid  Name="innerGrid" Grid.Row="1" >
+        <Grid  Name="innerGrid" Grid.Row="1"  >
             <Grid.Background>
                 <ImageBrush      ImageSource="images/update.jpg"  />
             </Grid.Background>
@@ -40,10 +40,11 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-
+                <ColumnDefinition Width="*"/>
+                
             </Grid.ColumnDefinitions>
 
-            <StackPanel  HorizontalAlignment="Right" VerticalAlignment="Center">
+            <!--<StackPanel  HorizontalAlignment="Right" VerticalAlignment="Center">
                 <CheckBox  Name="SignalCheckBox"  FontSize="26" VerticalAlignment="Top"  Content="is trainee signaling" >
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="2" ScaleY="2" />
@@ -61,13 +62,36 @@
                     </CheckBox.LayoutTransform>
                 </CheckBox>
 
-            </StackPanel>
-            <Button Name="pastTestButton" Content="did i past the test" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="83"  Width="233"  FontSize="26" Click="PastTestButton_Click" />
-            <TextBlock Name="resultTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="43,241,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="300" Height="44" FontSize="26"/>
+            </StackPanel>-->
+            <Grid   Name="innerResultGrid" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Grid.Row="0" Text="Is Signaling" VerticalAlignment="Center" FontSize="20"/>
+                <TextBlock HorizontalAlignment="Right"  Grid.Row="1" TextWrapping="Wrap" Text="Mirors" VerticalAlignment="Center" FontSize="20"/>
+                <TextBlock HorizontalAlignment="Right"  Grid.Row="2" TextWrapping="Wrap" Text="Two Hands On Wheel" VerticalAlignment="Center" FontSize="20"/>
+            </Grid>
+            <Grid   Name="innerSecondResultGrid" Grid.Column="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <CheckBox Name="signalingCheckBox" HorizontalAlignment="Left"  Grid.Row="0"  VerticalAlignment="Center" FontSize="20"/>
+                <CheckBox Name="mirorsCheckBox" HorizontalAlignment="Left"  Grid.Row="1"  VerticalAlignment="Center" FontSize="20"/>
+                <CheckBox Name="wheelCheckBox" HorizontalAlignment="Left"  Grid.Row="2"  VerticalAlignment="Center" FontSize="20"/>
+            </Grid>
+            
+            <Button Name="EnterButton" Content="enter" Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Height="83"  Width="233"  FontSize="26" Click="EnterButton_Click" />
+            <!--<TextBlock Name="resultTextBlock" Grid.Column="2" HorizontalAlignment="Left" Margin="43,241,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="300" Height="44" FontSize="26"/>-->
 
 
 
         </Grid>
+        
+
 
 
     </Grid>

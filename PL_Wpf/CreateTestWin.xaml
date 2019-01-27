@@ -33,31 +33,32 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Label Content="Exit Point City:" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Grid.Row="4" VerticalAlignment="Center" FontSize="20"/>
-            <ComboBox x:Name="exitPointCityComboBox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" SelectedItem="{Binding ExitPoint.Town}"/>
-            <Label Content="Exit Point Street:" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Grid.Row="5" VerticalAlignment="Center" FontSize="20"/>
-            <TextBox x:Name="exitPointStreetTextBox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="5" Text="{Binding ExitPoint.Street, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Exit Point Num:" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Grid.Row="6" VerticalAlignment="Center" FontSize="20"/>
-            <TextBox x:Name="exitPointNumberTextBox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="6" Text="{Binding ExitPoint.Building, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Gear:" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Grid.Row="3" VerticalAlignment="Center" FontSize="20"/>
-            <ComboBox x:Name="gearComboBox" Grid.Column="2"  HorizontalAlignment="Left"  SelectedItem="{Binding Gear}" Margin="3,10,0,11" Grid.Row="3" VerticalAlignment="Center" Width="102"   />
+            <Label Content="Exit Point City:" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Grid.Row="1" VerticalAlignment="Center" FontSize="20"/>
+            <ComboBox x:Name="exitPointCityComboBox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="3,10,0,10" Grid.Row="1" SelectedItem="{Binding ExitPoint.Town}" Width="120"/>
+            <Label Content="Exit Point Street:" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Grid.Row="2" VerticalAlignment="Center" FontSize="20"/>
+            <TextBox x:Name="exitPointStreetTextBox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding ExitPoint.Street, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Exit Point Num:" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Grid.Row="3" VerticalAlignment="Center" FontSize="20"/>
+            <TextBox x:Name="exitPointNumberTextBox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding ExitPoint.Building, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <!--<Label Content="Gear:" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Grid.Row="2" VerticalAlignment="Center" FontSize="20"/>
+            <TextBlock x:Name="gearTextBlock" Grid.Column="2"  HorizontalAlignment="Left"   Margin="3,10,0,11" Grid.Row="2" VerticalAlignment="Center" Width="102"   />-->
 
             <!--<Label Content="Tester ID:" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Grid.Row="1" VerticalAlignment="Center" FontSize="20"/>
             <ComboBox x:Name="testerIDComboBox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" SelectedItem="{Binding TesterID}" VerticalAlignment="Center" Width="120"/>-->
-            <Label Content="Test Day:" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Grid.Row="7" VerticalAlignment="Center" FontSize="20"/>
-            <DatePicker x:Name="testDayDatePicker" Grid.Column="2" HorizontalAlignment="Left" Margin="3" Grid.Row="7" SelectedDate="{Binding TestDay, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+            <Label Content="Test Day:" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Grid.Row="4" VerticalAlignment="Center" FontSize="20"/>
+            <DatePicker x:Name="testDayDatePicker" Grid.Column="2" HorizontalAlignment="Left" Margin="3" Grid.Row="4" SelectedDate="{Binding TestDay, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
             <Label Content="Trainee ID:" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Grid.Row="0" VerticalAlignment="Center" FontSize="20"/>
-            <ComboBox x:Name="traineeIDComboBox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding TraineeID}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Vehicle:" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Grid.Row="2" VerticalAlignment="Center" FontSize="20"/>
-            <ComboBox x:Name="vehicleComboBox" Grid.Column="2"  HorizontalAlignment="Left"   Margin="3,10,0,11" Grid.Row="2" VerticalAlignment="Center" SelectedItem="{Binding Vehicle}" Width="102"/>
+            <ComboBox x:Name="traineeIDComboBox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding TraineeID}" VerticalAlignment="Center" Width="120" />
+            <!--<Label Content="Vehicle:" Grid.Column="1" HorizontalAlignment="Right" Margin="3" Grid.Row="1" VerticalAlignment="Center" FontSize="20"/>
+            <TextBlock x:Name="vehicleTextBlock" Grid.Column="2"  HorizontalAlignment="Left"   Margin="3,10,0,11" Grid.Row="1" VerticalAlignment="Center"  Width="102"/>-->
 
-            <Label VerticalAlignment="Center" Grid.Row="8" Margin="3" HorizontalAlignment="Right" Grid.Column="1" Content="test Hour:" FontSize="20"/>
-            <TextBox x:Name="testHourTextBox" Width="120" VerticalAlignment="Center"  Grid.Row="8" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="2" TextChanged="TestHourTextBox_TextChanged" Text="{Binding TestHour, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+            <Label VerticalAlignment="Center" Grid.Row="5" Margin="3" HorizontalAlignment="Right" Grid.Column="1" Content="test Hour:" FontSize="20"/>
+            <ComboBox x:Name="testHourComboBox" Width="120" VerticalAlignment="Center"  Grid.Row="5" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="2" SelectionChanged="TestHourComboBox_SelectionChanged" />
             <Button Name="findTesterButton" Content="Find A Tester" Grid.Column="3" HorizontalAlignment="Center"  Grid.Row="0"  Grid.RowSpan="2" FontSize="50" Click="FindTesterButton_Click" >
                 <Button.Style>
                     <Style TargetType="Button">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding ElementName=traineeIDComboBox, Path=SelectedItem}" Value="{x:Null}">
+
                                 <Setter Property="IsEnabled" Value="False"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -65,10 +66,10 @@
                 </Button.Style>
             </Button>
             <DataGrid Name="availabilityDataGrid" Grid.Column="3"    Grid.Row="4" Grid.RowSpan="3" SelectionMode="Single" >
-               
+
             </DataGrid>
             <Button Name="AddTestButton" Content="Add Test" FontSize="30" Grid.Column="3"  Margin="90,15" Grid.Row="7"  Grid.RowSpan="2" Click="AddTestButton_Click"/>
-            <Label Name="testerDetailsLabel" Content="tester details:" FontSize="30" Grid.Column="3"  Grid.Row="2" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Label Name="testerDetailsLabel" Content="Choose One Tester" FontSize="30" Grid.Column="3"  Grid.Row="2" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
 
         </Grid>

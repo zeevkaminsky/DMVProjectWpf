@@ -21,17 +21,19 @@ namespace DAL
         bool RemoveTrainee(string traineeID);
         bool UpdateTrainee(Trainee trainee);
 
+       
+        
+        
+        #endregion
         #region drivingtest function
         bool AddDrivingTest(Test test);
         bool RemovedrivingTest(int serialNumber);
         bool UpdateDrivingTest(Test test);
         #endregion
-        
         #region getting list function
         List<Tester> GetTesters(Predicate<Tester> predicate = null);
         List<Trainee> GetTrainees(Predicate<Trainee> predicate = null);
         List<Test> GetTests(Predicate<Test> predicate = null);
-        #endregion
         #endregion
     }
 }

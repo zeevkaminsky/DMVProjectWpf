@@ -69,6 +69,10 @@
     <Compile Include="DataSourceWin.xaml.cs">
       <DependentUpon>DataSourceWin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Distance.xaml.cs">
+      <DependentUpon>Distance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Extra.cs" />
     <Compile Include="LogoUserControl.xaml.cs">
       <DependentUpon>LogoUserControl.xaml</DependentUpon>
     </Compile>
@@ -86,6 +90,12 @@
     </Compile>
     <Compile Include="Test.xaml.cs">
       <DependentUpon>Test.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TraineeView.xaml.cs">
+      <DependentUpon>TraineeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TesterView.xaml.cs">
+      <DependentUpon>TesterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="TesterWind.xaml.cs">
       <DependentUpon>TesterWind.xaml</DependentUpon>
@@ -118,6 +128,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DataSourceWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Distance.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -154,6 +168,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Test.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TraineeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TesterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

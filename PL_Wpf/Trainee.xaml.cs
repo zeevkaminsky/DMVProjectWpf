@@ -40,5 +40,10 @@ namespace PL_Wpf
         {
             new UpdateTraineeWind().ShowDialog();
         }
+
+        private void DataBaseTrainee_Click(object sender, RoutedEventArgs e)
+        {
+            new TraineeView().ShowDialog();
+        }
     }
 }
