@@ -55,10 +55,18 @@ namespace PL_Wpf
             {
                 if (IDCBox.SelectedItem != null)
                 {
+                    IBl _bl = FactorySingletonBl.GetBl();
+                    var testersInTest = from t in _bl.GetTests()
+                                  where t.TesterID == IDCBox.SelectedItem.ToString()
+                                  select t;
+                    if (testersInTest.Any())
+                    {
+                        throw new Exception("tester can not be remove. need to remove all tests that he was the tester");
+                    }
                     MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure?", "Delete Tester", System.Windows.MessageBoxButton.YesNo);
                     if (messageBoxResult == MessageBoxResult.Yes)
                     {
-                        IBl _bl = FactorySingletonBl.GetBl();
+                        
                         string IDToRemove = IDCBox.SelectedItem as string;
                         if (_bl.RemoveTester(IDToRemove))
                         {

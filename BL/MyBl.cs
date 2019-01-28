@@ -17,24 +17,24 @@ namespace BL
     {
         String API_KEY = @"W1ahdi7Gr0ex7rRwwKtx2inAadymOCKD";
         
-        public List<Tester> rangeOfTesters(Address address)
-        {
-            IDal _dal = FactorySingletonDal.GetDal();
+        //public List<Tester> rangeOfTesters(Address address)
+        //{
+        //    IDal _dal = FactorySingletonDal.GetDal();
             
-            List<Tester> testersByRange = new List<Tester>();
-            var rangGroup = from tester in _dal.GetTesters()
-                            group tester by tester.MaxDistance > getRange(tester.Address.ToString(), address.ToString())into g
-                            select new { key = g.Key, testers = g };
-            foreach (var item in rangGroup)
-            {
-                if (item.key)
-                {
-                    foreach (var tester in item.testers)
-                        testersByRange.Add(tester);
-                }
-            }
-            return testersByRange;
-        }
+        //    List<Tester> testersByRange = new List<Tester>();
+        //    var rangGroup = from tester in _dal.GetTesters()
+        //                    group tester by tester.MaxDistance > getRange(tester.Address.ToString(), address.ToString())into g
+        //                    select new { key = g.Key, testers = g };
+        //    foreach (var item in rangGroup)
+        //    {
+        //        if (item.key)
+        //        {
+        //            foreach (var tester in item.testers)
+        //                testersByRange.Add(tester);
+        //        }
+        //    }
+        //    return testersByRange;
+        //}
         public int getRange(string origin, string destination)
         {
             Random X = new Random();//for error occurreds

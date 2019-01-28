@@ -12,7 +12,7 @@ namespace DAL
 {
     internal class DalXML : IDal
     {
-        //only for the first time
+        
         
         #region add
         public bool AddDrivingTest(Test test)
@@ -43,6 +43,16 @@ namespace DAL
 
         public bool AddTester(Tester tester)
         {
+            //check for duplicate
+            var testers = from t in GetTesters()
+                          where t.ID == tester.ID
+                          select t;
+            if (testers.Any())
+            {
+                throw new Exception("tester with same ud already exist");
+            }
+
+
             string str = tester.ToXMLstring();
             XElement xml = XElement.Parse(str);
             DS.DataSourceXML.Testers.Add(xml);
@@ -53,13 +63,13 @@ namespace DAL
 
         public bool AddTrainee(Trainee trainee)
         {
-            //var trainees = (from t in DataSourceXML.Trainees.Elements()
-            //               where t.Element("ID").Value == trainee.ID
-            //               select t).FirstOrDefault();
-            //if (trainees != null)
-            //{
-            //    throw new Exception("Trainee with the same ID already exist");
-            //}
+            var trainees = (from t in DataSourceXML.Trainees.Elements()
+                            where t.Element("ID").Value == trainee.ID
+                            select t);
+            if (trainees.Any())
+            {
+                throw new Exception("Trainee with the same ID already exist");
+            }
             string str = trainee.ToXMLstring();
             XElement xml = XElement.Parse(str);
             DS.DataSourceXML.Trainees.Add(xml);
