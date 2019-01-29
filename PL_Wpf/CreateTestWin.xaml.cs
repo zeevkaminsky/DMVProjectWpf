@@ -34,27 +34,30 @@ namespace PL_Wpf
             this.DataContext = test;
 
 
-
             this.exitPointCityComboBox.ItemsSource = Enum.GetValues(typeof(Cities));
+
+            this.traineeIDComboBox.ItemsSource = _bl.GetTrainees();
+            this.traineeIDComboBox.DisplayMemberPath = "ID";
+            //test hour
             for (int i = 9; i < 15; i++)
             {
                 string str = i + ":00";
                 this.testHourComboBox.Items.Add(str);
             }
 
-            this.traineeIDComboBox.ItemsSource = _bl.GetTrainees();
-            this.traineeIDComboBox.DisplayMemberPath = "ID";
+
 
             findTesterButton.Visibility = Visibility.Visible;
             availabilityDataGrid.Visibility = Visibility.Hidden;
             testerDetailsLabel.Visibility = Visibility.Hidden;
             this.AddTestButton.Visibility = Visibility.Hidden;
 
+
+            //set the time picker to next 1000 days; friday & saturday will be unavailable;
             testDayDatePicker.DisplayDateStart = DateTime.Now;
             testDayDatePicker.DisplayDateEnd = DateTime.Now + TimeSpan.FromDays(1000);
             var minDate = testDayDatePicker.DisplayDateStart ?? DateTime.MinValue;
             var maxDate = testDayDatePicker.DisplayDateEnd ?? DateTime.MaxValue;
-
             for (var d = minDate; d <= maxDate && DateTime.MaxValue > d; d = d.AddDays(1))
             {
                 if (d.DayOfWeek == DayOfWeek.Saturday || d.DayOfWeek == DayOfWeek.Friday)
@@ -70,7 +73,7 @@ namespace PL_Wpf
             {
 
                 test.TestHour = TimeSpan.Parse(this.testHourComboBox.SelectedItem.ToString());
-                var testers = _bl.FindTesterToTest(test);
+                var testers = _bl.FindTesterToTest(test);//find  a matcing tester; day,hour,vehicle,distance;
                 if (testers.Any())
                 {
 
@@ -99,7 +102,7 @@ namespace PL_Wpf
         }
 
 
-     
+
         private void AddTestButton_Click(object sender, RoutedEventArgs e)
         {
             BE.Tester tester;
@@ -116,62 +119,54 @@ namespace PL_Wpf
                 test.Vehicle = _bl.FindTraineeByID(test.TraineeID).MyVehicle;
                 test.Gear = _bl.FindTraineeByID(test.TraineeID).MyGear;
                 test.TesterID = tester.ID;
-            
-            
-            
-            new Thread(() =>
-            {
-                try
-                {
-
-                    
-                    if (_bl.AddDrivingTest(test))
-                    {
-                        MessageBox.Show("the test set to " + test.TestHour.ToString());
-                        MessageBox.Show(test + "added successfully");
-                    }
-                    
-                }
-                catch (Exception m)
-                {
-
-                    MessageBox.Show(m.Message);
-                }
-                Dispatcher.Invoke(new Action(() =>
+                
+                new Thread(() =>
                 {
                     try
                     {
-                       
-                        Close();
+                        
+                        if (_bl.AddDrivingTest(test))
+                        {
+                            MessageBox.Show("the test set to " + test.TestHour.ToString());
+                            MessageBox.Show(test + "added successfully");
+                        }
                     }
-                    catch (Exception n)
+                    catch (Exception m)
                     {
-                        MessageBox.Show(n.Message);
+                        MessageBox.Show(m.Message);
                     }
-                }));
+                    Dispatcher.Invoke(new Action(() =>
+                    {
+                        try
+                        {
+                            Close();
+                        }
+                        catch (Exception n)
+                        {
+                            MessageBox.Show(n.Message);
+                        }
+                    }));
 
-            }).Start();
-
+                }).Start();
             }
             catch (Exception p)
             {
 
                 MessageBox.Show(p.Message);
             }
-
         }
-
-
-
-
-            private void TestHourComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        
+        private void TestHourComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             findTesterButton.Visibility = Visibility.Visible;
             availabilityDataGrid.Visibility = Visibility.Hidden;
             testerDetailsLabel.Visibility = Visibility.Hidden;
             this.AddTestButton.Visibility = Visibility.Hidden;
         }
-
-       
+        //input validation
+        private void ExitPointNumberTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Extra.NumbersValidate(sender, e);
+        }
     }
 }

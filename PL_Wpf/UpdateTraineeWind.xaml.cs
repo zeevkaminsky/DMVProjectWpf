@@ -27,12 +27,11 @@ namespace PL_Wpf
             InitializeComponent();
 
             IBl _bl = FactorySingletonBl.GetBl();
+            //combo box with all trainees ID
             foreach (var item in _bl.GetTrainees())
             {
                 trainees.Add(item.ID);
             }
-
-
             IDCBox.ItemsSource = trainees;
 
         }
@@ -42,7 +41,7 @@ namespace PL_Wpf
             IBl _bl = FactorySingletonBl.GetBl();
             BE.Trainee trainee = _bl.FindTraineeByID(IDCBox.SelectedItem as string);
             this.Close();
-            new AddTrainee(trainee).Show();
+            new AddTrainee(trainee).Show();//send to add window
         }
     }
 }

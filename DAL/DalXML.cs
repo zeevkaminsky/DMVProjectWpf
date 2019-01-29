@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,28 +13,38 @@ namespace DAL
 {
     internal class DalXML : IDal
     {
+
+
         
-        
+
+
         #region add
         public bool AddDrivingTest(Test test)
         {
 
-            //DS.DataSourceXML.Tests.Add(test.ToXML());
-            //DS.DataSourceXML.SaveTests();
-            //return true;
-            test.SerialNumber = getSerialNum();
-            raiseSerialNumber();
-            string str = test.ToXMLstring();
-            XElement xml = XElement.Parse(str);
-            DS.DataSourceXML.Tests.Add(xml);
-            DS.DataSourceXML.SaveTests();
-            return true;
+            try
+            {
+                test.SerialNumber = getSerialNum();
+                raiseSerialNumber();
+                string str = test.ToXMLstring();
+                XElement xml = XElement.Parse(str);
+                DS.DataSourceXML.Tests.Add(xml);
+                DS.DataSourceXML.SaveTests();
+                return true;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            
         }
         private int getSerialNum()
         {
             return int.Parse(DataSourceXML.Config.Element("Test_Serial_Number").Element("value").Value);
         }
 
+        //serialNumber++; xml version
         private void raiseSerialNumber()
         {
             int x = getSerialNum() + 1;
@@ -43,38 +54,58 @@ namespace DAL
 
         public bool AddTester(Tester tester)
         {
-            //check for duplicate
-            var testers = from t in GetTesters()
+            try
+            {
+                //check for duplicate
+                var testers = from t in GetTesters()
                           where t.ID == tester.ID
                           select t;
-            if (testers.Any())
-            {
+                if (testers.Any())
+                {
                 throw new Exception("tester with same id already exist");
+                }
+
+            
+            
+                string str = tester.ToXMLstring();
+                XElement xml = XElement.Parse(str);
+                DS.DataSourceXML.Testers.Add(xml);
+                DS.DataSourceXML.SaveTesters();
+                return true;
             }
+            catch (Exception e)
+            {
 
-
-            string str = tester.ToXMLstring();
-            XElement xml = XElement.Parse(str);
-            DS.DataSourceXML.Testers.Add(xml);
-            DS.DataSourceXML.SaveTesters();
-            return true;
+                throw e;
+            }
+            
         }
 
 
         public bool AddTrainee(Trainee trainee)
         {
-            var trainees = (from t in DataSourceXML.Trainees.Elements()
+            try
+            {
+                var trainees = (from t in DataSourceXML.Trainees.Elements()
                             where t.Element("ID").Value == trainee.ID
                             select t);
             if (trainees.Any())
             {
                 throw new Exception("Trainee with the same ID already exist");
             }
-            string str = trainee.ToXMLstring();
-            XElement xml = XElement.Parse(str);
-            DS.DataSourceXML.Trainees.Add(xml);
-            DS.DataSourceXML.SaveTrainees();
-            return true;
+            
+                string str = trainee.ToXMLstring();
+                XElement xml = XElement.Parse(str);
+                DS.DataSourceXML.Trainees.Add(xml);
+                DS.DataSourceXML.SaveTrainees();
+                return true;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            
         }
         #endregion
 
@@ -91,7 +122,7 @@ namespace DAL
             {
                 result = from t in result
                          where predicate(t)
-                         select t;
+                         select t.Clone();
             }
             return result.ToList();
 
@@ -107,7 +138,7 @@ namespace DAL
             {
                 result = from t in result
                          where predicate(t)
-                         select t;
+                         select t.Clone();
             }
             return result.ToList();
 
@@ -160,44 +191,10 @@ namespace DAL
             {
                 res = from t in res
                       where predicate(t)
-                      select t;
+                      select t.Clone();
             }
             return res.ToList();
-            //var result = from t in DS.DataSourceXML.Trainees.Elements()
-            //             select new Trainee
-            //             {
-            //                 ID = t.Element("ID").Value,
-            //                 Name = new FullName
-            //                 {
-            //                     FirstName = t.Element("FullName").Element("FirstName").Value,
-            //                     LastName = t.Element("FullName").Element("LastName").Value
-            //                 },
-            //                 Address = new Address
-            //                 {
-            //                     Town = BE.Configuration.ToEnum<Cities>(t.Element("Address").Element("Town").Value),
-            //                     Building = Int32.Parse(t.Element("Address").Element("Building").Value),
-            //                     Street = t.Element("Address").Element("Street").Value
-            //                 },
-            //                 TeacherName = new FullName
-            //                 {
-            //                     FirstName = t.Element("TeacherName").Element("FirstName").Value,
-            //                     LastName = t.Element("TeacherName").Element("LastName").Value
-            //                 },
-            //                 MyVehicle = BE.Configuration.ToEnum<Vehicle> (t.Element("MyVehicle").Value),
-            //                 DateOfBirth = BE.Configuration.ToEnum<DateTime>(t.Element("DateOfBirth").Value),
-            //                 School = t.Element("School").Value,
-            //                 NumOfLessons = Int32.Parse(t.Element("NumOfLessons").Value),
-            //                 MyGear = BE.Configuration.ToEnum < Gear > (t.Element("GearType").Value),
-            //                 Gender = BE.Configuration.ToEnum < Gender >( t.Element("Gender").Value)
-            //             };
-            //if (predicate != null)
-            //{
-            //    return (from tr in result
-            //            where predicate(tr)
-            //            select tr).ToList();
-            //}
-            //return result.ToList();
-
+            
         }
         #endregion
 
@@ -271,18 +268,28 @@ namespace DAL
         #region update
         public bool UpdateDrivingTest(Test test)
         {
-            XElement oldtestElement = (from tes in DataSourceXML.Tests.Elements()
+            try
+            {
+                XElement oldtestElement = (from tes in DataSourceXML.Tests.Elements()
                                          where int.Parse(tes.Element("SerialNumber").Value) == test.SerialNumber
                                          select tes).FirstOrDefault();
             if (oldtestElement == null)
                 throw new Exception("test didnt found");
+           
+           
+                //easy way to update, without to update every filed
+                oldtestElement.Remove();
+                DataSourceXML.SaveTests();
+                AddDrivingTest(test);
+                DataSourceXML.SaveTests();
+                return true;
+            }
+            catch (Exception e)
+            {
 
-            //easy way to update, without to update every filed
-            oldtestElement.Remove();
-            DataSourceXML.SaveTests();
-            AddDrivingTest(test);
-            DataSourceXML.SaveTests();
-            return true;
+                throw e;
+            }
+            
         }
 
         public bool UpdateTester(Tester tester)

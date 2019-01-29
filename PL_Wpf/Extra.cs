@@ -11,6 +11,7 @@ namespace PL_Wpf
 {
     public static class Extra
     {
+        //validate for numbers
         public static void NumbersValidate(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
@@ -20,6 +21,7 @@ namespace PL_Wpf
                 MessageBox.Show("Please enter only numbers");
             }
         }
+        //convert to enum
         public static T ToEnum<T>(string enumString)
         {
             return (T)Enum.Parse(typeof(T), enumString);

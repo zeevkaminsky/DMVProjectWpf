@@ -70,6 +70,8 @@ namespace BL
                 //Console.WriteLine("We have'nt got an answer, maybe the net is busy...");
             }
         }
+
+
         #region add
         public bool AddDrivingTest(Test test)
         {
@@ -93,16 +95,11 @@ namespace BL
                     throw new Exception("There must be at least " + Configuration.daysBetweenTests + " days before a trainee can take another test\n");
                 }
             }
-            
-
-            //check there is enough lessons
+            //check trainee took enough lessons
             if (helpTrainee.NumOfLessons < Configuration.minLessons)
             {
                 throw new Exception("A trainee cannot take a test if he took less than" + Configuration.minLessons + " lessons\n");
             }
-
-            
-
             //find all tests trainee succedded
             var licence = from t in GetTests()
                           where t.TraineeID == test.TraineeID && t.TestResult == true
@@ -120,8 +117,13 @@ namespace BL
             try
             {
                 IDal _dal = FactorySingletonDal.GetDal();
-                _dal.AddDrivingTest(test);
-                return true;
+                if(_dal.AddDrivingTest(test))
+                {
+                    helpTester.NumOfTests++;
+                    helpTrainee.NumOfTests++;
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {
@@ -164,29 +166,38 @@ namespace BL
 
         public bool AddTester(Tester tester)
         {
+            //if tester is to young
             if (DateTime.Now.Year - tester.DateOfBirth.Year < Configuration.minTesterAge)
             {
                 throw new Exception("A tester cannot be under " + Configuration.minTesterAge + " years old /n");
             }
+            //if tester is to old
+            if (DateTime.Now.Year - tester.DateOfBirth.Year > Configuration.MaxTesterAge)
+            {
+                throw new Exception("A tester cannot be over " + Configuration.minTesterAge + " years old /n");
+            }
             try
             {
-                IDal _dal = FactorySingletonDal.GetDal();
+               IDal _dal = FactorySingletonDal.GetDal();
                if( _dal.AddTester(tester))
                 {
                     return true;
                 }
+                return false;
             }
+             
             catch (Exception e)
             {
 
                 throw e;
             }
            
-            return true;
+           
         }
 
         public bool AddTrainee(Trainee trainee)
         {
+            //if trainee is to young
             if (DateTime.Now.Year - trainee.DateOfBirth.Year < Configuration.minTraineeAge)
             {
                 throw new Exception("A trainee cannot be under " + Configuration.minTraineeAge + " years old \n");
@@ -194,14 +205,18 @@ namespace BL
             try
             {
                 IDal _dal = FactorySingletonDal.GetDal();
-                _dal.AddTrainee(trainee);
+                if(_dal.AddTrainee(trainee))
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {
 
                 throw e;
             }
-            return true;
+            
         }
         #endregion
 
@@ -212,14 +227,18 @@ namespace BL
             try
             {
                 IDal _dal = FactorySingletonDal.GetDal();
-                _dal.RemovedrivingTest(serialNumber);
+                if(_dal.RemovedrivingTest(serialNumber))
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {
 
                 throw e;
             }
-            return true;
+            
         }
 
         public bool RemoveTester(string testerID)
@@ -242,14 +261,18 @@ namespace BL
             IDal _dal = FactorySingletonDal.GetDal();
             try
             {
-                _dal.RemoveTrainee(traineeID);
+                if(_dal.RemoveTrainee(traineeID))
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {
 
                 throw e;
             }
-            return true;
+            
         }
         #endregion
 
@@ -345,25 +368,6 @@ namespace BL
                     select t).FirstOrDefault();
         }
         #endregion
-        /// <summary>
-        /// return the number of tests trainee did
-        /// </summary>
-        /// <param name="trainee"></param>
-        /// <returns></returns>
-        public int NumOfTests (string traineeID)
-        {
-            int count = 0;
-            foreach (Test t in GetTests())
-            {
-                if (t.TraineeID == traineeID)
-                {
-                    count++;
-                }
-            }
-            return count;
-            
-        }
-
         
         /// <summary>
         /// returns a collection of testers order by a distance from a giving address
@@ -381,8 +385,7 @@ namespace BL
           
             return testersByDistance.OrderByDescending(x => x.temp);
         }
-
-
+        
         /// <summary>
         /// check if trainee past the test.trainee passes a test if 80% precent of requirments
         /// </summary>
@@ -409,17 +412,9 @@ namespace BL
             return false;
             
         }
-
         
-
-        public Trainee GetTraineeByName(FullName name)
-        {
-            return GetTrainees().FirstOrDefault(t => t.Name == name);
-        }
-
-
         /// <summary>
-        /// returns all testers avaliable in specific hour
+        /// returns all testers avaliable in specific hour and day
         /// </summary>
         /// <param name="testTime"></param>
         /// <returns></returns>
@@ -457,9 +452,7 @@ namespace BL
             return GetTests(t => t.TestDay.Month == date.Month);
                    
         }
-
-       
-
+        
         #region grouping
         public IEnumerable<IGrouping<Vehicle,Tester> >TestersByVehicle()
         {

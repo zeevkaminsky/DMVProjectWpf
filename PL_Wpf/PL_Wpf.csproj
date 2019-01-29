@@ -66,18 +66,12 @@
     <Compile Include="CreateTestWin.xaml.cs">
       <DependentUpon>CreateTestWin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DataSourceWin.xaml.cs">
-      <DependentUpon>DataSourceWin.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Distance.xaml.cs">
       <DependentUpon>Distance.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extra.cs" />
     <Compile Include="LogoUserControl.xaml.cs">
       <DependentUpon>LogoUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="NumericUserControl1.xaml.cs">
-      <DependentUpon>NumericUserControl1.xaml</DependentUpon>
     </Compile>
     <Compile Include="RemoveTester.xaml.cs">
       <DependentUpon>RemoveTester.xaml</DependentUpon>
@@ -127,10 +121,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DataSourceWin.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Distance.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,10 +141,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="NumericUserControl1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="RemoveTester.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

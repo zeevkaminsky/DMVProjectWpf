@@ -24,18 +24,15 @@ namespace PL_Wpf
         private ObservableCollection<string> trainees = new ObservableCollection<string>();
         public RemoveTraineeWin()
         {
-
             InitializeComponent();
             try
             {
-
                 IBl _bl = FactorySingletonBl.GetBl();
+                //combo box with trainee ID's
                 foreach (var item in _bl.GetTrainees())
                 {
                     trainees.Add(item.ID);
                 }
-
-
                 IDCBox.ItemsSource = trainees;
                 
             }
@@ -53,10 +50,11 @@ namespace PL_Wpf
                 if (IDCBox.SelectedItem != null)
                 {
                     IBl _bl = FactorySingletonBl.GetBl();
+                    //get all tests off trainee 
                     var traineesInTest = from t in _bl.GetTests()
                                   where t.TraineeID == IDCBox.SelectedItem.ToString()
                                   select t;
-                    if (traineesInTest.Any())
+                    if (traineesInTest.Any())//first need to remove the tests
                     {
                         throw new Exception("trainee can not be remove. need to remove all tests that he was the trainee");
                     }
@@ -69,14 +67,14 @@ namespace PL_Wpf
                         {
                             trainees.Remove(IDToRemove);
                             MessageBox.Show(IDToRemove + " removed successfully");
+                            this.Close();
                         }
                     }
                 }
-                this.Close();
+                
             }
             catch (Exception m)
             {
-
                 MessageBox.Show(m.Message);
             }
         }

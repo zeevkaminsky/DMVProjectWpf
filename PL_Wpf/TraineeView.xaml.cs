@@ -27,7 +27,7 @@ namespace PL_Wpf
             _bl = FactorySingletonBl.GetBl();
             InitializeComponent();
 
-            this.LVUsers.ItemsSource = _bl.GetTrainees();
+            this.LVUsers.ItemsSource = _bl.GetTrainees();//show all
             this.cityCB.ItemsSource = Enum.GetValues(typeof(Cities));
             for (int i = 0; i < 30; i++)
             {
@@ -35,7 +35,7 @@ namespace PL_Wpf
             }
 
         }
-
+        // show only trainees with a specific tests number
         private void TestsCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (TestsCB.SelectedItem != null)
@@ -46,7 +46,7 @@ namespace PL_Wpf
                                             select g).ToList();
             }
         }
-        
+        // show only trainees lives in a specific city
         private void CityCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cityCB.SelectedItem != null)
@@ -58,7 +58,7 @@ namespace PL_Wpf
             }
         }
         
-
+        //trainees by school
         private void SchoolBtn_Click(object sender, RoutedEventArgs e)
         {
             if (SchoolTB.Text != null)
@@ -69,7 +69,7 @@ namespace PL_Wpf
                                             select g).ToList();
             }
         }
-
+        //trainees by teacher
         private void TeacherBtn_Click(object sender, RoutedEventArgs e)
         {
             this.LVUsers.ItemsSource = (from Igroup in _bl.TraineeByTeacher()
@@ -78,7 +78,7 @@ namespace PL_Wpf
                                         select g).ToList();
 
         }
-
+        //show all
         private void ShowAll_Click(object sender, RoutedEventArgs e)
         {
             this.LVUsers.ItemsSource = _bl.GetTrainees();

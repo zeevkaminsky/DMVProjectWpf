@@ -25,7 +25,7 @@ namespace PL_Wpf
         {
             InitializeComponent();
             _bl = FactorySingletonBl.GetBl();
-            this.LVUsers.ItemsSource = _bl.GetTests();
+            this.LVUsers.ItemsSource = _bl.GetTests();//show all tests
         }
     }
 }

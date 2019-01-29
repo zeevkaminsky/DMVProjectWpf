@@ -27,12 +27,11 @@ namespace PL_Wpf
             InitializeComponent();
 
             IBl _bl = FactorySingletonBl.GetBl();
+            //combo box with all testers ID
             foreach (var item in _bl.GetTesters())
             {
                 testers.Add(item.ID);
             }
-
-
             IDCBox.ItemsSource = testers;
 
         }
@@ -42,7 +41,7 @@ namespace PL_Wpf
             IBl _bl = FactorySingletonBl.GetBl();
             BE.Tester tester = _bl.FindTesterByID(IDCBox.SelectedItem as string);
             this.Close();
-            new AddTester(tester).Show();
+            new AddTester(tester).Show();//send to add window
         }
     }
 }

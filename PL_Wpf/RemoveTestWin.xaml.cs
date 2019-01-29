@@ -31,12 +31,11 @@ namespace PL_Wpf
             {
 
                 IBl _bl = FactorySingletonBl.GetBl();
+                //combo box with all tests serial number
                 foreach (var item in _bl.GetTests())
                 {
                     tests.Add(item.SerialNumber);
                 }
-
-
                 IDCBox.ItemsSource = tests;
 
 
@@ -68,7 +67,6 @@ namespace PL_Wpf
                         }
                     }
                 }
-
             }
             catch (Exception m)
             {

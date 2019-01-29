@@ -23,28 +23,22 @@ namespace PL_Wpf
     /// </summary>
     public partial class AddTester : Window
     {
-
         private BE.Tester tester;
 
         public AddTester()
         {
             InitializeComponent();
             tester = new BE.Tester();
-            
             init(tester);//initialize all comboboxes with apropriate values
-
-            
         }
         public AddTester(Tester testerToUp)//update window sending an existing tester
         {
-
-
             InitializeComponent();
             tester = testerToUp;
             this.EnterButton.Content = "update";
             this.IDTBox.IsReadOnly = true;
             init(testerToUp);
-
+            //set the schedule with the old values
             foreach (var item in SchedGrid.Children.OfType<CheckBox>())
             {
                 int row = Grid.GetRow(item);
@@ -57,24 +51,22 @@ namespace PL_Wpf
 
         private void init(BE.Tester tester)
         {
-
-            
             this.TextBoxGrid.DataContext = tester;
 
             GenderCBox.ItemsSource = Enum.GetValues(typeof(Gender));
             SpecialityCBox.ItemsSource = Enum.GetValues(typeof(Vehicle));
             CityCBox.ItemsSource = Enum.GetValues(typeof(Cities));
-
+            //tester experience
             for (int i = 0; i < Configuration.MaxTesterAge - Configuration.minTesterAge; i++)
             {
                 ExpCBox.Items.Add(i);
             }
-
+            //can take up to 30 tests; (5 days * 6 hours)
             for (int i = 0; i <= 30; i++)
             {
                 MaxTestsCBox.Items.Add(i);
             }
-
+            //distance
             for (int i = 0; i < 150; i++)
             {
                 MaxDistanceCBox.Items.Add(i);
@@ -88,6 +80,7 @@ namespace PL_Wpf
             
             try
             {
+                //get schedule
                 foreach (var item in SchedGrid.Children.OfType<CheckBox>())
                 {
                     int row = Grid.GetRow(item);
@@ -98,7 +91,7 @@ namespace PL_Wpf
                 
 
                 
-
+                //add for the first time
                 if (EnterButton.Content.ToString() != "update")
                 {
                     IBl _bl = FactorySingletonBl.GetBl();
@@ -108,7 +101,7 @@ namespace PL_Wpf
                         this.Close();
                     }
                 }
-                else
+                else//update
                 {
                     IBl _bl = FactorySingletonBl.GetBl();
                     
@@ -134,7 +127,7 @@ namespace PL_Wpf
 
         }
 
-        
+        #region input_validations
         private void IDTBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Extra.NumbersValidate(sender,e);
@@ -149,15 +142,7 @@ namespace PL_Wpf
         {
             Extra.NumbersValidate(sender, e);
         }
-
-        //private void MenuButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    MainWindow mainWindow = new MainWindow();
-        //    this.Close();
-        //    mainWindow.Show();
-        //}
-
-
+        #endregion
     }
 }
 

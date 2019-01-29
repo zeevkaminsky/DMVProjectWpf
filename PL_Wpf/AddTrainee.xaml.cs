@@ -32,12 +32,10 @@ namespace PL_Wpf
             trainee = new BE.Trainee();
             _bl = FactorySingletonBl.GetBl();
             init();
-
-            
             
 
         }
-        public AddTrainee(BE.Trainee traineeToUp)
+        public AddTrainee(BE.Trainee traineeToUp)//update send an existing trainee
         {
             InitializeComponent();
             trainee = traineeToUp;
@@ -45,50 +43,40 @@ namespace PL_Wpf
             _bl = FactorySingletonBl.GetBl();
             init();
             this.AddTraineeButton.Content = "Update";
-
-           
-           
-           
+            
         }
         private void init()
         {
             this.InnerGrid.DataContext = trainee;
 
             GearCBox.ItemsSource = Enum.GetValues(typeof(Gear));
-
             CityCBox.ItemsSource = Enum.GetValues(typeof(Cities));
-
             GenderCBox.ItemsSource = Enum.GetValues(typeof(Gender));
-
-            this.VehicleCBox.ItemsSource = Enum.GetValues(typeof(Vehicle));
+            VehicleCBox.ItemsSource = Enum.GetValues(typeof(Vehicle));
         }
 
         private void AddTraineeButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                
-
-
-                if (this.AddTraineeButton.Content.ToString() != "Update")
+                if (AddTraineeButton.Content.ToString() != "Update")//add for the first time
                 {
                     IBl _bl = FactorySingletonBl.GetBl();
                     if (_bl.AddTrainee(trainee))
                     {
                         MessageBox.Show(trainee.ToString() + "added successfully");
-                        this.Close();
                     }
                 }
-                else
+                else//update
                 {
                     IBl _bl = FactorySingletonBl.GetBl();
 
                     if (_bl.UpdateTrainee(trainee))
                     {
                         MessageBox.Show(trainee.ToString() + "updated successfully");
-                        this.Close();
                     }
                 }
+                this.Close();
 
             }
             catch (Exception m)
@@ -98,5 +86,26 @@ namespace PL_Wpf
             }
 
         }
+        #region input_validations
+        private void IDTBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Extra.NumbersValidate(sender, e);
+        }
+
+        private void PhoneTBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Extra.NumbersValidate(sender, e);
+        }
+
+        private void NumberTBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Extra.NumbersValidate(sender, e);
+        }
+
+        private void LessonsTBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Extra.NumbersValidate(sender, e);
+        }
+        #endregion
     }
 }

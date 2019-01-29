@@ -30,12 +30,11 @@ namespace PL_Wpf
             InitializeComponent();
             this.ResultGrid.Visibility = Visibility.Hidden;
             _bl = FactorySingletonBl.GetBl();
+            //combo box with all serial numbers
             foreach (var item in _bl.GetTests())
             {
                 tests.Add(item.SerialNumber);
             }
-
-
             SNCBox.ItemsSource = tests;
         }
 
@@ -48,23 +47,35 @@ namespace PL_Wpf
 
         private void EnterButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                test.Criteria["isSignaling"] = this.signalingCheckBox.IsChecked == true;
+                test.Criteria["TwoHandsOnWheel"] = this.wheelCheckBox.IsChecked == true;
+                test.Criteria["Mirors"] = this.mirorsCheckBox.IsChecked == true;
+                if (_bl.IsLisense(test))//check if trainee past 80% precent of requirments
+                {
+                    MessageBox.Show("trainee past the test");
+                    test.TestResult = true;
+
+                }
+                else
+                {
+                    MessageBox.Show("trainee  failed the test");
+                    test.TestResult = false;
+                }
+                if(_bl.UpdateDrivingTest(test))
+                {
+                    MessageBox.Show("update succeded");
+                }
+                Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
             
-            test.Criteria["isSignaling"] = this.signalingCheckBox.IsChecked == true;
-            test.Criteria["TwoHandsOnWheel"] = this.wheelCheckBox.IsChecked == true;
-            test.Criteria["Mirors"] = this.mirorsCheckBox.IsChecked == true;
-            if (_bl.IsLisense(test))
-            {
-                MessageBox.Show("trainee past the test");
-                test.TestResult = true;
-                
-            }
-            else
-            {
-                MessageBox.Show("trainee  failed the test"); 
-                test.TestResult = false;
-            }
-            _bl.UpdateDrivingTest(test);
-            Close();
+            
         }
     }
 }

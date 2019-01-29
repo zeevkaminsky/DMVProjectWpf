@@ -24,18 +24,16 @@ namespace PL_Wpf
         private ObservableCollection<string> testers = new ObservableCollection<string>();
         public RemoveTester()
         {
-            
             InitializeComponent();
             try
             {
                 
                 IBl _bl = FactorySingletonBl.GetBl();
+                //combo box show all testers id
                 foreach (var item in _bl.GetTesters())
                 {
                     testers.Add(item.ID);
                 }
-               
-
                 IDCBox.ItemsSource = testers; 
 
 
@@ -56,10 +54,12 @@ namespace PL_Wpf
                 if (IDCBox.SelectedItem != null)
                 {
                     IBl _bl = FactorySingletonBl.GetBl();
+
+                    //get all tests of thid tester
                     var testersInTest = from t in _bl.GetTests()
                                   where t.TesterID == IDCBox.SelectedItem.ToString()
                                   select t;
-                    if (testersInTest.Any())
+                    if (testersInTest.Any())//need to remove the test first
                     {
                         throw new Exception("tester can not be remove. need to remove all tests that he was the tester");
                     }
@@ -75,8 +75,10 @@ namespace PL_Wpf
                             this.Close();
                         }
                     }
-                }
                     
+                }
+                
+
             }
             catch (Exception m)
             {
