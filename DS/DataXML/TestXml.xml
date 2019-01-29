@@ -1,2 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Tests />
+<Tests>
+  <Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Vehicle>car</Vehicle>
+    <Gear>auto</Gear>
+    <SerialNumber>12345700</SerialNumber>
+    <TesterID>123</TesterID>
+    <TraineeID>123456879</TraineeID>
+    <TestDay>2019-01-29T16:13:37.7637157+02:00</TestDay>
+    <TempTimeSpan>14:00:00</TempTimeSpan>
+    <ExitPoint>
+      <Street>rambam</Street>
+      <Building>20</Building>
+      <Town>Hadera</Town>
+    </ExitPoint>
+    <TestResult>true</TestResult>
+    <tempDict>isSignaling,true,TwoHandsOnWheel,true,Mirors,true,</tempDict>
+  </Test>
+</Tests>
