@@ -38,11 +38,14 @@ namespace BL
         Tester FindTesterByID(string id);
         Test FindTestBySerialNumber(int serial_number);
         bool IsLisense(Test test);
+
+        #region grouping
         IEnumerable<IGrouping<Vehicle, Tester>> TestersByVehicle();
         IEnumerable<IGrouping<string, Trainee>> TraineesBySchool();
         IEnumerable<IGrouping<FullName, Trainee>> TraineeByTeacher();
         IEnumerable<IGrouping<int, Trainee>> TraineesByNumOfTests();
         IEnumerable<IGrouping<Cities, Tester>> TestersByCity();
         IEnumerable<IGrouping<Cities, Trainee>> TraineeByCity();
+        #endregion
     }
 }

@@ -27,6 +27,24 @@ namespace BE
                Experience, MaxTests, MyVehicle, MaxDistance);
         }
 
-        
+        public  Tester Clone()
+        {
+            
+            return new Tester
+            {
+                Address = this.Address.Clone(),
+                DateOfBirth = this.DateOfBirth,
+                MyVehicle = this.MyVehicle,
+                Gender = this.Gender,
+                ID = this.ID,
+                MaxDistance = this.MaxDistance,
+                Name = this.Name,
+                Phone = this.Phone,
+                Experience = this.Experience,
+                MaxTests = this.MaxTests,
+                WeeklySchedule = this.WeeklySchedule.Clone()
+            };
+            
+        }
     }
 }

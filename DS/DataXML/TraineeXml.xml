@@ -48,4 +48,28 @@
     <NumOfLessons>40</NumOfLessons>
     <NumOfTests>0</NumOfTests>
   </Trainee>
+  <Trainee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <ID>123456879</ID>
+    <Name>
+      <FirstName>moshe</FirstName>
+      <LastName>hgfd</LastName>
+    </Name>
+    <DateOfBirth>1980-01-01T00:00:00</DateOfBirth>
+    <Gender>MALE</Gender>
+    <Phone>45678</Phone>
+    <Address>
+      <Street>j</Street>
+      <Building>123465</Building>
+      <Town>Afula</Town>
+    </Address>
+    <MyVehicle>car</MyVehicle>
+    <MyGear>auto</MyGear>
+    <School>gh</School>
+    <TeacherName>
+      <FirstName>er</FirstName>
+      <LastName>fg</LastName>
+    </TeacherName>
+    <NumOfLessons>40</NumOfLessons>
+    <NumOfTests>0</NumOfTests>
+  </Trainee>
 </Trainees>

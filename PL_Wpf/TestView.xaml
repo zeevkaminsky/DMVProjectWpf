@@ -1,0 +1,41 @@
+﻿<Window x:Class="PL_Wpf.TestView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL_Wpf"
+        mc:Ignorable="d"
+        Title="TestView" Height="450" Width="800">
+    <Grid>
+        <ListView Margin="10" Name="LVUsers" Grid.Row="1" FontFamily="Bold">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Serial Number" Width="120" DisplayMemberBinding="{Binding SerialNumber}" />
+                    <GridViewColumn Header="Tester ID" Width="120" DisplayMemberBinding="{Binding TesterID}" />
+                    <GridViewColumn Header="Trainee ID" Width="120" DisplayMemberBinding="{Binding TraineeID}" />
+
+                    <GridViewColumn Header="Test Day" Width="120" DisplayMemberBinding="{Binding TestDay}"  />
+                    <GridViewColumn Header="Test Hour" Width="120" DisplayMemberBinding="{Binding TestHour}" />
+                    <GridViewColumn Header="Gear" Width="100" DisplayMemberBinding="{Binding Gear}" />
+                    <GridViewColumn Header="Vehicle" Width="120" DisplayMemberBinding="{Binding Vehicle}" />
+                    
+                    <GridViewColumn Header="City" Width="100" DisplayMemberBinding="{Binding ExitPoint.Town}" />
+                    <GridViewColumn Header="StreetName" Width="100" DisplayMemberBinding="{Binding ExitPoint.Street}" />
+                    <GridViewColumn Header="BuildingNumber" Width="100" DisplayMemberBinding="{Binding ExitPoint.Building}" />
+                    <GridViewColumn Header="TestResult" Width="100" DisplayMemberBinding="{Binding TestResult}" />
+                    
+                </GridView>
+            </ListView.View>
+
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding  Name}"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
+        </ListView>
+    </Grid>
+</Window>

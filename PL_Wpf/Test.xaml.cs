@@ -38,5 +38,10 @@ namespace PL_Wpf
         {
             new RemoveTestWin().ShowDialog();
         }
+
+        private void DataBaseTest_Click(object sender, RoutedEventArgs e)
+        {
+            new TestView().ShowDialog();
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace BE
             Gear = new Gear();
            
             foreach (var item in BE.Configuration.requirments)
-            {
+            {//initialize the dictionary with the requirments ,and set them to false.
                 Criteria.Add(item, false);
             }
         }
@@ -30,12 +30,25 @@ namespace BE
         public string TraineeID { get; set; }
         
         public DateTime TestDay { get; set; }
-        
+        [XmlIgnore]
         public TimeSpan TestHour { get; set; }
+        //create for the serializer
+        public string TempTimeSpan
+        {
+            get
+            {
+                return TestHour.ToString();
+            }
+            set
+            {
+                TestHour = TimeSpan.Parse(value);
+            }
+        }
         public Address ExitPoint { get; set; }
         public bool TestResult  { get; set; }
         [XmlIgnore]
         public Dictionary<string, bool> Criteria { get; set; } 
+        //create for the serializer
         public string tempDict
         {
             get
@@ -51,12 +64,12 @@ namespace BE
                         result += item.Key + "," + item.Value.ToString().ToLower() + ",";
                     }
                 }
-                result = result.Substring(0, result.Length - 1);
+                //result = result.Substring(0, result.Length - 1);
                 return result;
             }
             set
             {
-                if (value != null && value.Count() > 0)
+                if (value != null && value.Any())
                 {
                     string[] values = value.Split(',');
                     Criteria = new Dictionary<string, bool>();
@@ -76,9 +89,24 @@ namespace BE
                 }
             }
         }
-           
 
 
+        public Test Clone()  
+        {
+            return new Test
+            {
+                SerialNumber = this.SerialNumber,
+                TesterID = this.TesterID,
+                TraineeID = this.TraineeID,
+                TestDay = this.TestDay,
+                ExitPoint = this.ExitPoint.Clone(),
+                TestResult = this.TestResult,
+                Vehicle = this.Vehicle,
+                Gear = this.Gear,
+                tempDict = this.tempDict
+                
+            };
+        }
 
         public override string ToString()
         {

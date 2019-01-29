@@ -17,5 +17,16 @@ namespace BE
                 weeklySchedule[i] = new bool[6];
             }
         }
+
+        public Schedule(bool[][] sched)
+        {
+            this.weeklySchedule = sched;
+        }
+
+        public Schedule Clone()
+        {
+            return new Schedule((bool[][])this.weeklySchedule.Clone());
+            
+        }
     }
 }

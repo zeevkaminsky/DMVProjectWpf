@@ -71,7 +71,7 @@ namespace PL_Wpf
 
                 test.TestHour = TimeSpan.Parse(this.testHourComboBox.SelectedItem.ToString());
                 var testers = _bl.FindTesterToTest(test);
-                if (testers.Count() > 0)
+                if (testers.Any())
                 {
 
                     this.availabilityDataGrid.ItemsSource = new ObservableCollection<Person>(testers);
@@ -103,19 +103,22 @@ namespace PL_Wpf
         private void AddTestButton_Click(object sender, RoutedEventArgs e)
         {
             BE.Tester tester;
-            if (availabilityDataGrid.SelectedItem != null)
+            try
             {
-                tester = availabilityDataGrid.SelectedItem as BE.Tester;
-            }
-            else
-            {
-                throw new Exception("please choose one tester from the list");
-            }
-
-            test.Vehicle = _bl.FindTraineeByID(test.TraineeID).MyVehicle;
-            test.Gear = _bl.FindTraineeByID(test.TraineeID).MyGear;
-
-            test.TesterID = tester.ID;
+                if (availabilityDataGrid.SelectedItem != null && availabilityDataGrid.SelectedItem as BE.Tester != null)
+                {
+                    tester = availabilityDataGrid.SelectedItem as BE.Tester;
+                }
+                else
+                {
+                    throw new Exception("please choose one tester from the list");
+                }
+                test.Vehicle = _bl.FindTraineeByID(test.TraineeID).MyVehicle;
+                test.Gear = _bl.FindTraineeByID(test.TraineeID).MyGear;
+                test.TesterID = tester.ID;
+            
+            
+            
             new Thread(() =>
             {
                 try
@@ -149,9 +152,15 @@ namespace PL_Wpf
 
             }).Start();
 
+            }
+            catch (Exception p)
+            {
 
+                MessageBox.Show(p.Message);
+            }
 
         }
+
 
 
 

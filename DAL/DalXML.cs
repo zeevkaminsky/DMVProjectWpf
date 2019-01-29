@@ -49,7 +49,7 @@ namespace DAL
                           select t;
             if (testers.Any())
             {
-                throw new Exception("tester with same ud already exist");
+                throw new Exception("tester with same id already exist");
             }
 
 

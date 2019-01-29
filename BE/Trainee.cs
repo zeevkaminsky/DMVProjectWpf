@@ -26,5 +26,30 @@ namespace BE
             return base.ToString() + string.Format("vehicle:{0}\n gear:{1}\n school:{2}\n teacher name:{3}\n number of lessons:{4}\n",
                MyVehicle, MyGear, School, TeacherName, NumOfLessons);
         }
+
+        public  Trainee Clone()
+        {
+            
+            return new Trainee
+            {
+                Address = this.Address.Clone(),
+                DateOfBirth = this.DateOfBirth,
+                Gender = this.Gender,
+                ID = this.ID,
+                Name = this.Name,
+                Phone = this.Phone,
+                MyVehicle = this.MyVehicle,
+                School = this.School,
+                TeacherName = new FullName
+                {
+                    FirstName = this.TeacherName.FirstName,
+                    LastName = this.TeacherName.LastName
+                },
+                NumOfLessons = this.NumOfLessons,
+                NumOfTests = this.NumOfTests
+
+            };
+            
+        }
     }
 }

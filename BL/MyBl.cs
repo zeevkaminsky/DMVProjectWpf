@@ -15,26 +15,15 @@ namespace BL
 {
     public class MyBl : IBl
     {
+        //key for using map quest
         String API_KEY = @"W1ahdi7Gr0ex7rRwwKtx2inAadymOCKD";
         
-        //public List<Tester> rangeOfTesters(Address address)
-        //{
-        //    IDal _dal = FactorySingletonDal.GetDal();
-            
-        //    List<Tester> testersByRange = new List<Tester>();
-        //    var rangGroup = from tester in _dal.GetTesters()
-        //                    group tester by tester.MaxDistance > getRange(tester.Address.ToString(), address.ToString())into g
-        //                    select new { key = g.Key, testers = g };
-        //    foreach (var item in rangGroup)
-        //    {
-        //        if (item.key)
-        //        {
-        //            foreach (var tester in item.testers)
-        //                testersByRange.Add(tester);
-        //        }
-        //    }
-        //    return testersByRange;
-        //}
+        /// <summary>
+        /// get 2 addresses and return the distance. in case of mistake returns random
+        /// </summary>
+        /// <param name="origin"></param>
+        /// <param name="destination"></param>
+        /// <returns></returns>
         public int getRange(string origin, string destination)
         {
             Random X = new Random();//for error occurreds
@@ -88,7 +77,7 @@ namespace BL
             Tester helpTester = GetTesters().FirstOrDefault(t => t.ID == test.TesterID);
             
             
-
+            //get all trainee tests. the last test will be first;
             var TraineeTests = ((from t in GetTests()
                                  where t.TraineeID == test.TraineeID
                                  select t).OrderByDescending(t => test.TestDay.Year)
@@ -96,7 +85,7 @@ namespace BL
                           .ThenByDescending(t => test.TestDay.Day).ToList());
 
             //check there is enough days between tests
-            if (TraineeTests.Count > 0)
+            if (TraineeTests.Any())
             {
                 TimeSpan ts = test.TestDay - TraineeTests.First().TestDay;
                 if (ts.Days < Configuration.daysBetweenTests)
@@ -132,13 +121,14 @@ namespace BL
             {
                 IDal _dal = FactorySingletonDal.GetDal();
                 _dal.AddDrivingTest(test);
+                return true;
             }
             catch (Exception e)
             {
 
                 throw e;
             }
-            return true;
+            
        }
 
 
@@ -148,9 +138,10 @@ namespace BL
             TimeSpan tempTS = new TimeSpan(14, 0, 0);
 
 
-
+            //check if tester available in this day and hour
             var testersavailability = TestersAvailableByHour(test.TestDay, test.TestHour);
            
+            //if tester not availabla, check the next hour in this day
             while (!testersavailability.Any() && test.TestHour < tempTS)
             {
                 testersavailability = TestersAvailableByHour(test.TestDay, test.TestHour.Add(toAdd));
@@ -160,13 +151,13 @@ namespace BL
             }
             Trainee trainee = FindTraineeByID(test.TraineeID);
 
-            //List<Tester> closedTesters = rangeOfTesters(test.ExitPoint);
-            //get only testers that are match to trainee vehicle and can take another test this week
-            var testers = (from t in testersavailability//find all testers available in the hour of the test
-                           where t.MyVehicle == trainee.MyVehicle && t.MaxTests > t.NumOfTests
+            
+            
+            var testers = (from t in testersavailability//from testers available in the hour of the test
+                           where t.MyVehicle == trainee.MyVehicle && t.MaxTests > t.NumOfTests//get only testers that are match to trainee vehicle and can take another test this week
                            select t).ToList();
             var result = (from t in testers
-                      where getRange(t.Address.ToString(), test.ExitPoint.ToString()) < t.MaxDistance
+                      where getRange(t.Address.ToString(), test.ExitPoint.ToString()) < t.MaxDistance//get only testers from close distance
                       select t).ToList();
             return result;
         }
@@ -347,7 +338,7 @@ namespace BL
                     select t).FirstOrDefault();
         }
 
-        public Test FindTestWithSerialNumber(int num)
+        public Test FindTestBySerialNumber(int num)
         {
             return (from t in GetTests()
                     where t.SerialNumber == num
@@ -399,19 +390,7 @@ namespace BL
         /// <returns></returns>
         public bool IsLisense(Test test)
         {
-          ////get all the tests of the trainee. the last test will be first in the list
-          //  var tests = from t in GetTests()
-          //              where t.TraineeID == traineeID
-          //              orderby t.SerialNumber
-          //              select t;
-
-            ////if trainee didn't found
-            //if (!tests.Any() )
-            //{
-            //    throw new Exception("this trainee didn't took a test yet.\n");
-            //}
-            
-
+          
             //check how many criterions trainee succeed
             int count = 0;
             foreach (var c in test.Criteria)
@@ -446,7 +425,18 @@ namespace BL
         /// <returns></returns>
         public List<Tester> TestersAvailableByHour(DateTime testTime, TimeSpan timeSpan)
         {
-            return GetTesters(t => t.WeeklySchedule.weeklySchedule[(int)testTime.DayOfWeek][(int)(timeSpan.Hours-9)] == true);
+            //get all testers working in this hour and day
+            List<Tester> testers = (from t in GetTesters(t => t.WeeklySchedule.weeklySchedule[(int)testTime.DayOfWeek][(int)(timeSpan.Hours - 9)] == true)
+                                    select t).ToList();
+            //get all testers that already in test in this hour and day
+            List<String> testersID = (from t in GetTests(t => (t.TestDay == testTime && t.TestHour == timeSpan))
+                                      select t.TesterID).ToList();
+            //returns testers that working this day and hour, and dosn't have a test
+            return (from t in testers
+                    where !(testersID.Contains(t.ID))
+                    select t).ToList();
+
+
         }
         /// <summary>
         /// returns all tests in a specific day
@@ -468,10 +458,7 @@ namespace BL
                    
         }
 
-        public Test FindTestBySerialNumber(int serial_number)
-        {
-            return GetTests(t => t.SerialNumber == serial_number).FirstOrDefault();
-        }
+       
 
         #region grouping
         public IEnumerable<IGrouping<Vehicle,Tester> >TestersByVehicle()

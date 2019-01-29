@@ -22,11 +22,13 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                     
                 </Grid.RowDefinitions>
                 <Button Name="CreateTest" Content="Create Test" FontSize="30" Background="LightGray" Margin="20" Click="CreateTest_Click" />
                 <Button Name="UpdateTest" Content="Update Test" FontSize="30" Grid.Row="1" Background="LightGray" Margin="20" Click="UpdateTest_Click" />
                 <Button Name="RemoveTest" Content="Remove Test" FontSize="30" Grid.Row="2" Background="LightGray" Margin="20" Click="RemoveTest_Click" />
+                <Button Name="DataBaseTest" Content="Information" FontSize="30" Grid.Row="3" Background="LightGray" Margin="20" Click="DataBaseTest_Click" />
             </Grid>
             <Image Grid.Column="1" Source="images/Tester_new.jpg"/>
         </Grid>

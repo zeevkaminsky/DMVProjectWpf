@@ -16,7 +16,7 @@ namespace BE
         public static int InitialSerialNumber = 12345678;
         public static double MaxTesterAge = 85.0;
 
-        
+        //List of requirments. every test will hold a dictionary with these requirments
         public static List<string> requirments = new List<string>(new string[] { "isSignaling", "TwoHandsOnWheel", "Mirors" });
 
         

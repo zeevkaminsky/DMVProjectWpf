@@ -130,7 +130,7 @@ namespace DAL
             {
                 var res = from t in DataSource.Testers
                           where predicate(t)
-                          select t;
+                          select t.Clone();
                 return res.ToList();
             }
             return DataSource.Testers.ToList();
@@ -142,7 +142,7 @@ namespace DAL
             {
                 var res = from t in DataSource.Test
                           where predicate(t)
-                          select t;
+                          select t.Clone();
                 return res.ToList();
             }
             return DataSource.Test.ToList();
@@ -154,7 +154,7 @@ namespace DAL
             {
                 var res = from t in DataSource.trainees
                           where predicate(t)
-                          select t;
+                          select t.Clone();
                 return res.ToList();
             }
             return DataSource.trainees.ToList();

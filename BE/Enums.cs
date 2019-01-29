@@ -8,7 +8,7 @@ namespace BE
 {
 
     public enum Gender { MALE, FEMALE }
-    public enum Days { sun = 1, mon, tues, wednes, thurs }
+    public enum Days { sun , mon, tues, wednes, thurs }
     public enum Vehicle { car, motorcycle, truck, trailer, tractor }
     public enum Gear { auto, manual }
     public enum Cities
@@ -80,8 +80,7 @@ namespace BE
         Yokneam
     };
 
-    //public enum WorkAvailability { work, not_work, in_test}
-    public enum Types { tester, trainee, test}
+    
 
    
 

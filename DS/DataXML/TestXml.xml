@@ -3,65 +3,62 @@
   <Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <Vehicle>car</Vehicle>
     <Gear>auto</Gear>
-    <SerialNumber>12345682</SerialNumber>
-    <TesterID>132456789</TesterID>
-    <TraineeID>123985467</TraineeID>
-    <TestDay>2019-01-27T19:18:28.5613406+02:00</TestDay>
-    <TestHour />
-    <ExitPoint>
-      <Street>rambam</Street>
-      <Building>12</Building>
-      <Town>Hadera</Town>
-    </ExitPoint>
-    <TestResult>false</TestResult>
-    <tempDict>isSignaling,false,TwoHandsOnWheel,false,Mirors,false</tempDict>
-  </Test>
-  <Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Vehicle>car</Vehicle>
-    <Gear>auto</Gear>
-    <SerialNumber>12345683</SerialNumber>
-    <TesterID>132456789</TesterID>
-    <TraineeID>123985467</TraineeID>
-    <TestDay>2019-03-07T00:00:00</TestDay>
-    <TestHour />
-    <ExitPoint>
-      <Street>rambam</Street>
-      <Building>12</Building>
-      <Town>Afula</Town>
-    </ExitPoint>
-    <TestResult>false</TestResult>
-    <tempDict>isSignaling,false,TwoHandsOnWheel,false,Mirors,false</tempDict>
-  </Test>
-  <Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Vehicle>car</Vehicle>
-    <Gear>auto</Gear>
-    <SerialNumber>12345684</SerialNumber>
-    <TesterID>132456789</TesterID>
-    <TraineeID>123985467</TraineeID>
-    <TestDay>2019-03-07T00:00:00</TestDay>
-    <TestHour />
-    <ExitPoint>
-      <Street>rambam</Street>
-      <Building>12</Building>
-      <Town>Afula</Town>
-    </ExitPoint>
-    <TestResult>false</TestResult>
-    <tempDict>isSignaling,false,TwoHandsOnWheel,false,Mirors,false</tempDict>
-  </Test>
-  <Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Vehicle>car</Vehicle>
-    <Gear>auto</Gear>
-    <SerialNumber>12345685</SerialNumber>
+    <SerialNumber>12345694</SerialNumber>
     <TesterID>132456789</TesterID>
     <TraineeID>508072876</TraineeID>
-    <TestDay>2019-01-27T19:54:53.1153229+02:00</TestDay>
-    <TestHour />
+    <TestDay>2019-01-31T00:00:00</TestDay>
+    <TempTimeSpan>10:00:00</TempTimeSpan>
     <ExitPoint>
-      <Street>rambam</Street>
-      <Building>22</Building>
+      <Building>0</Building>
       <Town>Afula</Town>
     </ExitPoint>
     <TestResult>false</TestResult>
-    <tempDict>isSignaling,false,TwoHandsOnWheel,false,Mirors,false</tempDict>
+    <tempDict>isSignaling,false,TwoHandsOnWheel,false,Mirors,false,</tempDict>
+  </Test>
+  <Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Vehicle>car</Vehicle>
+    <Gear>auto</Gear>
+    <SerialNumber>12345695</SerialNumber>
+    <TesterID>132456789</TesterID>
+    <TraineeID>123985467</TraineeID>
+    <TestDay>2019-01-31T00:00:00</TestDay>
+    <TempTimeSpan>14:00:00</TempTimeSpan>
+    <ExitPoint>
+      <Building>0</Building>
+      <Town>Afula</Town>
+    </ExitPoint>
+    <TestResult>false</TestResult>
+    <tempDict>isSignaling,false,TwoHandsOnWheel,false,Mirors,false,</tempDict>
+  </Test>
+  <Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Vehicle>car</Vehicle>
+    <Gear>auto</Gear>
+    <SerialNumber>12345696</SerialNumber>
+    <TesterID>132456789</TesterID>
+    <TraineeID>123456879</TraineeID>
+    <TestDay>2019-01-30T00:00:00</TestDay>
+    <TempTimeSpan>10:00:00</TempTimeSpan>
+    <ExitPoint>
+      <Street>rambam</Street>
+      <Building>8</Building>
+      <Town>Afula</Town>
+    </ExitPoint>
+    <TestResult>false</TestResult>
+    <tempDict>isSignaling,false,TwoHandsOnWheel,false,Mirors,false,</tempDict>
+  </Test>
+  <Test xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Vehicle>car</Vehicle>
+    <Gear>auto</Gear>
+    <SerialNumber>12345697</SerialNumber>
+    <TesterID>132456789</TesterID>
+    <TraineeID>123985467</TraineeID>
+    <TestDay>2019-03-14T00:00:00</TestDay>
+    <TempTimeSpan>10:00:00</TempTimeSpan>
+    <ExitPoint>
+      <Building>0</Building>
+      <Town>Afula</Town>
+    </ExitPoint>
+    <TestResult>false</TestResult>
+    <tempDict>isSignaling,false,TwoHandsOnWheel,false,Mirors,false,</tempDict>
   </Test>
 </Tests>
