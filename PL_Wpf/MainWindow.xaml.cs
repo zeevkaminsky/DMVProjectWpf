@@ -44,9 +44,9 @@ namespace PL_Wpf
 
         
 
-        private void Dictance_Click(object sender, RoutedEventArgs e)
+        private void Schedule_Click(object sender, RoutedEventArgs e)
         {
-            new Distance().ShowDialog();
+            new Schedule().ShowDialog();
         }
     }
 }

@@ -27,8 +27,8 @@
                 </Grid.RowDefinitions>
                 <Button Name="Tester" Content="Tester" FontSize="36" Background="LightGray" Margin="15" Click="Tester_Click"/>
                 <Button Name="Trainee" Content="Trainee"  Grid.Row="1" FontSize="36" Background="LightGray"  Margin="15" Click="Trainee_Click" />
-                <Button Name="Distance" Content="Distance" Grid.Row="2" FontSize="36" Background="LightGray"  Margin="15" Click="Dictance_Click"/>
-                <Button Name="Test" Content="Test"  Grid.Row="3" FontSize="36" Background="LightGray"  Margin="15" Click="Test_Click"/>
+                <Button Name="Schedule" Content="Testers Schedule" Grid.Row="3" FontSize="23" Background="LightGray"  Margin="15"  Click="Schedule_Click"/>
+                <Button Name="Test" Content="Test"  Grid.Row="2" FontSize="36" Background="LightGray"  Margin="15" Click="Test_Click"/>
             </Grid>
             <Image Grid.Column="1" Source="images/car_new.JPG" />
 

@@ -26,7 +26,7 @@ namespace PL_Wpf
         private ObservableCollection<int> tests = new ObservableCollection<int>();
         public UpdateTestWin()
         {
-            //this.DataContext = test.Criteria;
+            
             InitializeComponent();
             this.ResultGrid.Visibility = Visibility.Hidden;
             _bl = FactorySingletonBl.GetBl();
@@ -56,7 +56,6 @@ namespace PL_Wpf
                 {
                     MessageBox.Show("trainee past the test");
                     test.TestResult = true;
-
                 }
                 else
                 {

@@ -28,5 +28,37 @@ namespace BE
             return new Schedule((bool[][])this.weeklySchedule.Clone());
             
         }
+        public override string ToString()
+        {
+            int starttime = 9;
+            bool oved = false;
+            string result = null;
+            string hayom = null;
+            for (int i = 0; i < 5; i++)
+            {
+                oved = false;
+                hayom = null;
+                //result += ((Day)i).ToString() + "\n";
+                for (int j = 0; j < 6; j++)
+                {
+                    if (weeklySchedule[i][j] == true)
+                    {
+                        oved = true;
+                        hayom += "\t" + (starttime + j) + ":00-";
+                        hayom += (starttime + j + 1).ToString() + ":00\n";
+                    }
+                }
+                if (oved == true)
+                {
+                    result += ((Days)i).ToString() + "\n";
+                    result += hayom;
+                }
+            }
+            if (result != null && result.Length > 1)
+            {
+                result = result.Substring(0, result.Length - 1);
+            }
+            return result;
+        }
     }
 }
